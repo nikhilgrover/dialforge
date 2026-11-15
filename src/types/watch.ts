@@ -201,6 +201,8 @@ export interface WatchBuild {
   selectedVendors: Record<string, string>;
 }
 
+export type BuildStep = 'movement' | 'case' | 'dial' | 'hands' | 'accessories' | 'sourcing';
+
 export type IssueSeverity = 'error' | 'warning' | 'info';
 
 export interface CompatibilityIssue {

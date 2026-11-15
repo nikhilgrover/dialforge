@@ -430,7 +430,7 @@ export const SEED_HANDS: Hands[] = [
     handHoleSizes: { hour: 1.20, minute: 0.70, second: 0.17 },
     lume: 'BGW9',
     finish: 'silver',
-    compatibleMovementFamilies: ['VH'],
+    compatibleMovementFamilies: ['VH', 'Ronda'],
     vendors: [
       { id: 'v-tandorio-vh31-hands', storeName: 'Tandorio Official (AliExpress)', tier: 'vetted-direct', price: 11.00, productUrl: 'https://aliexpress.com', inStock: true, isSpecialDeal: true },
       { id: 'v-esslinger-quartz-hands', storeName: 'Esslinger Watch Supplies', tier: 'supply-house', price: 18.50, productUrl: 'https://esslinger.com', inStock: true }
@@ -447,7 +447,7 @@ export const SEED_HANDS: Hands[] = [
     handHoleSizes: { hour: 1.20, minute: 0.70, second: 0.17 },
     lume: 'C3',
     finish: 'silver',
-    compatibleMovementFamilies: ['VH'],
+    compatibleMovementFamilies: ['VH', 'Ronda'],
     vendors: [
       { id: 'v-caroline-vh31-sword', storeName: 'Caroline Mod Store (AliExpress)', tier: 'vetted-direct', price: 12.80, productUrl: 'https://aliexpress.com', inStock: true, isSpecialDeal: true }
     ]
