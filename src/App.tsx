@@ -11,19 +11,11 @@ import type {
   BezelInsert,
   Rotor,
   MovementSpacer,
-  Strap
+  Strap,
+  ScanJob
 } from './types/watch';
-import {
-  SEED_MOVEMENTS,
-  SEED_CASES,
-  SEED_DIALS,
-  SEED_HANDS,
-  SEED_SECONDS_ACCENTS,
-  SEED_BEZEL_INSERTS,
-  SEED_ROTORS,
-  SEED_SPACERS,
-  SEED_STRAPS
-} from './data/seedParts';
+import { partsDb } from './db/partsDatabase';
+import { executeStoreScan, VETTED_SCAN_SOURCES } from './services/scannerService';
 import { WatchCanvas } from './components/WatchCanvas';
 import { PartPicker } from './components/PartPicker';
 import { BillOfMaterials } from './components/BillOfMaterials';
@@ -34,7 +26,12 @@ import {
   CheckCircle2,
   FileText,
   Sliders,
-  ArrowRight
+  ArrowRight,
+  Flame,
+  Radio,
+  X,
+  ExternalLink,
+  Store
 } from 'lucide-react';
 
 export function App() {
@@ -46,15 +43,15 @@ export function App() {
         const encoded = hash.replace('#build=', '');
         const decoded = JSON.parse(atob(encoded));
         return {
-          movement: SEED_MOVEMENTS.find(m => m.id === decoded.mov),
-          case: SEED_CASES.find(c => c.id === decoded.cas),
-          dial: SEED_DIALS.find(d => d.id === decoded.dia),
-          hands: SEED_HANDS.find(h => h.id === decoded.han),
-          secondsAccent: SEED_SECONDS_ACCENTS.find(s => s.id === decoded.sec),
-          bezelInsert: SEED_BEZEL_INSERTS.find(b => b.id === decoded.bez),
-          rotor: SEED_ROTORS.find(r => r.id === decoded.rot),
-          spacer: SEED_SPACERS.find(sp => sp.id === decoded.spc),
-          strap: SEED_STRAPS.find(st => st.id === decoded.stp),
+          movement: partsDb.getMovements().find(m => m.id === decoded.mov),
+          case: partsDb.getCases().find(c => c.id === decoded.cas),
+          dial: partsDb.getDials().find(d => d.id === decoded.dia),
+          hands: partsDb.getHands().find(h => h.id === decoded.han),
+          secondsAccent: partsDb.getSecondsAccents().find(s => s.id === decoded.sec),
+          bezelInsert: partsDb.getBezelInserts().find(b => b.id === decoded.bez),
+          rotor: partsDb.getRotors().find(r => r.id === decoded.rot),
+          spacer: partsDb.getSpacers().find(sp => sp.id === decoded.spc),
+          strap: partsDb.getStraps().find(st => st.id === decoded.stp),
           selectedVendors: decoded.v || {}
         };
       }
@@ -62,7 +59,6 @@ export function App() {
       // fallback
     }
 
-    // Default: Clean empty build ready for Step 1
     return {
       selectedVendors: {}
     };
@@ -70,6 +66,32 @@ export function App() {
 
   const [currentStep, setCurrentStep] = useState<BuildStep>('movement');
   const [activeTab, setActiveTab] = useState<'configurator' | 'sourcing'>('configurator');
+
+  // Store Scanner State
+  const [isScanning, setIsScanning] = useState(false);
+  const [scanStage, setScanStage] = useState('');
+  const [scanProgress, setScanProgress] = useState(0);
+  const [isScanModalOpen, setIsScanModalOpen] = useState(false);
+  const [latestScanJob, setLatestScanJob] = useState<ScanJob | null>(() => partsDb.getLastScanJob());
+
+  // Run periodic store scan
+  const handleRunStoreScan = async () => {
+    setIsScanning(true);
+    setScanProgress(5);
+    setScanStage('Initializing connection to suppliers...');
+
+    try {
+      const job = await executeStoreScan((stage, pct) => {
+        setScanStage(stage);
+        setScanProgress(pct);
+      });
+      setLatestScanJob(job);
+    } catch (e) {
+      console.error('Scan error:', e);
+    } finally {
+      setIsScanning(false);
+    }
+  };
 
   // Handle component selection with cascading incompatibility protection
   const handleSelectComponent = (category: string, component: BaseComponent | undefined) => {
@@ -82,7 +104,6 @@ export function App() {
           updated.movement = newMov;
 
           if (newMov) {
-            // If movement changed, verify downstream parts:
             // 1. Hands: Clear if arbor holes don't match
             if (updated.hands && !updated.hands.compatibleMovementFamilies.includes(newMov.family)) {
               updated.hands = undefined;
@@ -97,7 +118,7 @@ export function App() {
             }
             // 4. Spacer: Auto-assign spacer if VH31
             if (newMov.caliber === 'VH31') {
-              updated.spacer = SEED_SPACERS.find(s => s.id === 'spacer-vh31-to-nh') || SEED_SPACERS[0];
+              updated.spacer = partsDb.getSpacers().find(s => s.id === 'spacer-vh31-to-nh') || partsDb.getSpacers()[0];
             } else {
               updated.spacer = undefined;
             }
@@ -200,35 +221,35 @@ export function App() {
   const loadPreset = (presetName: 'nh35-diver' | 'vh31-quartz-field' | 'nh34-gmt') => {
     if (presetName === 'vh31-quartz-field') {
       setBuild({
-        movement: SEED_MOVEMENTS.find(m => m.caliber === 'VH31'),
-        case: SEED_CASES.find(c => c.id === 'case-field-38'),
-        dial: SEED_DIALS.find(d => d.id === 'dial-explorer-navy'),
-        hands: SEED_HANDS.find(h => h.id === 'hands-baton-vh31'),
-        secondsAccent: SEED_SECONDS_ACCENTS.find(s => s.id === 'sec-vh31-red-arrow'),
-        spacer: SEED_SPACERS.find(s => s.id === 'spacer-vh31-to-nh'),
-        strap: SEED_STRAPS.find(st => st.id === 'strap-nato-bond-20'),
+        movement: partsDb.getMovements().find(m => m.caliber === 'VH31'),
+        case: partsDb.getCases().find(c => c.id === 'case-field-38'),
+        dial: partsDb.getDials().find(d => d.id === 'dial-explorer-navy'),
+        hands: partsDb.getHands().find(h => h.id === 'hands-baton-vh31'),
+        secondsAccent: partsDb.getSecondsAccents().find(s => s.id === 'sec-vh31-red-arrow'),
+        spacer: partsDb.getSpacers().find(s => s.id === 'spacer-vh31-to-nh'),
+        strap: partsDb.getStraps().find(st => st.id === 'strap-nato-bond-20'),
         selectedVendors: {}
       });
     } else if (presetName === 'nh34-gmt') {
       setBuild({
-        movement: SEED_MOVEMENTS.find(m => m.caliber === 'NH34A'),
-        case: SEED_CASES.find(c => c.id === 'case-skx-42'),
-        dial: SEED_DIALS.find(d => d.id === 'dial-marine-master'),
-        hands: SEED_HANDS.find(h => h.id === 'hands-gmt-nh34'),
-        bezelInsert: SEED_BEZEL_INSERTS.find(b => b.id === 'insert-gmt-batman'),
-        strap: SEED_STRAPS.find(st => st.id === 'strap-jubilee-22'),
-        rotor: SEED_ROTORS[0],
+        movement: partsDb.getMovements().find(m => m.caliber === 'NH34A'),
+        case: partsDb.getCases().find(c => c.id === 'case-skx-42'),
+        dial: partsDb.getDials().find(d => d.id === 'dial-marine-master'),
+        hands: partsDb.getHands().find(h => h.id === 'hands-gmt-nh34'),
+        bezelInsert: partsDb.getBezelInserts().find(b => b.id === 'insert-gmt-batman'),
+        strap: partsDb.getStraps().find(st => st.id === 'strap-jubilee-22'),
+        rotor: partsDb.getRotors()[0],
         selectedVendors: {}
       });
     } else {
       setBuild({
-        movement: SEED_MOVEMENTS[0],
-        case: SEED_CASES[0],
-        dial: SEED_DIALS[0],
-        hands: SEED_HANDS[0],
-        secondsAccent: SEED_SECONDS_ACCENTS[1],
-        bezelInsert: SEED_BEZEL_INSERTS[0],
-        strap: SEED_STRAPS[0],
+        movement: partsDb.getMovements()[0],
+        case: partsDb.getCases()[0],
+        dial: partsDb.getDials()[0],
+        hands: partsDb.getHands()[0],
+        secondsAccent: partsDb.getSecondsAccents()[1],
+        bezelInsert: partsDb.getBezelInserts()[0],
+        strap: partsDb.getStraps()[0],
         selectedVendors: {}
       });
     }
@@ -286,36 +307,51 @@ export function App() {
                   DialForge
                 </span>
                 <span className="px-1.5 py-0.5 text-[10px] font-bold rounded bg-brass-500/20 text-brass-300 border border-brass-500/30 uppercase tracking-wider">
-                  Guided Builder
+                  DB v1.2
                 </span>
               </div>
               <p className="hidden sm:block text-[11px] text-slate-400 -mt-0.5">
-                The Custom Watch Builder & Compatibility Engine
+                The Custom Watch Builder & Deal Scanner
               </p>
             </div>
           </div>
 
-          {/* Quick Preset Starters & Reset */}
+          {/* Quick Preset Starters & Store Scanner Trigger */}
           <div className="flex items-center gap-2">
-            <div className="hidden md:flex items-center gap-1.5 bg-slate-950/80 p-1 rounded-xl border border-slate-800 text-xs">
+            {/* Store Scanner Button */}
+            <button
+              onClick={() => setIsScanModalOpen(true)}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-800/90 hover:bg-slate-700/90 border border-slate-700 text-xs font-semibold text-slate-200 transition shadow-sm"
+              title="View Scanned Suppliers & Deals"
+            >
+              <Radio className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
+              <span className="hidden sm:inline">Scanner Feeds</span>
+              {latestScanJob && latestScanJob.dealsDiscovered.length > 0 && (
+                <span className="px-1.5 py-0.2 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/30 text-[10px] font-bold">
+                  {latestScanJob.dealsDiscovered.length} Deals
+                </span>
+              )}
+            </button>
+
+            <div className="hidden lg:flex items-center gap-1.5 bg-slate-950/80 p-1 rounded-xl border border-slate-800 text-xs">
               <span className="px-2 text-slate-400 font-medium">Quick Starters:</span>
               <button
                 onClick={() => loadPreset('nh35-diver')}
                 className="px-2.5 py-1 rounded-lg hover:bg-slate-800 text-slate-300 hover:text-slate-100 transition"
               >
-                Sub Diver (NH35)
+                Sub Diver
               </button>
               <button
                 onClick={() => loadPreset('vh31-quartz-field')}
                 className="px-2.5 py-1 rounded-lg hover:bg-slate-800 text-brass-400 font-semibold transition"
               >
-                ⚡ Sweeping Quartz (VH31)
+                ⚡ Sweeping Quartz
               </button>
               <button
                 onClick={() => loadPreset('nh34-gmt')}
                 className="px-2.5 py-1 rounded-lg hover:bg-slate-800 text-slate-300 hover:text-slate-100 transition"
               >
-                GMT 24H (NH34)
+                GMT 24H
               </button>
             </div>
 
@@ -329,6 +365,122 @@ export function App() {
           </div>
         </div>
       </header>
+
+      {/* STORE SCANNER MODAL & PROGRESS */}
+      {isScanModalOpen && (
+        <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-slate-900 border border-slate-800 rounded-2xl max-w-2xl w-full p-6 shadow-2xl space-y-5 animate-in fade-in zoom-in-95 duration-200">
+            <div className="flex items-start justify-between">
+              <div>
+                <div className="flex items-center gap-2">
+                  <Store className="w-5 h-5 text-brass-400" />
+                  <h3 className="font-bold text-slate-100 text-base">Horological Store Scanner Pipeline</h3>
+                </div>
+                <p className="text-xs text-slate-400 mt-1">
+                  Periodically monitors inventory, mechanical tolerances, and pricing across vetted suppliers.
+                </p>
+              </div>
+
+              <button
+                onClick={() => setIsScanModalOpen(false)}
+                className="p-1 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Scan Execution & Progress */}
+            {isScanning ? (
+              <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-3">
+                <div className="flex items-center justify-between text-xs font-mono">
+                  <span className="text-brass-400 flex items-center gap-2">
+                    <Radio className="w-3.5 h-3.5 animate-spin" />
+                    {scanStage}
+                  </span>
+                  <span className="font-bold text-slate-300">{scanProgress}%</span>
+                </div>
+                <div className="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
+                  <div
+                    className="bg-gradient-to-r from-brass-500 to-emerald-400 h-2 rounded-full transition-all duration-300"
+                    style={{ width: `${scanProgress}%` }}
+                  />
+                </div>
+              </div>
+            ) : (
+              <div className="flex items-center justify-between p-3.5 rounded-xl bg-slate-950/70 border border-slate-800 text-xs">
+                <div>
+                  <span className="text-slate-400 block text-[11px]">Last Scan Completed:</span>
+                  <span className="font-mono font-semibold text-slate-200">
+                    {latestScanJob ? new Date(latestScanJob.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }) : 'Never'}
+                  </span>
+                </div>
+
+                <button
+                  onClick={handleRunStoreScan}
+                  className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-brass-500 hover:bg-brass-400 text-slate-950 text-xs font-bold transition shadow"
+                >
+                  <Radio className="w-3.5 h-3.5" />
+                  <span>Run Scan Pipeline Now</span>
+                </button>
+              </div>
+            )}
+
+            {/* Monitored Supplier Sources */}
+            <div>
+              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">
+                Monitored Supplier Feeds ({VETTED_SCAN_SOURCES.length})
+              </h4>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
+                {VETTED_SCAN_SOURCES.map(src => (
+                  <div key={src.id} className="p-2 rounded-lg bg-slate-950/60 border border-slate-800/80">
+                    <div className="font-semibold text-slate-200 truncate">{src.name}</div>
+                    <div className="text-[10px] text-slate-500 font-mono flex items-center justify-between mt-1">
+                      <span>{src.tier}</span>
+                      <a href={`https://${src.domain}`} target="_blank" rel="noopener noreferrer" className="hover:text-brass-400">
+                        <ExternalLink className="w-3 h-3" />
+                      </a>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Active Price Drops / Deals Table */}
+            {latestScanJob && latestScanJob.dealsDiscovered.length > 0 && (
+              <div>
+                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-300 mb-2 flex items-center gap-1.5">
+                  <Flame className="w-3.5 h-3.5 text-rose-400" />
+                  <span>Discovered Deals & Price Reductions</span>
+                </h4>
+                <div className="border border-slate-800 rounded-xl overflow-hidden text-xs max-h-48 overflow-y-auto">
+                  <table className="w-full text-left">
+                    <thead className="bg-slate-950 text-slate-400 font-mono text-[11px] border-b border-slate-800">
+                      <tr>
+                        <th className="py-2 px-3">Component</th>
+                        <th className="py-2 px-3">Supplier</th>
+                        <th className="py-2 px-3 text-right">Prior</th>
+                        <th className="py-2 px-3 text-right">New Deal</th>
+                        <th className="py-2 px-3 text-right">Savings</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-slate-800/60">
+                      {latestScanJob.dealsDiscovered.map((deal, idx) => (
+                        <tr key={idx} className="hover:bg-slate-850/60">
+                          <td className="py-2 px-3 font-medium text-slate-200">{deal.componentName}</td>
+                          <td className="py-2 px-3 text-slate-400 text-[11px]">{deal.storeName}</td>
+                          <td className="py-2 px-3 text-right text-slate-500 line-through font-mono">${deal.oldPrice.toFixed(2)}</td>
+                          <td className="py-2 px-3 text-right font-bold text-brass-400 font-mono">${deal.newPrice.toFixed(2)}</td>
+                          <td className="py-2 px-3 text-right text-emerald-400 font-bold text-[11px]">-{deal.discountPercent}%</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* MAIN APP BODY (TWO-COLUMN RESPONSIVE LAYOUT) */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-1 w-full">
@@ -514,11 +666,11 @@ export function App() {
         <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p>© 2026 DialForge — Open Source Watch Modding & Horology Engine</p>
           <p className="flex items-center gap-3">
-            <span>Supports Automatic (NH35/36/34/38)</span>
+            <span>Supports Automatic (NH35/36/34/38/PT5000)</span>
             <span>•</span>
             <span className="text-brass-400 font-semibold">Sweeping Quartz (VH31)</span>
             <span>•</span>
-            <span>Standard Quartz (Ronda)</span>
+            <span>Swiss Quartz (Ronda)</span>
           </p>
         </div>
       </footer>

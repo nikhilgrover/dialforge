@@ -447,6 +447,25 @@ export const WatchCanvas: React.FC<WatchCanvasProps> = ({ build }) => {
                   {dial.texture === 'sunburst' && (
                     <circle cx="200" cy="200" r="105" fill="url(#sunburst-sheen)" />
                   )}
+                  {dial.texture === 'meteorite' && (
+                    <g opacity="0.4" stroke="#ffffff" strokeWidth="0.8">
+                      <line x1="120" y1="130" x2="280" y2="270" />
+                      <line x1="140" y1="110" x2="260" y2="290" />
+                      <line x1="280" y1="130" x2="120" y2="270" />
+                      <line x1="160" y1="290" x2="240" y2="110" />
+                      <line x1="110" y1="200" x2="290" y2="200" />
+                    </g>
+                  )}
+                  {dial.texture === 'linen' && (
+                    <g opacity="0.2" stroke="#ffffff" strokeWidth="0.6">
+                      {[120, 138, 156, 174, 192, 210, 228, 246, 264, 280].map((coord, idx) => (
+                        <g key={idx}>
+                          <line x1={coord} y1="110" x2={coord} y2="290" />
+                          <line x1="110" y1={coord} x2="290" y2={coord} />
+                        </g>
+                      ))}
+                    </g>
+                  )}
 
                   {/* Date Window at 3:00 */}
                   {dial.dateWindow === '3.0' && (
@@ -542,6 +561,25 @@ export const WatchCanvas: React.FC<WatchCanvasProps> = ({ build }) => {
                           </text>
                         );
                       })}
+                    </g>
+                  )}
+
+                  {dial.indicesStyle === 'minimal-markers' && (
+                    <g id="minimal-markers">
+                      {[...Array(12)].map((_, i) => (
+                        <rect
+                          key={i}
+                          x="198"
+                          y="108"
+                          width="4"
+                          height={i % 3 === 0 ? "13" : "8"}
+                          rx="0.5"
+                          fill={lumeColor}
+                          stroke="#cbd5e1"
+                          strokeWidth="0.5"
+                          transform={`rotate(${i * 30} 200 200)`}
+                        />
+                      ))}
                     </g>
                   )}
 

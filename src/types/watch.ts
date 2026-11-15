@@ -34,6 +34,8 @@ export interface BaseComponent {
   basePrice: number;
   vendors: VendorOption[];
   imageUrl?: string;
+  lastScannedAt?: string;
+  historicalLowestPrice?: number;
 }
 
 export type MovementType = 'automatic' | 'manual' | 'quartz-sweeping' | 'quartz-standard';
@@ -63,7 +65,7 @@ export interface Movement extends BaseComponent {
   batteryLifeYears?: number;
 }
 
-export type CaseStyle = 'diver' | 'explorer' | 'field' | 'flieger' | 'dress';
+export type CaseStyle = 'diver' | 'explorer' | 'field' | 'flieger' | 'dress' | 'datejust' | 'pilot';
 export type CrownPosition = '3.0' | '3.8' | '4.0' | '9.0';
 export type CrystalType = 'flat-sapphire' | 'double-domed-sapphire' | 'top-hat-sapphire' | 'mineral';
 export type CaseFinish = 'brushed-steel' | 'pvd-black' | 'bronze' | 'rose-gold' | 'gold';
@@ -111,10 +113,10 @@ export interface Dial extends BaseComponent {
   lume: LumeType;
   dialFeetPositions: DialFeetPosition[];
   dateWindow: 'none' | '3.0' | '3.8' | '6.0';
-  texture?: 'matte' | 'sunburst' | 'waffle' | 'enamel' | 'sand';
+  texture?: 'matte' | 'sunburst' | 'waffle' | 'enamel' | 'sand' | 'linen' | 'meteorite';
 }
 
-export type HandsStyle = 'mercedes' | 'snowflake' | 'sword' | 'cathedral' | 'baton' | 'marine';
+export type HandsStyle = 'mercedes' | 'snowflake' | 'sword' | 'cathedral' | 'baton' | 'marine' | 'dauphine' | 'flieger';
 
 export interface Hands extends BaseComponent {
   category: 'hands';
@@ -225,4 +227,21 @@ export interface CompatibilityReport {
   warningCount: number;
   infoCount: number;
   issues: CompatibilityIssue[];
+}
+
+export interface ScanJob {
+  id: string;
+  timestamp: string;
+  sourcesScanned: string[];
+  itemsFound: number;
+  priceDropsDetected: number;
+  status: 'idle' | 'running' | 'completed' | 'failed';
+  dealsDiscovered: {
+    componentId: string;
+    componentName: string;
+    storeName: string;
+    oldPrice: number;
+    newPrice: number;
+    discountPercent: number;
+  }[];
 }

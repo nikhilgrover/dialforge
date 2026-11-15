@@ -1,19 +1,10 @@
-import React from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import type {
   WatchBuild,
   BuildStep,
   BaseComponent
 } from '../types/watch';
-import {
-  SEED_MOVEMENTS,
-  SEED_CASES,
-  SEED_DIALS,
-  SEED_HANDS,
-  SEED_SECONDS_ACCENTS,
-  SEED_BEZEL_INSERTS,
-  SEED_ROTORS,
-  SEED_STRAPS
-} from '../data/seedParts';
+import { partsDb } from '../db/partsDatabase';
 import {
   Cpu,
   Watch,
@@ -25,7 +16,10 @@ import {
   ArrowRight,
   ArrowLeft,
   Info,
-  CheckCircle2
+  CheckCircle2,
+  Search,
+  X,
+  Flame
 } from 'lucide-react';
 
 interface PartPickerProps {
@@ -41,6 +35,11 @@ export const PartPicker: React.FC<PartPickerProps> = ({
   onSelectComponent,
   onNavigateStep
 }) => {
+  // Search & Filter state
+  const [searchQuery, setSearchQuery] = useState('');
+  const [styleFilter, setStyleFilter] = useState<string>('all');
+  const [sortBy, setSortBy] = useState<'featured' | 'price-asc' | 'price-desc' | 'deals'>('featured');
+
   // Step definitions
   const steps: { id: BuildStep; label: string; icon: React.ElementType }[] = [
     { id: 'movement', label: '1. Movement', icon: Cpu },
@@ -63,21 +62,101 @@ export const PartPicker: React.FC<PartPickerProps> = ({
     }
   };
 
+  // Helper: check if component has an active special deal
+  const hasActiveDeal = (comp: BaseComponent): boolean => {
+    return comp.vendors.some(v => v.isSpecialDeal);
+  };
+
+  // Helper: sort components
+  const sortComponents = useCallback(<T extends BaseComponent>(items: T[]): T[] => {
+    return [...items].sort((a, b) => {
+      if (sortBy === 'deals') {
+        const aDeal = hasActiveDeal(a) ? 1 : 0;
+        const bDeal = hasActiveDeal(b) ? 1 : 0;
+        if (aDeal !== bDeal) return bDeal - aDeal;
+      }
+      if (sortBy === 'price-asc') return a.basePrice - b.basePrice;
+      if (sortBy === 'price-desc') return b.basePrice - a.basePrice;
+      return 0; // featured default
+    });
+  }, [sortBy]);
+
   // -------------------------------------------------------------
   // STEP 1: MOVEMENTS
   // -------------------------------------------------------------
+  const allMovements = partsDb.getMovements();
+  const filteredMovements = useMemo(() => {
+    let list = allMovements;
+    if (searchQuery.trim()) {
+      const q = searchQuery.toLowerCase().trim();
+      list = list.filter(m => m.name.toLowerCase().includes(q) || m.caliber.toLowerCase().includes(q) || m.description.toLowerCase().includes(q));
+    }
+    if (styleFilter !== 'all') {
+      if (styleFilter === 'automatic') list = list.filter(m => m.movementType === 'automatic');
+      else if (styleFilter === 'quartz') list = list.filter(m => m.movementType.includes('quartz'));
+      else if (styleFilter === 'gmt') list = list.filter(m => m.hasGmt);
+    }
+    return sortComponents(list);
+  }, [allMovements, searchQuery, styleFilter, sortComponents]);
+
   const renderMovementStep = () => (
     <div className="space-y-4">
-      <div className="bg-slate-950/60 p-3.5 rounded-xl border border-slate-800 text-xs text-slate-300 flex items-start gap-2.5">
-        <Info className="w-4 h-4 text-brass-400 shrink-0 mt-0.5" />
-        <div>
-          <span className="font-semibold text-slate-100">Step 1: Choose Caliber Architecture.</span> All subsequent cases, dials, and hand pinion dimensions will automatically filter to guarantee 100% mechanical compatibility.
+      {/* Category Header & Filters */}
+      <div className="flex flex-wrap items-center justify-between gap-3 bg-slate-950/60 p-3 rounded-xl border border-slate-800">
+        <div className="flex items-center gap-1.5 flex-wrap">
+          <span className="text-[11px] font-semibold text-slate-400 mr-1">Filter:</span>
+          {['all', 'automatic', 'quartz', 'gmt'].map(flt => (
+            <button
+              key={flt}
+              onClick={() => setStyleFilter(flt)}
+              className={`px-2.5 py-1 rounded-lg text-[11px] font-semibold capitalize transition ${
+                styleFilter === flt
+                  ? 'bg-brass-500 text-slate-950 font-bold'
+                  : 'bg-slate-900 text-slate-400 hover:text-slate-200 hover:bg-slate-800'
+              }`}
+            >
+              {flt === 'all' ? 'All Movements' : flt}
+            </button>
+          ))}
+        </div>
+
+        <div className="flex items-center gap-2">
+          <div className="relative">
+            <Search className="w-3.5 h-3.5 text-slate-500 absolute left-2.5 top-1/2 -translate-y-1/2" />
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={e => setSearchQuery(e.target.value)}
+              placeholder="Search caliber..."
+              className="bg-slate-900 border border-slate-700/80 rounded-lg pl-8 pr-7 py-1 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-brass-500 w-36 sm:w-48"
+            />
+            {searchQuery && (
+              <button
+                onClick={() => setSearchQuery('')}
+                className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300"
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
+            )}
+          </div>
+
+          <select
+            value={sortBy}
+            onChange={e => setSortBy(e.target.value as any)}
+            className="bg-slate-900 border border-slate-700/80 rounded-lg px-2.5 py-1 text-xs text-slate-300 focus:outline-none focus:border-brass-500"
+          >
+            <option value="featured">Featured</option>
+            <option value="price-asc">Price: Low to High</option>
+            <option value="price-desc">Price: High to Low</option>
+            <option value="deals">🔥 Deals First</option>
+          </select>
         </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {SEED_MOVEMENTS.map(mov => {
+        {filteredMovements.map(mov => {
           const isSelected = build.movement?.id === mov.id;
+          const isDeal = hasActiveDeal(mov);
 
           return (
             <div
@@ -91,7 +170,7 @@ export const PartPicker: React.FC<PartPickerProps> = ({
               <div>
                 <div className="flex items-start justify-between gap-2">
                   <div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-1.5 flex-wrap">
                       <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-brass-500/15 text-brass-300 border border-brass-500/30">
                         {mov.caliber}
                       </span>
@@ -103,6 +182,11 @@ export const PartPicker: React.FC<PartPickerProps> = ({
                       {mov.caliber === 'NH34A' && (
                         <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-amber-500/15 text-amber-300 border border-amber-500/30">
                           GMT 24H
+                        </span>
+                      )}
+                      {isDeal && (
+                        <span className="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[10px] font-bold bg-rose-500/15 text-rose-300 border border-rose-500/30">
+                          <Flame className="w-3 h-3 text-rose-400" /> Deal
                         </span>
                       )}
                     </div>
@@ -140,9 +224,7 @@ export const PartPicker: React.FC<PartPickerProps> = ({
                 </div>
 
                 <button
-                  onClick={() => {
-                    onSelectComponent('movement', mov);
-                  }}
+                  onClick={() => onSelectComponent('movement', mov)}
                   className={`px-4 py-1.5 text-xs font-semibold rounded-lg transition ${
                     isSelected
                       ? 'bg-brass-500 text-slate-950 font-bold shadow'
@@ -162,13 +244,13 @@ export const PartPicker: React.FC<PartPickerProps> = ({
   // -------------------------------------------------------------
   // STEP 2: CASES (Filtered strictly to movement)
   // -------------------------------------------------------------
-  const renderCaseStep = () => {
+  const allCases = partsDb.getCases();
+  const compatibleCases = useMemo(() => {
     const mov = build.movement;
-    if (!mov) return null;
+    if (!mov) return [];
 
-    // Filter cases
-    const compatibleCases = SEED_CASES.filter(c => {
-      // If NH34 GMT: Must have double-domed sapphire (clearance >= 1.8mm) to avoid hand stack collision
+    let list = allCases.filter(c => {
+      // If NH34 GMT: Must have double-domed sapphire (clearance >= 1.8mm)
       if (mov.caliber === 'NH34A') {
         return c.crystalType === 'double-domed-sapphire' || c.crystalClearanceMm >= 1.8;
       }
@@ -180,29 +262,83 @@ export const PartPicker: React.FC<PartPickerProps> = ({
       if (mov.caliber === 'VH31') {
         return c.nativeMovementFamily === 'NH' && c.dialDiameterFitMm >= 28.5;
       }
-      // Ronda or others
       return true;
     });
 
+    if (searchQuery.trim()) {
+      const q = searchQuery.toLowerCase().trim();
+      list = list.filter(c => c.name.toLowerCase().includes(q) || c.caseStyle.toLowerCase().includes(q) || c.description.toLowerCase().includes(q));
+    }
+
+    if (styleFilter !== 'all') {
+      list = list.filter(c => c.caseStyle === styleFilter);
+    }
+
+    return sortComponents(list);
+  }, [allCases, build.movement, searchQuery, styleFilter, sortComponents]);
+
+  const renderCaseStep = () => {
+    const mov = build.movement;
+    if (!mov) return null;
+
     return (
       <div className="space-y-4">
-        <div className="bg-slate-950/60 p-3.5 rounded-xl border border-slate-800 text-xs text-slate-300 flex items-start gap-2.5">
-          <Info className="w-4 h-4 text-brass-400 shrink-0 mt-0.5" />
-          <div>
-            <span className="font-semibold text-slate-100">Cases compatible with {mov.name}:</span>
-            {mov.caliber === 'NH34A' ? (
-              <span> High-clearance double-domed sapphire cases shown to prevent 5.70mm GMT stack collision.</span>
-            ) : mov.caliber === 'VH31' ? (
-              <span> Standard cases shown with auto-included 28.5mm VH31-to-NH casing spacer ring.</span>
-            ) : (
-              <span> Standard NH-compatible cases with direct stem alignment.</span>
-            )}
+        {/* Filter bar */}
+        <div className="flex flex-wrap items-center justify-between gap-3 bg-slate-950/60 p-3 rounded-xl border border-slate-800">
+          <div className="flex items-center gap-1.5 flex-wrap">
+            <span className="text-[11px] font-semibold text-slate-400 mr-1">Style:</span>
+            {['all', 'diver', 'explorer', 'field', 'pilot', 'datejust'].map(flt => (
+              <button
+                key={flt}
+                onClick={() => setStyleFilter(flt)}
+                className={`px-2.5 py-1 rounded-lg text-[11px] font-semibold capitalize transition ${
+                  styleFilter === flt
+                    ? 'bg-brass-500 text-slate-950 font-bold'
+                    : 'bg-slate-900 text-slate-400 hover:text-slate-200 hover:bg-slate-800'
+                }`}
+              >
+                {flt === 'all' ? 'All Styles' : flt}
+              </button>
+            ))}
+          </div>
+
+          <div className="flex items-center gap-2">
+            <div className="relative">
+              <Search className="w-3.5 h-3.5 text-slate-500 absolute left-2.5 top-1/2 -translate-y-1/2" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={e => setSearchQuery(e.target.value)}
+                placeholder="Search case..."
+                className="bg-slate-900 border border-slate-700/80 rounded-lg pl-8 pr-7 py-1 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-brass-500 w-36 sm:w-48"
+              />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery('')}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300"
+                >
+                  <X className="w-3.5 h-3.5" />
+                </button>
+              )}
+            </div>
+
+            <select
+              value={sortBy}
+              onChange={e => setSortBy(e.target.value as any)}
+              className="bg-slate-900 border border-slate-700/80 rounded-lg px-2.5 py-1 text-xs text-slate-300 focus:outline-none focus:border-brass-500"
+            >
+              <option value="featured">Featured</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="price-desc">Price: High to Low</option>
+              <option value="deals">🔥 Deals First</option>
+            </select>
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {compatibleCases.map(c => {
             const isSelected = build.case?.id === c.id;
+            const isDeal = hasActiveDeal(c);
 
             return (
               <div
@@ -223,6 +359,11 @@ export const PartPicker: React.FC<PartPickerProps> = ({
                         {c.crystalType === 'double-domed-sapphire' && (
                           <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-indigo-500/15 text-indigo-300 border border-indigo-500/30">
                             Double-Domed Sapphire
+                          </span>
+                        )}
+                        {isDeal && (
+                          <span className="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[10px] font-bold bg-rose-500/15 text-rose-300 border border-rose-500/30">
+                            <Flame className="w-3 h-3 text-rose-400" /> Deal
                           </span>
                         )}
                       </div>
@@ -250,7 +391,7 @@ export const PartPicker: React.FC<PartPickerProps> = ({
                     </span>
                     {mov.caliber === 'VH31' && (
                       <span className="px-2 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/40">
-                        ✓ Fits via VH31 Spacer
+                        ✓ Fits via Spacer
                       </span>
                     )}
                   </div>
@@ -263,9 +404,7 @@ export const PartPicker: React.FC<PartPickerProps> = ({
                   </div>
 
                   <button
-                    onClick={() => {
-                      onSelectComponent('case', c);
-                    }}
+                    onClick={() => onSelectComponent('case', c)}
                     className={`px-4 py-1.5 text-xs font-semibold rounded-lg transition ${
                       isSelected
                         ? 'bg-brass-500 text-slate-950 font-bold shadow'
@@ -286,42 +425,99 @@ export const PartPicker: React.FC<PartPickerProps> = ({
   // -------------------------------------------------------------
   // STEP 3: DIALS (Filtered to Movement Complication & Case)
   // -------------------------------------------------------------
+  const allDials = partsDb.getDials();
+  const compatibleDials = useMemo(() => {
+    const mov = build.movement;
+    const watchCase = build.case;
+    if (!mov || !watchCase) return [];
+
+    let list = allDials.filter(d => {
+      // Must match case cavity diameter (28.5mm)
+      if (Math.abs(d.diameterMm - watchCase.dialDiameterFitMm) > 0.5) return false;
+
+      // If movement is no-date (NH38 or VH31), only show sterile dials
+      if (!mov.hasDate) {
+        return d.dateWindow === 'none';
+      }
+
+      return true;
+    });
+
+    if (searchQuery.trim()) {
+      const q = searchQuery.toLowerCase().trim();
+      list = list.filter(d => d.name.toLowerCase().includes(q) || d.dialStyle.toLowerCase().includes(q) || d.colorName.toLowerCase().includes(q));
+    }
+
+    if (styleFilter !== 'all') {
+      list = list.filter(d => d.dialStyle === styleFilter);
+    }
+
+    return sortComponents(list);
+  }, [allDials, build.movement, build.case, searchQuery, styleFilter, sortComponents]);
+
   const renderDialStep = () => {
     const mov = build.movement;
     const watchCase = build.case;
     if (!mov || !watchCase) return null;
 
-    // Filter dials
-    const compatibleDials = SEED_DIALS.filter(d => {
-      // Must match case cavity diameter (28.5mm)
-      if (Math.abs(d.diameterMm - watchCase.dialDiameterFitMm) > 0.5) return false;
-
-      // If movement is no-date (NH38 or VH31), only show sterile dials (no date window cutout!)
-      if (!mov.hasDate) {
-        return d.dateWindow === 'none';
-      }
-
-      // If movement has date (NH35, NH34, Ronda 515), can show date dials or sterile dials
-      return true;
-    });
-
     return (
       <div className="space-y-4">
-        <div className="bg-slate-950/60 p-3.5 rounded-xl border border-slate-800 text-xs text-slate-300 flex items-start gap-2.5">
-          <Info className="w-4 h-4 text-brass-400 shrink-0 mt-0.5" />
-          <div>
-            <span className="font-semibold text-slate-100">Dials matching {watchCase.outerDiameterMm}mm Case & {mov.caliber}:</span>
-            {!mov.hasDate ? (
-              <span> Filtered strictly to sterile time-only dials (no empty date windows).</span>
-            ) : (
-              <span> Dials with 3:00 date apertures and sterile variants compatible with {mov.caliber}.</span>
-            )}
+        {/* Filters */}
+        <div className="flex flex-wrap items-center justify-between gap-3 bg-slate-950/60 p-3 rounded-xl border border-slate-800">
+          <div className="flex items-center gap-1.5 flex-wrap">
+            <span className="text-[11px] font-semibold text-slate-400 mr-1">Style:</span>
+            {['all', 'diver', 'explorer', 'field', 'dress', 'flieger', 'minimalist'].map(flt => (
+              <button
+                key={flt}
+                onClick={() => setStyleFilter(flt)}
+                className={`px-2.5 py-1 rounded-lg text-[11px] font-semibold capitalize transition ${
+                  styleFilter === flt
+                    ? 'bg-brass-500 text-slate-950 font-bold'
+                    : 'bg-slate-900 text-slate-400 hover:text-slate-200 hover:bg-slate-800'
+                }`}
+              >
+                {flt === 'all' ? 'All Dials' : flt}
+              </button>
+            ))}
+          </div>
+
+          <div className="flex items-center gap-2">
+            <div className="relative">
+              <Search className="w-3.5 h-3.5 text-slate-500 absolute left-2.5 top-1/2 -translate-y-1/2" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={e => setSearchQuery(e.target.value)}
+                placeholder="Search dial..."
+                className="bg-slate-900 border border-slate-700/80 rounded-lg pl-8 pr-7 py-1 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-brass-500 w-36 sm:w-48"
+              />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery('')}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300"
+                >
+                  <X className="w-3.5 h-3.5" />
+                </button>
+              )}
+            </div>
+
+            <select
+              value={sortBy}
+              onChange={e => setSortBy(e.target.value as any)}
+              className="bg-slate-900 border border-slate-700/80 rounded-lg px-2.5 py-1 text-xs text-slate-300 focus:outline-none focus:border-brass-500"
+            >
+              <option value="featured">Featured</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="price-desc">Price: High to Low</option>
+              <option value="deals">🔥 Deals First</option>
+            </select>
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {compatibleDials.map(d => {
             const isSelected = build.dial?.id === d.id;
+            const isDeal = hasActiveDeal(d);
 
             return (
               <div
@@ -338,6 +534,11 @@ export const PartPicker: React.FC<PartPickerProps> = ({
                       <div className="flex items-center gap-2">
                         <span className="w-3.5 h-3.5 rounded-full border border-slate-700 inline-block shrink-0" style={{ backgroundColor: d.colorHex }} />
                         <span className="font-semibold text-slate-100 text-sm">{d.name}</span>
+                        {isDeal && (
+                          <span className="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[10px] font-bold bg-rose-500/15 text-rose-300 border border-rose-500/30">
+                            <Flame className="w-3 h-3 text-rose-400" /> Deal
+                          </span>
+                        )}
                       </div>
                       <div className="text-xs text-slate-400 mt-0.5">
                         {d.colorName} • {d.texture} texture
@@ -358,7 +559,7 @@ export const PartPicker: React.FC<PartPickerProps> = ({
                       Lume: {d.lume}
                     </span>
                     <span className="px-2 py-0.5 rounded bg-slate-800 text-slate-300">
-                      Date: {d.dateWindow === 'none' ? 'Sterile (No Date)' : `${d.dateWindow}:00 Window`}
+                      Date: {d.dateWindow === 'none' ? 'Sterile' : `${d.dateWindow}:00 Window`}
                     </span>
                     {mov.movementType.includes('quartz') ? (
                       <span className="px-2 py-0.5 rounded bg-sky-950/60 text-sky-300 border border-sky-800/40">
@@ -379,9 +580,7 @@ export const PartPicker: React.FC<PartPickerProps> = ({
                   </div>
 
                   <button
-                    onClick={() => {
-                      onSelectComponent('dial', d);
-                    }}
+                    onClick={() => onSelectComponent('dial', d)}
                     className={`px-4 py-1.5 text-xs font-semibold rounded-lg transition ${
                       isSelected
                         ? 'bg-brass-500 text-slate-950 font-bold shadow'
@@ -402,37 +601,91 @@ export const PartPicker: React.FC<PartPickerProps> = ({
   // -------------------------------------------------------------
   // STEP 4: HANDS (Filtered to exact pinion hole sizes)
   // -------------------------------------------------------------
+  const allHands = partsDb.getHands();
+  const compatibleHands = useMemo(() => {
+    const mov = build.movement;
+    if (!mov) return [];
+
+    let list = allHands.filter(h => {
+      if (!h.compatibleMovementFamilies.includes(mov.family)) return false;
+      if (mov.caliber === 'NH34A') return !!h.handHoleSizes.gmt;
+      return !h.handHoleSizes.gmt;
+    });
+
+    if (searchQuery.trim()) {
+      const q = searchQuery.toLowerCase().trim();
+      list = list.filter(h => h.name.toLowerCase().includes(q) || h.handsStyle.toLowerCase().includes(q) || h.finish.toLowerCase().includes(q));
+    }
+
+    if (styleFilter !== 'all') {
+      list = list.filter(h => h.handsStyle === styleFilter);
+    }
+
+    return sortComponents(list);
+  }, [allHands, build.movement, searchQuery, styleFilter, sortComponents]);
+
   const renderHandsStep = () => {
     const mov = build.movement;
     if (!mov) return null;
 
-    // Filter hands
-    const compatibleHands = SEED_HANDS.filter(h => {
-      // Must match movement family
-      if (!h.compatibleMovementFamilies.includes(mov.family)) return false;
-
-      // If NH34 GMT movement, MUST have GMT hand
-      if (mov.caliber === 'NH34A') {
-        return !!h.handHoleSizes.gmt;
-      }
-
-      // If regular 3-hand movement, must NOT have GMT hand
-      return !h.handHoleSizes.gmt;
-    });
-
     return (
       <div className="space-y-4">
-        <div className="bg-slate-950/60 p-3.5 rounded-xl border border-slate-800 text-xs text-slate-300 flex items-start gap-2.5">
-          <Info className="w-4 h-4 text-brass-400 shrink-0 mt-0.5" />
-          <div>
-            <span className="font-semibold text-slate-100">Hand sets engineered for {mov.caliber} pinions:</span>
-            <span> Hour {mov.handHoleSizes.hour}mm / Min {mov.handHoleSizes.minute}mm / Sec {mov.handHoleSizes.second}mm{mov.handHoleSizes.gmt ? ` / GMT ${mov.handHoleSizes.gmt}mm` : ''}.</span>
+        {/* Filters */}
+        <div className="flex flex-wrap items-center justify-between gap-3 bg-slate-950/60 p-3 rounded-xl border border-slate-800">
+          <div className="flex items-center gap-1.5 flex-wrap">
+            <span className="text-[11px] font-semibold text-slate-400 mr-1">Style:</span>
+            {['all', 'mercedes', 'snowflake', 'sword', 'baton', 'dauphine', 'flieger'].map(flt => (
+              <button
+                key={flt}
+                onClick={() => setStyleFilter(flt)}
+                className={`px-2.5 py-1 rounded-lg text-[11px] font-semibold capitalize transition ${
+                  styleFilter === flt
+                    ? 'bg-brass-500 text-slate-950 font-bold'
+                    : 'bg-slate-900 text-slate-400 hover:text-slate-200 hover:bg-slate-800'
+                }`}
+              >
+                {flt === 'all' ? 'All Hand Sets' : flt}
+              </button>
+            ))}
+          </div>
+
+          <div className="flex items-center gap-2">
+            <div className="relative">
+              <Search className="w-3.5 h-3.5 text-slate-500 absolute left-2.5 top-1/2 -translate-y-1/2" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={e => setSearchQuery(e.target.value)}
+                placeholder="Search hands..."
+                className="bg-slate-900 border border-slate-700/80 rounded-lg pl-8 pr-7 py-1 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-brass-500 w-36 sm:w-48"
+              />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery('')}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300"
+                >
+                  <X className="w-3.5 h-3.5" />
+                </button>
+              )}
+            </div>
+
+            <select
+              value={sortBy}
+              onChange={e => setSortBy(e.target.value as any)}
+              className="bg-slate-900 border border-slate-700/80 rounded-lg px-2.5 py-1 text-xs text-slate-300 focus:outline-none focus:border-brass-500"
+            >
+              <option value="featured">Featured</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="price-desc">Price: High to Low</option>
+              <option value="deals">🔥 Deals First</option>
+            </select>
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {compatibleHands.map(h => {
             const isSelected = build.hands?.id === h.id;
+            const isDeal = hasActiveDeal(h);
 
             return (
               <div
@@ -453,6 +706,11 @@ export const PartPicker: React.FC<PartPickerProps> = ({
                         {h.handHoleSizes.gmt && (
                           <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-amber-500/15 text-amber-300 border border-amber-500/30">
                             4-Piece GMT
+                          </span>
+                        )}
+                        {isDeal && (
+                          <span className="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[10px] font-bold bg-rose-500/15 text-rose-300 border border-rose-500/30">
+                            <Flame className="w-3 h-3 text-rose-400" /> Deal
                           </span>
                         )}
                       </div>
@@ -485,9 +743,7 @@ export const PartPicker: React.FC<PartPickerProps> = ({
                   </div>
 
                   <button
-                    onClick={() => {
-                      onSelectComponent('hands', h);
-                    }}
+                    onClick={() => onSelectComponent('hands', h)}
                     className={`px-4 py-1.5 text-xs font-semibold rounded-lg transition ${
                       isSelected
                         ? 'bg-brass-500 text-slate-950 font-bold shadow'
@@ -515,19 +771,17 @@ export const PartPicker: React.FC<PartPickerProps> = ({
 
     // Filter Bezel Inserts
     const compatibleInserts = watchCase.hasRotatingBezel
-      ? SEED_BEZEL_INSERTS.filter(b => {
-          if (mov.caliber === 'NH34A') {
-            return b.style === 'gmt-24hr';
-          }
+      ? partsDb.getBezelInserts().filter(b => {
+          if (mov.caliber === 'NH34A') return b.style === 'gmt-24hr';
           return b.style !== 'gmt-24hr';
         })
       : [];
 
     // Filter Straps by Case Lug Width
-    const compatibleStraps = SEED_STRAPS.filter(st => st.lugWidthMm === watchCase.lugWidthMm);
+    const compatibleStraps = partsDb.getStraps().filter(st => st.lugWidthMm === watchCase.lugWidthMm);
 
     // Filter Seconds Accents
-    const compatibleAccents = SEED_SECONDS_ACCENTS.filter(s =>
+    const compatibleAccents = partsDb.getSecondsAccents().filter(s =>
       s.compatibleMovementFamilies.includes(mov.family)
     );
 
@@ -637,7 +891,7 @@ export const PartPicker: React.FC<PartPickerProps> = ({
           </h5>
           {canHaveRotor ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {SEED_ROTORS.map(r => {
+              {partsDb.getRotors().map(r => {
                 const isSelected = build.rotor?.id === r.id;
 
                 return (
@@ -801,7 +1055,7 @@ export const PartPicker: React.FC<PartPickerProps> = ({
       case 'case': return !!build.case;
       case 'dial': return !!build.dial;
       case 'hands': return !!build.hands;
-      case 'accessories': return true; // Accessories are optional finishing touches
+      case 'accessories': return true;
       default: return true;
     }
   };
@@ -827,7 +1081,11 @@ export const PartPicker: React.FC<PartPickerProps> = ({
               <button
                 key={st.id}
                 disabled={!isUnlocked}
-                onClick={() => onNavigateStep(st.id)}
+                onClick={() => {
+                  setSearchQuery('');
+                  setStyleFilter('all');
+                  onNavigateStep(st.id);
+                }}
                 className={`flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-medium whitespace-nowrap transition shrink-0 ${
                   isCurrent
                     ? 'bg-brass-500 text-slate-950 font-bold shadow-md shadow-brass-500/20'
@@ -866,7 +1124,11 @@ export const PartPicker: React.FC<PartPickerProps> = ({
       <div className="px-5 py-3.5 bg-slate-950/90 border-t border-slate-800 flex items-center justify-between shrink-0">
         {prevStep ? (
           <button
-            onClick={() => onNavigateStep(prevStep)}
+            onClick={() => {
+              setSearchQuery('');
+              setStyleFilter('all');
+              onNavigateStep(prevStep);
+            }}
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold transition"
           >
             <ArrowLeft className="w-3.5 h-3.5" /> Back
@@ -879,7 +1141,11 @@ export const PartPicker: React.FC<PartPickerProps> = ({
           {nextStep ? (
             <button
               disabled={!isCurrentStepComplete()}
-              onClick={() => onNavigateStep(nextStep)}
+              onClick={() => {
+                setSearchQuery('');
+                setStyleFilter('all');
+                onNavigateStep(nextStep);
+              }}
               className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold transition shadow ${
                 isCurrentStepComplete()
                   ? 'bg-brass-500 hover:bg-brass-400 text-slate-950'
