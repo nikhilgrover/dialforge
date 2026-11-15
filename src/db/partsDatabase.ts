@@ -51,16 +51,18 @@ class PartsDatabase {
   }
 
   private loadInitialState(): DatabaseState {
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved) {
-        const parsed = JSON.parse(saved);
-        if (parsed.version === 1 && parsed.movements?.length > 0) {
-          return parsed;
+    if (typeof window !== 'undefined' && typeof window.localStorage !== 'undefined') {
+      try {
+        const saved = window.localStorage.getItem(STORAGE_KEY);
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (parsed.version === 1 && parsed.movements?.length > 0) {
+            return parsed;
+          }
         }
+      } catch {
+        // Fallback to fresh seed
       }
-    } catch {
-      // Fallback to fresh seed
     }
 
     return {
@@ -92,8 +94,11 @@ class PartsDatabase {
   }
 
   private persist() {
+    if (typeof window === 'undefined' || typeof window.localStorage === 'undefined') {
+      return;
+    }
     try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(this.state));
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(this.state));
     } catch (e) {
       console.warn('Unable to persist parts DB to localStorage:', e);
     }

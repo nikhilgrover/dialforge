@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import type { WatchBuild, BaseComponent, VendorTier, BuildStep } from '../types/watch';
 import { SEED_TOOLS } from '../data/seedParts';
+import { saveBuildToFirestore } from '../services/firestoreService';
 import {
   Share2,
   Check,
@@ -93,25 +94,34 @@ export const BillOfMaterials: React.FC<BillOfMaterialsProps> = ({
     });
   };
 
-  // Generate shareable link
-  const handleShareLink = () => {
-    const stateObj = {
-      mov: build.movement?.id,
-      cas: build.case?.id,
-      dia: build.dial?.id,
-      han: build.hands?.id,
-      sec: build.secondsAccent?.id,
-      bez: build.bezelInsert?.id,
-      rot: build.rotor?.id,
-      spc: build.spacer?.id,
-      stp: build.strap?.id,
-      v: build.selectedVendors
-    };
-    const encoded = btoa(JSON.stringify(stateObj));
-    const url = `${window.location.origin}${window.location.pathname}#build=${encoded}`;
-    navigator.clipboard.writeText(url);
-    setCopiedLink(true);
-    setTimeout(() => setCopiedLink(false), 2500);
+  // Generate shareable short link (backed by Firestore + local cache)
+  const handleShareLink = async () => {
+    try {
+      const shortId = await saveBuildToFirestore(build);
+      const url = `${window.location.origin}${window.location.pathname}?b=${shortId}`;
+      navigator.clipboard.writeText(url);
+      setCopiedLink(true);
+      setTimeout(() => setCopiedLink(false), 2500);
+    } catch {
+      // Fallback to base64 URL hash
+      const stateObj = {
+        mov: build.movement?.id,
+        cas: build.case?.id,
+        dia: build.dial?.id,
+        han: build.hands?.id,
+        sec: build.secondsAccent?.id,
+        bez: build.bezelInsert?.id,
+        rot: build.rotor?.id,
+        spc: build.spacer?.id,
+        stp: build.strap?.id,
+        v: build.selectedVendors
+      };
+      const encoded = btoa(JSON.stringify(stateObj));
+      const url = `${window.location.origin}${window.location.pathname}#build=${encoded}`;
+      navigator.clipboard.writeText(url);
+      setCopiedLink(true);
+      setTimeout(() => setCopiedLink(false), 2500);
+    }
   };
 
   // Generate Markdown BOM for Reddit / Forums

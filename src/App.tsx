@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import type {
   WatchBuild,
   BuildStep,
@@ -16,6 +16,8 @@ import type {
 } from './types/watch';
 import { partsDb } from './db/partsDatabase';
 import { executeStoreScan, VETTED_SCAN_SOURCES } from './services/scannerService';
+import { isFirebaseConfigured, firebaseConfig } from './lib/firebase';
+import { loadBuildFromFirestore, seedCatalogToFirestore } from './services/firestoreService';
 import { WatchCanvas } from './components/WatchCanvas';
 import { PartPicker } from './components/PartPicker';
 import { BillOfMaterials } from './components/BillOfMaterials';
@@ -31,7 +33,9 @@ import {
   Radio,
   X,
   ExternalLink,
-  Store
+  Store,
+  Database,
+  CloudUpload
 } from 'lucide-react';
 
 export function App() {
@@ -67,12 +71,39 @@ export function App() {
   const [currentStep, setCurrentStep] = useState<BuildStep>('movement');
   const [activeTab, setActiveTab] = useState<'configurator' | 'sourcing'>('configurator');
 
-  // Store Scanner State
+  // Store Scanner & Cloud Firestore Sync State
   const [isScanning, setIsScanning] = useState(false);
   const [scanStage, setScanStage] = useState('');
   const [scanProgress, setScanProgress] = useState(0);
   const [isScanModalOpen, setIsScanModalOpen] = useState(false);
   const [latestScanJob, setLatestScanJob] = useState<ScanJob | null>(() => partsDb.getLastScanJob());
+  const [isSeedingFirestore, setIsSeedingFirestore] = useState(false);
+  const [seedingMessage, setSeedingMessage] = useState<string | null>(null);
+
+  // Load shared build if ?b=shortId query param is in URL
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const shortId = params.get('b');
+    if (shortId) {
+      loadBuildFromFirestore(shortId).then(data => {
+        if (data) {
+          setBuild({
+            movement: partsDb.getMovements().find(m => m.id === data.movementId),
+            case: partsDb.getCases().find(c => c.id === data.caseId),
+            dial: partsDb.getDials().find(d => d.id === data.dialId),
+            hands: partsDb.getHands().find(h => h.id === data.handsId),
+            secondsAccent: partsDb.getSecondsAccents().find(s => s.id === data.secondsAccentId),
+            bezelInsert: partsDb.getBezelInserts().find(b => b.id === data.bezelInsertId),
+            rotor: partsDb.getRotors().find(r => r.id === data.rotorId),
+            spacer: partsDb.getSpacers().find(sp => sp.id === data.spacerId),
+            strap: partsDb.getStraps().find(st => st.id === data.strapId),
+            selectedVendors: data.selectedVendors || {}
+          });
+          setActiveTab('sourcing');
+        }
+      });
+    }
+  }, []);
 
   // Run periodic store scan
   const handleRunStoreScan = async () => {
@@ -90,6 +121,24 @@ export function App() {
       console.error('Scan error:', e);
     } finally {
       setIsScanning(false);
+    }
+  };
+
+  // Seed Catalog to Cloud Firestore
+  const handleSeedFirestore = async () => {
+    setIsSeedingFirestore(true);
+    setSeedingMessage('Connecting to Cloud Firestore...');
+
+    try {
+      const res = await seedCatalogToFirestore((count, total) => {
+        setSeedingMessage(`Uploading component ${count} of ${total} to Firestore...`);
+      });
+      setSeedingMessage(`✅ Successfully seeded ${res.count} components to Cloud Firestore!`);
+    } catch (err: any) {
+      setSeedingMessage(`⚠️ ${err.message || 'Error seeding Firestore'}`);
+    } finally {
+      setIsSeedingFirestore(false);
+      setTimeout(() => setSeedingMessage(null), 5000);
     }
   };
 
@@ -424,6 +473,39 @@ export function App() {
                 </button>
               </div>
             )}
+
+            {/* Cloud Firestore Storage & Sync Section */}
+            <div className="p-3.5 rounded-xl bg-slate-950/70 border border-slate-800 space-y-2.5">
+              <div className="flex items-center justify-between text-xs">
+                <div className="flex items-center gap-2">
+                  <Database className="w-4 h-4 text-sky-400" />
+                  <span className="font-semibold text-slate-200">Database Backend:</span>
+                  <span className={`px-2 py-0.5 rounded text-[10px] font-mono font-bold ${
+                    isFirebaseConfigured
+                      ? 'bg-sky-500/20 text-sky-300 border border-sky-500/40'
+                      : 'bg-emerald-500/15 text-emerald-300 border border-emerald-500/30'
+                  }`}>
+                    {isFirebaseConfigured ? `Cloud Firestore (${firebaseConfig.projectId})` : 'IndexedDB Local Cache (Free Tier Active)'}
+                  </span>
+                </div>
+
+                <button
+                  disabled={isSeedingFirestore}
+                  onClick={handleSeedFirestore}
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium border border-slate-700 transition"
+                  title="Push components from catalog into Cloud Firestore"
+                >
+                  <CloudUpload className="w-3.5 h-3.5 text-brass-400" />
+                  <span>{isSeedingFirestore ? 'Seeding...' : 'Sync Catalog to Firestore'}</span>
+                </button>
+              </div>
+
+              {seedingMessage && (
+                <div className="text-[11px] font-mono p-2 rounded bg-slate-900 border border-slate-800 text-brass-300">
+                  {seedingMessage}
+                </div>
+              )}
+            </div>
 
             {/* Monitored Supplier Sources */}
             <div>

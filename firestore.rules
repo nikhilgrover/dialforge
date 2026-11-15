@@ -1,0 +1,23 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Anyone can read catalog components, prices, and scan results
+    match /components/{componentId} {
+      allow read: if true;
+      allow write: if false; // Ingestion via Admin SDK / Seeder script
+    }
+
+    match /scan_jobs/{jobId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    // Anyone can save or read shared builds
+    match /shared_builds/{buildId} {
+      allow read: if true;
+      allow create: if request.resource.data.name is string;
+      allow update, delete: if false;
+    }
+  }
+}
