@@ -12,6 +12,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const PROJECT_ID = process.env.VITE_FIREBASE_PROJECT_ID || 'dialforge-app';
+const HOSTING_SITE = process.env.VITE_FIREBASE_HOSTING_SITE || 'dial-forge';
 
 function runStep(name: string, command: string) {
   console.log(`\n▶️  [${name}] Running: ${command}`);
@@ -80,8 +81,8 @@ async function main() {
   console.log('🎉 DEPLOYMENT FINISHED SUCCESSFULLY!');
   console.log('==================================================');
   console.log(`🌐 Live Public Website:`);
-  console.log(`   https://${PROJECT_ID}.web.app`);
-  console.log(`   https://${PROJECT_ID}.firebaseapp.com`);
+  console.log(`   https://${HOSTING_SITE}.web.app`);
+  console.log(`   https://${HOSTING_SITE}.firebaseapp.com`);
   console.log(`\n📊 Cloud Operations Dashboard (AWS CloudWatch Equivalent):`);
   console.log(`   https://console.cloud.google.com/monitoring/dashboards?project=${PROJECT_ID}`);
   console.log(`\n📦 Cloud Firestore Telemetry & Builds Database:`);
