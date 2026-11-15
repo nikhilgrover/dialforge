@@ -10,6 +10,7 @@
  */
 import fs from 'node:fs';
 import { executeStoreScan, VETTED_SCAN_SOURCES } from '../src/services/scannerService';
+import { sendScanSummaryEmail } from '../src/services/emailService';
 
 /**
  * Emit a structured JSON log entry in Google Cloud Logging format.
@@ -184,6 +185,18 @@ async function main() {
       if (!jsonOnly) console.log('✅ Generated GitHub Actions step summary.');
     } catch (summaryErr) {
       console.warn('Unable to write to $GITHUB_STEP_SUMMARY:', summaryErr);
+    }
+  }
+
+  // --- Automated Email Notification Dispatch ---
+  const emailResult = await sendScanSummaryEmail(job);
+  if (!jsonOnly) {
+    if (emailResult.sent) {
+      console.log(`📧 Scan summary email successfully dispatched via ${emailResult.provider.toUpperCase()} to ${process.env.NOTIFICATION_EMAIL || 'nikhil_ihs@hotmail.com'}`);
+    } else if (emailResult.provider !== 'none') {
+      console.warn(`⚠️ Failed to dispatch scan summary email: ${emailResult.error}`);
+    } else {
+      console.log(`💡 Email Summary Notice: Set RESEND_API_KEY or SMTP_USER/SMTP_PASSWORD in secrets to receive automated email summaries.`);
     }
   }
 

@@ -25,4 +25,10 @@ jobs:
       - name: Run Supplier Scanner & Update Firestore
         env:
           FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          NOTIFICATION_EMAIL: ${{ secrets.NOTIFICATION_EMAIL || 'nikhil_ihs@hotmail.com' }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
         run: npx tsx scripts/runScanner.ts

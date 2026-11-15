@@ -10,7 +10,7 @@ service cloud.firestore {
 
     match /scan_jobs/{jobId} {
       allow read: if true;
-      allow write: if false;
+      allow create, update: if true;
     }
 
     // Anyone can save or read shared builds
