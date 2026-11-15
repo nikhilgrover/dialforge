@@ -29,9 +29,10 @@ export const WatchCanvas: React.FC<WatchCanvasProps> = ({ build }) => {
 
   // Animation loop for ticking/sweeping hands
   const requestRef = useRef<number | null>(null);
-  const lastTickRef = useRef<number>(Date.now());
+  const lastTickRef = useRef<number>(0);
 
   useEffect(() => {
+    lastTickRef.current = Date.now();
     if (!isRunning) {
       if (requestRef.current) cancelAnimationFrame(requestRef.current);
       return;
