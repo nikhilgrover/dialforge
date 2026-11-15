@@ -229,13 +229,39 @@ export interface CompatibilityReport {
   issues: CompatibilityIssue[];
 }
 
+export interface SupplierScanResult {
+  sourceId: string;
+  sourceName: string;
+  domain: string;
+  tier: VendorTier;
+  status: 'online' | 'degraded' | 'offline' | 'error';
+  statusCode: number; // e.g. 200, 429, 502, 504
+  latencyMs: number;
+  itemsParsed: number;
+  itemsExpected: number;
+  error?: string;
+}
+
+export interface ScanJobMetrics {
+  totalDurationMs: number;
+  overallSuccessRate: number; // 0 - 100%
+  failureRatePercent: number; // 0 - 100%
+  sourcesTotal: number;
+  sourcesSucceeded: number;
+  sourcesFailed: number;
+  avgLatencyMs: number;
+  alertTriggered: boolean;
+  alertSeverity?: 'none' | 'warning' | 'critical';
+  alertMessage?: string;
+}
+
 export interface ScanJob {
   id: string;
   timestamp: string;
   sourcesScanned: string[];
   itemsFound: number;
   priceDropsDetected: number;
-  status: 'idle' | 'running' | 'completed' | 'failed';
+  status: 'idle' | 'running' | 'completed' | 'degraded' | 'failed';
   dealsDiscovered: {
     componentId: string;
     componentName: string;
@@ -244,4 +270,7 @@ export interface ScanJob {
     newPrice: number;
     discountPercent: number;
   }[];
+  metrics?: ScanJobMetrics;
+  sourceResults?: SupplierScanResult[];
 }
+

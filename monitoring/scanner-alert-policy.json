@@ -1,0 +1,32 @@
+{
+  "displayName": "DialForge Scanner SLA Breach (>25% Supplier Failure Rate)",
+  "documentation": {
+    "content": "### 🚨 DialForge Supplier Scanner SLA Incident\n\nThe periodic supplier feed scanner detected that **≥ 25% of monitored suppliers** are failing, degraded, or timing out.\n\n**Common Causes:**\n1. Upstream AliExpress or CDN rate limiting (HTTP 429).\n2. Boutique mod store inventory redesign or temporary DNS/network downtime (HTTP 502/504).\n\n**Next Steps:**\n1. Check Google Cloud Logging for `jsonPayload.component=\"supplier-scanner\"`.\n2. Inspect the failed supplier list and error codes in Firestore under `scan_jobs`.\n3. Run a diagnostic scan locally: `npm run scanner`.",
+    "mimeType": "text/markdown"
+  },
+  "conditions": [
+    {
+      "displayName": "Scanner Failure Rate >= 25%",
+      "conditionThreshold": {
+        "filter": "metric.type=\"logging.googleapis.com/user/dialforge_scanner_failure_rate\" resource.type=\"global\"",
+        "comparison": "COMPARISON_GT",
+        "thresholdValue": 24.9,
+        "duration": "0s",
+        "aggregations": [
+          {
+            "alignmentPeriod": "3600s",
+            "perSeriesAligner": "ALIGN_MEAN"
+          }
+        ],
+        "trigger": {
+          "count": 1
+        }
+      }
+    }
+  ],
+  "combiner": "OR",
+  "enabled": true,
+  "alertStrategy": {
+    "autoClose": "604800s"
+  }
+}

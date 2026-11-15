@@ -7,14 +7,31 @@ import {
   type Firestore
 } from 'firebase/firestore';
 
-// Environment configuration for Vite
-const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.VITE_FIREBASE_APP_ID
+function getEnv(key: string): string | undefined {
+  try {
+    if (typeof import.meta !== 'undefined' && import.meta.env && key in import.meta.env) {
+      return (import.meta.env as Record<string, string | undefined>)[key];
+    }
+  } catch {
+    // import.meta.env not available
+  }
+  const proc = typeof globalThis !== 'undefined'
+    ? (globalThis as unknown as { process?: { env?: Record<string, string | undefined> } }).process
+    : undefined;
+  if (proc?.env && key in proc.env) {
+    return proc.env[key];
+  }
+  return undefined;
+}
+
+// Environment configuration supporting both Vite and Node.js CLI
+export const firebaseConfig = {
+  apiKey: getEnv('VITE_FIREBASE_API_KEY'),
+  authDomain: getEnv('VITE_FIREBASE_AUTH_DOMAIN'),
+  projectId: getEnv('VITE_FIREBASE_PROJECT_ID'),
+  storageBucket: getEnv('VITE_FIREBASE_STORAGE_BUCKET'),
+  messagingSenderId: getEnv('VITE_FIREBASE_MESSAGING_SENDER_ID'),
+  appId: getEnv('VITE_FIREBASE_APP_ID')
 };
 
 // Check if valid Firebase credentials have been configured
@@ -30,20 +47,21 @@ let db: Firestore | null = null;
 if (isFirebaseConfigured) {
   try {
     app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
-    
-    // Enable multi-tab persistent local cache (IndexedDB)
-    // This allows instant offline reads and dramatically cuts down Firestore billable read quotas to near zero!
-    db = initializeFirestore(app, {
-      localCache: persistentLocalCache({
-        tabManager: persistentMultipleTabManager()
-      })
-    });
-  } catch (error) {
-    console.warn('Firebase initialization error, using local fallback:', error);
-    if (app) {
+
+    // In browser: enable multi-tab persistent local cache (IndexedDB) for near-zero reads
+    // In Node.js / CLI: use standard Firestore instance
+    if (typeof window !== 'undefined' && typeof window.indexedDB !== 'undefined') {
+      db = initializeFirestore(app, {
+        localCache: persistentLocalCache({
+          tabManager: persistentMultipleTabManager()
+        })
+      });
+    } else {
       db = getFirestore(app);
     }
+  } catch (error) {
+    console.warn('Firebase initialization error:', error);
   }
 }
 
-export { app, db, firebaseConfig };
+export { app, db };

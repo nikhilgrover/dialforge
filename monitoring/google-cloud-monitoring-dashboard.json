@@ -1,0 +1,185 @@
+{
+  "displayName": "DialForge - Supplier Feeds & Scanner Health (Firebase / Cloud Operations)",
+  "mosaicLayout": {
+    "columns": 12,
+    "tiles": [
+      {
+        "xPos": 0,
+        "yPos": 0,
+        "width": 4,
+        "height": 3,
+        "widget": {
+          "title": "Supplier Failure Rate (%)",
+          "scorecard": {
+            "timeSeriesQuery": {
+              "timeSeriesFilter": {
+                "filter": "metric.type=\"logging.googleapis.com/user/dialforge_scanner_failure_rate\" resource.type=\"global\"",
+                "aggregation": {
+                  "perSeriesAligner": "ALIGN_MEAN",
+                  "crossSeriesReducer": "REDUCE_MEAN",
+                  "alignmentPeriod": "3600s"
+                }
+              }
+            },
+            "thresholds": [
+              {
+                "label": "Healthy",
+                "value": 0,
+                "color": "COLOR_GREEN"
+              },
+              {
+                "label": "Degraded",
+                "value": 12.5,
+                "color": "COLOR_YELLOW"
+              },
+              {
+                "label": "SLA Critical Alert",
+                "value": 25,
+                "color": "COLOR_RED"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "xPos": 4,
+        "yPos": 0,
+        "width": 4,
+        "height": 3,
+        "widget": {
+          "title": "Average Response Latency (ms)",
+          "scorecard": {
+            "timeSeriesQuery": {
+              "timeSeriesFilter": {
+                "filter": "metric.type=\"logging.googleapis.com/user/dialforge_scanner_latency_ms\" resource.type=\"global\"",
+                "aggregation": {
+                  "perSeriesAligner": "ALIGN_MEAN",
+                  "crossSeriesReducer": "REDUCE_MEAN",
+                  "alignmentPeriod": "3600s"
+                }
+              }
+            },
+            "thresholds": [
+              {
+                "label": "Optimal",
+                "value": 0,
+                "color": "COLOR_GREEN"
+              },
+              {
+                "label": "Elevated",
+                "value": 600,
+                "color": "COLOR_YELLOW"
+              },
+              {
+                "label": "High Latency",
+                "value": 1200,
+                "color": "COLOR_RED"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "xPos": 8,
+        "yPos": 0,
+        "width": 4,
+        "height": 3,
+        "widget": {
+          "title": "Active Market Deals Discovered",
+          "scorecard": {
+            "timeSeriesQuery": {
+              "timeSeriesFilter": {
+                "filter": "metric.type=\"logging.googleapis.com/user/dialforge_scanner_deals_count\" resource.type=\"global\"",
+                "aggregation": {
+                  "perSeriesAligner": "ALIGN_MEAN",
+                  "crossSeriesReducer": "REDUCE_MEAN",
+                  "alignmentPeriod": "3600s"
+                }
+              }
+            },
+            "thresholds": [
+              {
+                "label": "Active Discounts (≥15%)",
+                "value": 1,
+                "color": "COLOR_BLUE"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "xPos": 0,
+        "yPos": 3,
+        "width": 8,
+        "height": 5,
+        "widget": {
+          "title": "Supplier Response Latency Trend by Store (ms)",
+          "xyChart": {
+            "dataSets": [
+              {
+                "timeSeriesQuery": {
+                  "timeSeriesFilter": {
+                    "filter": "metric.type=\"logging.googleapis.com/user/dialforge_scanner_supplier_latency\" resource.type=\"global\"",
+                    "aggregation": {
+                      "perSeriesAligner": "ALIGN_MEAN",
+                      "alignmentPeriod": "3600s",
+                      "groupByFields": ["metric.label.source_name"]
+                    }
+                  }
+                },
+                "plotType": "LINE"
+              }
+            ],
+            "yAxis": {
+              "label": "Latency (ms)",
+              "scale": "LINEAR"
+            }
+          }
+        }
+      },
+      {
+        "xPos": 8,
+        "yPos": 3,
+        "width": 4,
+        "height": 5,
+        "widget": {
+          "title": "HTTP Status Distribution (200 / 429 / 504)",
+          "xyChart": {
+            "dataSets": [
+              {
+                "timeSeriesQuery": {
+                  "timeSeriesFilter": {
+                    "filter": "metric.type=\"logging.googleapis.com/user/dialforge_scanner_status_codes\" resource.type=\"global\"",
+                    "aggregation": {
+                      "perSeriesAligner": "ALIGN_RATE",
+                      "alignmentPeriod": "3600s",
+                      "groupByFields": ["metric.label.status_code"]
+                    }
+                  }
+                },
+                "plotType": "STACKED_BAR"
+              }
+            ],
+            "yAxis": {
+              "label": "Requests/sec",
+              "scale": "LINEAR"
+            }
+          }
+        }
+      },
+      {
+        "xPos": 0,
+        "yPos": 8,
+        "width": 12,
+        "height": 5,
+        "widget": {
+          "title": "Cloud Logging Stream: Scanner Warnings, Errors & SLA Telemetry",
+          "logsPanel": {
+            "filter": "jsonPayload.logging.googleapis.com/labels.component=\"supplier-scanner\" OR jsonPayload.component=\"supplier-scanner\"",
+            "resourceNames": []
+          }
+        }
+      }
+    ]
+  }
+}
