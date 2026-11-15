@@ -2,7 +2,13 @@ import React, { useState, useMemo, useCallback } from 'react';
 import type {
   WatchBuild,
   BuildStep,
-  BaseComponent
+  BaseComponent,
+  Movement,
+  Case,
+  Dial,
+  Hands,
+  BezelInsert,
+  Strap
 } from '../types/watch';
 import { partsDb } from '../db/partsDatabase';
 import {
@@ -19,7 +25,11 @@ import {
   CheckCircle2,
   Search,
   X,
-  Flame
+  Flame,
+  ExternalLink,
+  Globe,
+  Loader2,
+  RefreshCw
 } from 'lucide-react';
 
 interface PartPickerProps {
@@ -39,6 +49,73 @@ export const PartPicker: React.FC<PartPickerProps> = ({
   const [searchQuery, setSearchQuery] = useState('');
   const [styleFilter, setStyleFilter] = useState<string>('all');
   const [sortBy, setSortBy] = useState<'featured' | 'price-asc' | 'price-desc' | 'deals'>('featured');
+
+  // Multi-Category Live Sourced Component State
+  const [allMovements, setAllMovements] = useState<Movement[]>(() => partsDb.getMovements());
+  const [allCases, setAllCases] = useState<Case[]>(() => partsDb.getCases());
+  const [allDials, setAllDials] = useState<Dial[]>(() => partsDb.getDials());
+  const [allHands, setAllHands] = useState<Hands[]>(() => partsDb.getHands());
+  const [allBezelInserts, setAllBezelInserts] = useState<BezelInsert[]>(() => partsDb.getBezelInserts());
+  const [allStraps, setAllStraps] = useState<Strap[]>(() => partsDb.getStraps());
+
+  const [isFetching, setIsFetching] = useState<string | null>(null);
+  const [fetchNotification, setFetchNotification] = useState<string | null>(null);
+
+  const handleFetchCategory = async (category: 'movement' | 'case' | 'dial' | 'hands' | 'accessories' | 'all') => {
+    setIsFetching(category);
+    setFetchNotification(null);
+    try {
+      if (category === 'movement') {
+        const prev = allMovements.length;
+        const updated = await partsDb.fetchLiveMovements(50);
+        setAllMovements([...updated]);
+        const added = updated.length - prev;
+        setFetchNotification(added > 0 ? `Successfully imported ${added} new movement calibers! Total: ${updated.length}` : `Movement catalog synchronized (${updated.length} available).`);
+      } else if (category === 'case') {
+        const prev = allCases.length;
+        const updated = await partsDb.fetchLiveCases(100);
+        setAllCases([...updated]);
+        const added = updated.length - prev;
+        setFetchNotification(added > 0 ? `Successfully imported ${added} new cases! Total: ${updated.length}` : `Case catalog synchronized (${updated.length} available).`);
+      } else if (category === 'dial') {
+        const prev = allDials.length;
+        const updated = await partsDb.fetchLiveDials(1, 100);
+        setAllDials([...updated]);
+        const added = updated.length - prev;
+        setFetchNotification(added > 0 ? `Successfully imported ${added} new dials! Total: ${updated.length}` : `Dial catalog synchronized (${updated.length} available).`);
+      } else if (category === 'hands') {
+        const prev = allHands.length;
+        const updated = await partsDb.fetchLiveHands(100);
+        setAllHands([...updated]);
+        const added = updated.length - prev;
+        setFetchNotification(added > 0 ? `Successfully imported ${added} new hand sets! Total: ${updated.length}` : `Hands catalog synchronized (${updated.length} available).`);
+      } else if (category === 'accessories') {
+        const [prevB, prevS] = [allBezelInserts.length, allStraps.length];
+        const [newB, newS] = await Promise.all([
+          partsDb.fetchLiveBezelInserts(100),
+          partsDb.fetchLiveStraps(100)
+        ]);
+        setAllBezelInserts([...newB]);
+        setAllStraps([...newS]);
+        const added = (newB.length - prevB) + (newS.length - prevS);
+        setFetchNotification(added > 0 ? `Successfully imported ${added} new inserts & straps! Total: ${newB.length + newS.length}` : `Accessories synchronized (${newB.length + newS.length} available).`);
+      } else if (category === 'all') {
+        const res = await partsDb.fetchLiveAll();
+        setAllMovements([...partsDb.getMovements()]);
+        setAllCases([...partsDb.getCases()]);
+        setAllDials([...partsDb.getDials()]);
+        setAllHands([...partsDb.getHands()]);
+        setAllBezelInserts([...partsDb.getBezelInserts()]);
+        setAllStraps([...partsDb.getStraps()]);
+        const total = res.movements + res.cases + res.dials + res.hands + res.bezelInserts + res.straps;
+        setFetchNotification(`Full supplier catalog synchronized! (${total} total components across all categories)`);
+      }
+    } catch {
+      setFetchNotification('Failed to fetch from supplier catalog. Please check connection.');
+    } finally {
+      setIsFetching(null);
+    }
+  };
 
   // Step definitions
   const steps: { id: BuildStep; label: string; icon: React.ElementType }[] = [
@@ -84,7 +161,6 @@ export const PartPicker: React.FC<PartPickerProps> = ({
   // -------------------------------------------------------------
   // STEP 1: MOVEMENTS
   // -------------------------------------------------------------
-  const allMovements = partsDb.getMovements();
   const filteredMovements = useMemo(() => {
     let list = allMovements;
     if (searchQuery.trim()) {
@@ -101,6 +177,44 @@ export const PartPicker: React.FC<PartPickerProps> = ({
 
   const renderMovementStep = () => (
     <div className="space-y-4">
+      {/* Sourcing Banner */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 rounded-xl border border-brass-500/30">
+        <div className="flex items-center gap-2.5">
+          <div className="w-8 h-8 rounded-lg bg-brass-500/10 border border-brass-500/20 flex items-center justify-center shrink-0">
+            <Globe className="w-4 h-4 text-brass-400" />
+          </div>
+          <div>
+            <div className="text-xs font-semibold text-slate-200 flex items-center gap-2">
+              <span>Direct Supplier Calibers</span>
+              <span className="px-1.5 py-0.5 rounded text-[10px] font-mono bg-slate-800 text-slate-300">
+                {filteredMovements.length} Available
+              </span>
+            </div>
+            <div className="text-[11px] text-slate-400">
+              Genuine Seiko Instruments (TMI) NH34 GMT, NH35, NH36, NH38, and Sweeping Quartz VH31.
+            </div>
+          </div>
+        </div>
+
+        <button
+          onClick={() => handleFetchCategory('movement')}
+          disabled={isFetching !== null}
+          className="flex items-center justify-center gap-1.5 px-3 py-1.5 bg-slate-800 hover:bg-slate-700 active:bg-slate-600 disabled:opacity-60 text-slate-200 border border-slate-700 rounded-lg text-xs font-semibold transition shrink-0"
+        >
+          {isFetching === 'movement' ? (
+            <>
+              <Loader2 className="w-3.5 h-3.5 animate-spin text-brass-400" />
+              <span>Syncing calibers...</span>
+            </>
+          ) : (
+            <>
+              <Globe className="w-3.5 h-3.5 text-brass-400" />
+              <span>Source More Movements</span>
+            </>
+          )}
+        </button>
+      </div>
+
       {/* Category Header & Filters */}
       <div className="flex flex-wrap items-center justify-between gap-3 bg-slate-950/60 p-3 rounded-xl border border-slate-800">
         <div className="flex items-center gap-1.5 flex-wrap">
@@ -168,8 +282,19 @@ export const PartPicker: React.FC<PartPickerProps> = ({
               }`}
             >
               <div>
-                <div className="flex items-start justify-between gap-2">
-                  <div>
+                <div className="flex items-start gap-3">
+                  {mov.imageUrl && (
+                    <div className="w-16 h-16 rounded-xl bg-slate-950 border border-slate-800 p-1 flex items-center justify-center shrink-0 overflow-hidden shadow-inner">
+                      <img
+                        src={mov.imageUrl}
+                        alt={mov.name}
+                        className="w-full h-full object-contain filter drop-shadow hover:scale-105 transition-transform"
+                        loading="lazy"
+                      />
+                    </div>
+                  )}
+
+                  <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-1.5 flex-wrap">
                       <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-brass-500/15 text-brass-300 border border-brass-500/30">
                         {mov.caliber}
@@ -190,11 +315,12 @@ export const PartPicker: React.FC<PartPickerProps> = ({
                         </span>
                       )}
                     </div>
-                    <h4 className="font-semibold text-slate-100 text-sm mt-1.5">{mov.name}</h4>
+                    <h4 className="font-semibold text-slate-100 text-sm mt-1 truncate" title={mov.name}>{mov.name}</h4>
+                    <div className="text-[11px] text-slate-400">{mov.brand}</div>
                   </div>
                 </div>
 
-                <p className="text-xs text-slate-400 mt-2 line-clamp-3 leading-relaxed">
+                <p className="text-xs text-slate-400 mt-2 line-clamp-2 leading-relaxed">
                   {mov.description}
                 </p>
 
@@ -217,22 +343,37 @@ export const PartPicker: React.FC<PartPickerProps> = ({
                 </div>
               </div>
 
-              <div className="mt-4 pt-3 border-t border-slate-800 flex items-center justify-between">
+              <div className="mt-4 pt-3 border-t border-slate-800 flex items-center justify-between gap-2">
                 <div>
                   <span className="text-[10px] text-slate-400 uppercase tracking-wider block">From</span>
                   <span className="text-sm font-bold font-mono text-slate-100">${mov.basePrice.toFixed(2)}</span>
                 </div>
 
-                <button
-                  onClick={() => onSelectComponent('movement', mov)}
-                  className={`px-4 py-1.5 text-xs font-semibold rounded-lg transition ${
-                    isSelected
-                      ? 'bg-brass-500 text-slate-950 font-bold shadow'
-                      : 'bg-slate-800 hover:bg-slate-700 text-slate-200'
-                  }`}
-                >
-                  {isSelected ? '✓ Selected' : 'Select Caliber'}
-                </button>
+                <div className="flex items-center gap-2">
+                  {mov.vendors[0]?.productUrl && (
+                    <a
+                      href={mov.vendors[0].productUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg border border-slate-700/80 bg-slate-800/70 hover:bg-slate-700 hover:text-white text-slate-300 text-xs transition"
+                      title={`View on ${mov.vendors[0].storeName}`}
+                    >
+                      <ExternalLink className="w-3 h-3 text-slate-400" />
+                      <span className="hidden sm:inline text-[11px]">Product</span>
+                    </a>
+                  )}
+
+                  <button
+                    onClick={() => onSelectComponent('movement', mov)}
+                    className={`px-3.5 py-1.5 text-xs font-semibold rounded-lg transition ${
+                      isSelected
+                        ? 'bg-brass-500 text-slate-950 font-bold shadow'
+                        : 'bg-slate-800 hover:bg-slate-700 text-slate-200'
+                    }`}
+                  >
+                    {isSelected ? '✓ Selected' : 'Select Caliber'}
+                  </button>
+                </div>
               </div>
             </div>
           );
@@ -244,7 +385,6 @@ export const PartPicker: React.FC<PartPickerProps> = ({
   // -------------------------------------------------------------
   // STEP 2: CASES (Filtered strictly to movement)
   // -------------------------------------------------------------
-  const allCases = partsDb.getCases();
   const compatibleCases = useMemo(() => {
     const mov = build.movement;
     if (!mov) return [];
@@ -283,11 +423,49 @@ export const PartPicker: React.FC<PartPickerProps> = ({
 
     return (
       <div className="space-y-4">
+        {/* Sourcing Banner */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 rounded-xl border border-brass-500/30">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-lg bg-brass-500/10 border border-brass-500/20 flex items-center justify-center shrink-0">
+              <Globe className="w-4 h-4 text-brass-400" />
+            </div>
+            <div>
+              <div className="text-xs font-semibold text-slate-200 flex items-center gap-2">
+                <span>Direct Modding Cases</span>
+                <span className="px-1.5 py-0.5 rounded text-[10px] font-mono bg-slate-800 text-slate-300">
+                  {compatibleCases.length} Compatible Cases
+                </span>
+              </div>
+              <div className="text-[11px] text-slate-400">
+                SKX007, SKX013, Submariner, GS 62MAS, 1908 Ultra-Thin, Datejust & Field cases.
+              </div>
+            </div>
+          </div>
+
+          <button
+            onClick={() => handleFetchCategory('case')}
+            disabled={isFetching !== null}
+            className="flex items-center justify-center gap-1.5 px-3 py-1.5 bg-slate-800 hover:bg-slate-700 active:bg-slate-600 disabled:opacity-60 text-slate-200 border border-slate-700 rounded-lg text-xs font-semibold transition shrink-0"
+          >
+            {isFetching === 'case' ? (
+              <>
+                <Loader2 className="w-3.5 h-3.5 animate-spin text-brass-400" />
+                <span>Syncing cases...</span>
+              </>
+            ) : (
+              <>
+                <Globe className="w-3.5 h-3.5 text-brass-400" />
+                <span>Source More Cases (120+ Available)</span>
+              </>
+            )}
+          </button>
+        </div>
+
         {/* Filter bar */}
         <div className="flex flex-wrap items-center justify-between gap-3 bg-slate-950/60 p-3 rounded-xl border border-slate-800">
           <div className="flex items-center gap-1.5 flex-wrap">
             <span className="text-[11px] font-semibold text-slate-400 mr-1">Style:</span>
-            {['all', 'diver', 'explorer', 'field', 'pilot', 'datejust'].map(flt => (
+            {['all', 'diver', 'explorer', 'field', 'pilot', 'datejust', 'gs', '1908'].map(flt => (
               <button
                 key={flt}
                 onClick={() => setStyleFilter(flt)}
@@ -339,6 +517,7 @@ export const PartPicker: React.FC<PartPickerProps> = ({
           {compatibleCases.map(c => {
             const isSelected = build.case?.id === c.id;
             const isDeal = hasActiveDeal(c);
+            const vendor = c.vendors[0];
 
             return (
               <div
@@ -350,9 +529,20 @@ export const PartPicker: React.FC<PartPickerProps> = ({
                 }`}
               >
                 <div>
-                  <div className="flex items-start justify-between gap-2">
-                    <div>
-                      <div className="flex items-center gap-2">
+                  <div className="flex items-start gap-3">
+                    {c.imageUrl && (
+                      <div className="w-16 h-16 rounded-xl bg-slate-950 border border-slate-800 p-1 flex items-center justify-center shrink-0 overflow-hidden shadow-inner">
+                        <img
+                          src={c.imageUrl}
+                          alt={c.name}
+                          className="w-full h-full object-contain filter drop-shadow hover:scale-105 transition-transform"
+                          loading="lazy"
+                        />
+                      </div>
+                    )}
+
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-1.5 flex-wrap">
                         <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-slate-800 text-slate-300 border border-slate-700 uppercase">
                           {c.caseStyle} • {c.outerDiameterMm}mm
                         </span>
@@ -367,11 +557,12 @@ export const PartPicker: React.FC<PartPickerProps> = ({
                           </span>
                         )}
                       </div>
-                      <h4 className="font-semibold text-slate-100 text-sm mt-1.5">{c.name}</h4>
+                      <h4 className="font-semibold text-slate-100 text-sm mt-1 truncate" title={c.name}>{c.name}</h4>
+                      <div className="text-[11px] text-slate-400">{c.brand}</div>
                     </div>
                   </div>
 
-                  <p className="text-xs text-slate-400 mt-2 line-clamp-3 leading-relaxed">
+                  <p className="text-xs text-slate-400 mt-2 line-clamp-2 leading-relaxed">
                     {c.description}
                   </p>
 
@@ -397,22 +588,37 @@ export const PartPicker: React.FC<PartPickerProps> = ({
                   </div>
                 </div>
 
-                <div className="mt-4 pt-3 border-t border-slate-800 flex items-center justify-between">
+                <div className="mt-4 pt-3 border-t border-slate-800 flex items-center justify-between gap-2">
                   <div>
                     <span className="text-[10px] text-slate-400 uppercase tracking-wider block">From</span>
                     <span className="text-sm font-bold font-mono text-slate-100">${c.basePrice.toFixed(2)}</span>
                   </div>
 
-                  <button
-                    onClick={() => onSelectComponent('case', c)}
-                    className={`px-4 py-1.5 text-xs font-semibold rounded-lg transition ${
-                      isSelected
-                        ? 'bg-brass-500 text-slate-950 font-bold shadow'
-                        : 'bg-slate-800 hover:bg-slate-700 text-slate-200'
-                    }`}
-                  >
-                    {isSelected ? '✓ Selected' : 'Select Case'}
-                  </button>
+                  <div className="flex items-center gap-2">
+                    {vendor?.productUrl && (
+                      <a
+                        href={vendor.productUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg border border-slate-700/80 bg-slate-800/70 hover:bg-slate-700 hover:text-white text-slate-300 text-xs transition"
+                        title={`View on ${vendor.storeName}`}
+                      >
+                        <ExternalLink className="w-3 h-3 text-slate-400" />
+                        <span className="hidden sm:inline text-[11px]">Product</span>
+                      </a>
+                    )}
+
+                    <button
+                      onClick={() => onSelectComponent('case', c)}
+                      className={`px-3.5 py-1.5 text-xs font-semibold rounded-lg transition ${
+                        isSelected
+                          ? 'bg-brass-500 text-slate-950 font-bold shadow'
+                          : 'bg-slate-800 hover:bg-slate-700 text-slate-200'
+                      }`}
+                    >
+                      {isSelected ? '✓ Selected' : 'Select Case'}
+                    </button>
+                  </div>
                 </div>
               </div>
             );
@@ -425,7 +631,6 @@ export const PartPicker: React.FC<PartPickerProps> = ({
   // -------------------------------------------------------------
   // STEP 3: DIALS (Filtered to Movement Complication & Case)
   // -------------------------------------------------------------
-  const allDials = partsDb.getDials();
   const compatibleDials = useMemo(() => {
     const mov = build.movement;
     const watchCase = build.case;
@@ -462,11 +667,49 @@ export const PartPicker: React.FC<PartPickerProps> = ({
 
     return (
       <div className="space-y-4">
+        {/* Source More Dials Bar */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 rounded-xl border border-brass-500/30">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-lg bg-brass-500/10 border border-brass-500/20 flex items-center justify-center shrink-0">
+              <Globe className="w-4 h-4 text-brass-400" />
+            </div>
+            <div>
+              <div className="text-xs font-semibold text-slate-200 flex items-center gap-2">
+                <span>Direct Modding Catalog</span>
+                <span className="px-1.5 py-0.5 rounded text-[10px] font-mono bg-slate-800 text-slate-300">
+                  {compatibleDials.length} Compatible Dials
+                </span>
+              </div>
+              <div className="text-[11px] text-slate-400">
+                Art, Great Wave, MOP, Sunburst, Guilloché, Tool & Divers from Lucius Atelier, NamokiMODS & more.
+              </div>
+            </div>
+          </div>
+
+          <button
+            onClick={() => handleFetchCategory('dial')}
+            disabled={isFetching !== null}
+            className="flex items-center justify-center gap-1.5 px-3 py-1.5 bg-slate-800 hover:bg-slate-700 active:bg-slate-600 disabled:opacity-60 text-slate-200 border border-slate-700 rounded-lg text-xs font-semibold transition shrink-0"
+          >
+            {isFetching === 'dial' ? (
+              <>
+                <Loader2 className="w-3.5 h-3.5 animate-spin text-brass-400" />
+                <span>Syncing live dials...</span>
+              </>
+            ) : (
+              <>
+                <Globe className="w-3.5 h-3.5 text-brass-400" />
+                <span>Source More Dials (200+ Available)</span>
+              </>
+            )}
+          </button>
+        </div>
+
         {/* Filters */}
         <div className="flex flex-wrap items-center justify-between gap-3 bg-slate-950/60 p-3 rounded-xl border border-slate-800">
           <div className="flex items-center gap-1.5 flex-wrap">
             <span className="text-[11px] font-semibold text-slate-400 mr-1">Style:</span>
-            {['all', 'diver', 'explorer', 'field', 'dress', 'flieger', 'minimalist'].map(flt => (
+            {['all', 'art', 'diver', 'explorer', 'field', 'dress', 'flieger', 'minimalist'].map(flt => (
               <button
                 key={flt}
                 onClick={() => setStyleFilter(flt)}
@@ -518,6 +761,7 @@ export const PartPicker: React.FC<PartPickerProps> = ({
           {compatibleDials.map(d => {
             const isSelected = build.dial?.id === d.id;
             const isDeal = hasActiveDeal(d);
+            const vendor = d.vendors[0];
 
             return (
               <div
@@ -529,24 +773,54 @@ export const PartPicker: React.FC<PartPickerProps> = ({
                 }`}
               >
                 <div>
-                  <div className="flex items-start justify-between gap-2">
-                    <div>
-                      <div className="flex items-center gap-2">
-                        <span className="w-3.5 h-3.5 rounded-full border border-slate-700 inline-block shrink-0" style={{ backgroundColor: d.colorHex }} />
-                        <span className="font-semibold text-slate-100 text-sm">{d.name}</span>
+                  <div className="flex items-start gap-3">
+                    {/* Visual Dial Thumbnail with Texture Preview */}
+                    <div className="relative w-16 h-16 rounded-xl bg-slate-950 border border-slate-800 p-1 flex items-center justify-center shrink-0 overflow-hidden shadow-inner group">
+                      {d.imageUrl ? (
+                        <img
+                          src={d.imageUrl}
+                          alt={d.name}
+                          className="w-full h-full object-contain filter drop-shadow hover:scale-105 transition-transform"
+                          loading="lazy"
+                        />
+                      ) : (
+                        <div
+                          className="w-12 h-12 rounded-full border border-slate-700 shadow flex items-center justify-center"
+                          style={{ backgroundColor: d.colorHex }}
+                        >
+                          <span className="text-[9px] font-mono font-bold text-slate-300 uppercase">
+                            {(d.texture || 'Dial').slice(0, 4)}
+                          </span>
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-1.5 flex-wrap">
+                        <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-slate-800 text-slate-300 border border-slate-700 uppercase">
+                          {d.dialStyle}
+                        </span>
+                        {d.texture && d.texture !== 'matte' && (
+                          <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-amber-500/15 text-amber-300 border border-amber-500/30 capitalize">
+                            {d.texture}
+                          </span>
+                        )}
                         {isDeal && (
                           <span className="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[10px] font-bold bg-rose-500/15 text-rose-300 border border-rose-500/30">
                             <Flame className="w-3 h-3 text-rose-400" /> Deal
                           </span>
                         )}
                       </div>
-                      <div className="text-xs text-slate-400 mt-0.5">
-                        {d.colorName} • {d.texture} texture
+                      <h4 className="font-semibold text-slate-100 text-sm mt-1 truncate" title={d.name}>
+                        {d.name}
+                      </h4>
+                      <div className="text-[11px] text-slate-400 truncate">
+                        {d.brand} • {d.colorName}
                       </div>
                     </div>
                   </div>
 
-                  <p className="text-xs text-slate-400 mt-2 line-clamp-3 leading-relaxed">
+                  <p className="text-xs text-slate-400 mt-2.5 line-clamp-2 leading-relaxed">
                     {d.description}
                   </p>
 
@@ -573,22 +847,37 @@ export const PartPicker: React.FC<PartPickerProps> = ({
                   </div>
                 </div>
 
-                <div className="mt-4 pt-3 border-t border-slate-800 flex items-center justify-between">
+                <div className="mt-4 pt-3 border-t border-slate-800 flex items-center justify-between gap-2">
                   <div>
                     <span className="text-[10px] text-slate-400 uppercase tracking-wider block">From</span>
                     <span className="text-sm font-bold font-mono text-slate-100">${d.basePrice.toFixed(2)}</span>
                   </div>
 
-                  <button
-                    onClick={() => onSelectComponent('dial', d)}
-                    className={`px-4 py-1.5 text-xs font-semibold rounded-lg transition ${
-                      isSelected
-                        ? 'bg-brass-500 text-slate-950 font-bold shadow'
-                        : 'bg-slate-800 hover:bg-slate-700 text-slate-200'
-                    }`}
-                  >
-                    {isSelected ? '✓ Selected' : 'Select Dial'}
-                  </button>
+                  <div className="flex items-center gap-2">
+                    {vendor?.productUrl && (
+                      <a
+                        href={vendor.productUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg border border-slate-700/80 bg-slate-800/70 hover:bg-slate-700 hover:text-white text-slate-300 text-xs transition"
+                        title={`View on ${vendor.storeName}`}
+                      >
+                        <ExternalLink className="w-3 h-3 text-slate-400" />
+                        <span className="hidden sm:inline text-[11px]">Product</span>
+                      </a>
+                    )}
+
+                    <button
+                      onClick={() => onSelectComponent('dial', d)}
+                      className={`px-3.5 py-1.5 text-xs font-semibold rounded-lg transition ${
+                        isSelected
+                          ? 'bg-brass-500 text-slate-950 font-bold shadow'
+                          : 'bg-slate-800 hover:bg-slate-700 text-slate-200'
+                      }`}
+                    >
+                      {isSelected ? '✓ Selected' : 'Select Dial'}
+                    </button>
+                  </div>
                 </div>
               </div>
             );
@@ -601,7 +890,6 @@ export const PartPicker: React.FC<PartPickerProps> = ({
   // -------------------------------------------------------------
   // STEP 4: HANDS (Filtered to exact pinion hole sizes)
   // -------------------------------------------------------------
-  const allHands = partsDb.getHands();
   const compatibleHands = useMemo(() => {
     const mov = build.movement;
     if (!mov) return [];
@@ -630,11 +918,49 @@ export const PartPicker: React.FC<PartPickerProps> = ({
 
     return (
       <div className="space-y-4">
+        {/* Sourcing Banner */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 rounded-xl border border-brass-500/30">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-lg bg-brass-500/10 border border-brass-500/20 flex items-center justify-center shrink-0">
+              <Globe className="w-4 h-4 text-brass-400" />
+            </div>
+            <div>
+              <div className="text-xs font-semibold text-slate-200 flex items-center gap-2">
+                <span>Precision Hand Sets</span>
+                <span className="px-1.5 py-0.5 rounded text-[10px] font-mono bg-slate-800 text-slate-300">
+                  {compatibleHands.length} Compatible Sets
+                </span>
+              </div>
+              <div className="text-[11px] text-slate-400">
+                Grand Seiko Dauphine, Baton, Breguet 1908, Snowflake, Sword, Flieger & 4-Hand GMT.
+              </div>
+            </div>
+          </div>
+
+          <button
+            onClick={() => handleFetchCategory('hands')}
+            disabled={isFetching !== null}
+            className="flex items-center justify-center gap-1.5 px-3 py-1.5 bg-slate-800 hover:bg-slate-700 active:bg-slate-600 disabled:opacity-60 text-slate-200 border border-slate-700 rounded-lg text-xs font-semibold transition shrink-0"
+          >
+            {isFetching === 'hands' ? (
+              <>
+                <Loader2 className="w-3.5 h-3.5 animate-spin text-brass-400" />
+                <span>Syncing hands...</span>
+              </>
+            ) : (
+              <>
+                <Globe className="w-3.5 h-3.5 text-brass-400" />
+                <span>Source More Hands (140+ Available)</span>
+              </>
+            )}
+          </button>
+        </div>
+
         {/* Filters */}
         <div className="flex flex-wrap items-center justify-between gap-3 bg-slate-950/60 p-3 rounded-xl border border-slate-800">
           <div className="flex items-center gap-1.5 flex-wrap">
             <span className="text-[11px] font-semibold text-slate-400 mr-1">Style:</span>
-            {['all', 'mercedes', 'snowflake', 'sword', 'baton', 'dauphine', 'flieger'].map(flt => (
+            {['all', 'mercedes', 'snowflake', 'sword', 'baton', 'dauphine', 'breguet', 'alpha', 'flieger'].map(flt => (
               <button
                 key={flt}
                 onClick={() => setStyleFilter(flt)}
@@ -686,6 +1012,7 @@ export const PartPicker: React.FC<PartPickerProps> = ({
           {compatibleHands.map(h => {
             const isSelected = build.hands?.id === h.id;
             const isDeal = hasActiveDeal(h);
+            const vendor = h.vendors[0];
 
             return (
               <div
@@ -697,9 +1024,24 @@ export const PartPicker: React.FC<PartPickerProps> = ({
                 }`}
               >
                 <div>
-                  <div className="flex items-start justify-between gap-2">
-                    <div>
-                      <div className="flex items-center gap-2">
+                  <div className="flex items-start gap-3">
+                    <div className="w-14 h-14 rounded-xl bg-slate-950 border border-slate-800 p-1 flex items-center justify-center shrink-0 overflow-hidden shadow-inner">
+                      {h.handComponents?.hour ? (
+                        <div className="relative w-full h-full flex items-center justify-center">
+                          <img
+                            src={h.handComponents.hour}
+                            alt={h.name}
+                            className="max-w-full max-h-full object-contain filter drop-shadow -rotate-45"
+                            loading="lazy"
+                          />
+                        </div>
+                      ) : (
+                        <Clock className="w-6 h-6 text-slate-500" />
+                      )}
+                    </div>
+
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-1.5 flex-wrap">
                         <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-slate-800 text-slate-300 border border-slate-700 uppercase">
                           {h.handsStyle} style
                         </span>
@@ -714,11 +1056,12 @@ export const PartPicker: React.FC<PartPickerProps> = ({
                           </span>
                         )}
                       </div>
-                      <h4 className="font-semibold text-slate-100 text-sm mt-1.5">{h.name}</h4>
+                      <h4 className="font-semibold text-slate-100 text-sm mt-1 truncate" title={h.name}>{h.name}</h4>
+                      <div className="text-[11px] text-slate-400">{h.brand}</div>
                     </div>
                   </div>
 
-                  <p className="text-xs text-slate-400 mt-2 line-clamp-3 leading-relaxed">
+                  <p className="text-xs text-slate-400 mt-2 line-clamp-2 leading-relaxed">
                     {h.description}
                   </p>
 
@@ -736,22 +1079,37 @@ export const PartPicker: React.FC<PartPickerProps> = ({
                   </div>
                 </div>
 
-                <div className="mt-4 pt-3 border-t border-slate-800 flex items-center justify-between">
+                <div className="mt-4 pt-3 border-t border-slate-800 flex items-center justify-between gap-2">
                   <div>
                     <span className="text-[10px] text-slate-400 uppercase tracking-wider block">From</span>
                     <span className="text-sm font-bold font-mono text-slate-100">${h.basePrice.toFixed(2)}</span>
                   </div>
 
-                  <button
-                    onClick={() => onSelectComponent('hands', h)}
-                    className={`px-4 py-1.5 text-xs font-semibold rounded-lg transition ${
-                      isSelected
-                        ? 'bg-brass-500 text-slate-950 font-bold shadow'
-                        : 'bg-slate-800 hover:bg-slate-700 text-slate-200'
-                    }`}
-                  >
-                    {isSelected ? '✓ Selected' : 'Select Hands'}
-                  </button>
+                  <div className="flex items-center gap-2">
+                    {vendor?.productUrl && (
+                      <a
+                        href={vendor.productUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg border border-slate-700/80 bg-slate-800/70 hover:bg-slate-700 hover:text-white text-slate-300 text-xs transition"
+                        title={`View on ${vendor.storeName}`}
+                      >
+                        <ExternalLink className="w-3 h-3 text-slate-400" />
+                        <span className="hidden sm:inline text-[11px]">Product</span>
+                      </a>
+                    )}
+
+                    <button
+                      onClick={() => onSelectComponent('hands', h)}
+                      className={`px-3.5 py-1.5 text-xs font-semibold rounded-lg transition ${
+                        isSelected
+                          ? 'bg-brass-500 text-slate-950 font-bold shadow'
+                          : 'bg-slate-800 hover:bg-slate-700 text-slate-200'
+                      }`}
+                    >
+                      {isSelected ? '✓ Selected' : 'Select Hands'}
+                    </button>
+                  </div>
                 </div>
               </div>
             );
@@ -771,14 +1129,14 @@ export const PartPicker: React.FC<PartPickerProps> = ({
 
     // Filter Bezel Inserts
     const compatibleInserts = watchCase.hasRotatingBezel
-      ? partsDb.getBezelInserts().filter(b => {
+      ? allBezelInserts.filter(b => {
           if (mov.caliber === 'NH34A') return b.style === 'gmt-24hr';
           return b.style !== 'gmt-24hr';
         })
       : [];
 
     // Filter Straps by Case Lug Width
-    const compatibleStraps = partsDb.getStraps().filter(st => st.lugWidthMm === watchCase.lugWidthMm);
+    const compatibleStraps = allStraps.filter(st => st.lugWidthMm === watchCase.lugWidthMm);
 
     // Filter Seconds Accents
     const compatibleAccents = partsDb.getSecondsAccents().filter(s =>
@@ -793,6 +1151,43 @@ export const PartPicker: React.FC<PartPickerProps> = ({
 
     return (
       <div className="space-y-6">
+        {/* Sourcing Banner */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 rounded-xl border border-brass-500/30">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-lg bg-brass-500/10 border border-brass-500/20 flex items-center justify-center shrink-0">
+              <Globe className="w-4 h-4 text-brass-400" />
+            </div>
+            <div>
+              <div className="text-xs font-semibold text-slate-200 flex items-center gap-2">
+                <span>Inserts & Straps Catalog</span>
+                <span className="px-1.5 py-0.5 rounded text-[10px] font-mono bg-slate-800 text-slate-300">
+                  {compatibleInserts.length + compatibleStraps.length} Compatible Options
+                </span>
+              </div>
+              <div className="text-[11px] text-slate-400">
+                Ceramic & Aluminum GMT/Diver Bezel Inserts, Oyster, Jubilee, GS & Shell Cordovan Straps.
+              </div>
+            </div>
+          </div>
+
+          <button
+            onClick={() => handleFetchCategory('accessories')}
+            disabled={isFetching !== null}
+            className="flex items-center justify-center gap-1.5 px-3 py-1.5 bg-slate-800 hover:bg-slate-700 active:bg-slate-600 disabled:opacity-60 text-slate-200 border border-slate-700 rounded-lg text-xs font-semibold transition shrink-0"
+          >
+            {isFetching === 'accessories' ? (
+              <>
+                <Loader2 className="w-3.5 h-3.5 animate-spin text-brass-400" />
+                <span>Syncing accessories...</span>
+              </>
+            ) : (
+              <>
+                <Globe className="w-3.5 h-3.5 text-brass-400" />
+                <span>Source More Accessories (300+ Available)</span>
+              </>
+            )}
+          </button>
+        </div>
         {/* Section 1: Bezel Insert (If rotating bezel) */}
         {watchCase.hasRotatingBezel ? (
           <div className="space-y-3">
@@ -824,26 +1219,46 @@ export const PartPicker: React.FC<PartPickerProps> = ({
                         : 'bg-slate-950/60 border-slate-800 hover:border-slate-700'
                     }`}
                   >
-                    <div className="flex items-center gap-2.5">
-                      <div className="w-4 h-4 rounded-full border border-slate-700 flex overflow-hidden shrink-0">
-                        <div className="w-1/2 h-full" style={{ backgroundColor: b.color1Hex }} />
-                        <div className="w-1/2 h-full" style={{ backgroundColor: b.color2Hex || b.color1Hex }} />
-                      </div>
-                      <div>
-                        <div className="font-semibold text-slate-200 text-xs">{b.name}</div>
+                    <div className="flex items-center gap-2.5 min-w-0">
+                      {b.imageUrl ? (
+                        <div className="w-9 h-9 rounded-lg bg-slate-950 border border-slate-800 p-0.5 flex items-center justify-center shrink-0 overflow-hidden">
+                          <img src={b.imageUrl} alt={b.name} className="w-full h-full object-contain" loading="lazy" />
+                        </div>
+                      ) : (
+                        <div className="w-4 h-4 rounded-full border border-slate-700 flex overflow-hidden shrink-0">
+                          <div className="w-1/2 h-full" style={{ backgroundColor: b.color1Hex }} />
+                          <div className="w-1/2 h-full" style={{ backgroundColor: b.color2Hex || b.color1Hex }} />
+                        </div>
+                      )}
+                      <div className="min-w-0">
+                        <div className="font-semibold text-slate-200 text-xs truncate">{b.name}</div>
                         <div className="text-[10px] text-slate-400 font-mono">
                           {b.material} • from ${b.basePrice}
                         </div>
                       </div>
                     </div>
 
-                    <button
-                      className={`px-2.5 py-1 text-[11px] font-semibold rounded-lg ${
-                        isSelected ? 'bg-brass-500 text-slate-950 font-bold' : 'bg-slate-800 text-slate-300'
-                      }`}
-                    >
-                      {isSelected ? '✓' : 'Select'}
-                    </button>
+                    <div className="flex items-center gap-1.5 shrink-0 ml-2">
+                      {b.vendors[0]?.productUrl && (
+                        <a
+                          href={b.vendors[0].productUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={e => e.stopPropagation()}
+                          className="p-1 rounded text-slate-400 hover:text-slate-200 hover:bg-slate-800 transition"
+                          title={`View on ${b.vendors[0].storeName}`}
+                        >
+                          <ExternalLink className="w-3.5 h-3.5" />
+                        </a>
+                      )}
+                      <button
+                        className={`px-2.5 py-1 text-[11px] font-semibold rounded-lg ${
+                          isSelected ? 'bg-brass-500 text-slate-950 font-bold' : 'bg-slate-800 text-slate-300'
+                        }`}
+                      >
+                        {isSelected ? '✓' : 'Select'}
+                      </button>
+                    </div>
                   </div>
                 );
               })}
@@ -911,13 +1326,27 @@ export const PartPicker: React.FC<PartPickerProps> = ({
                       </div>
                     </div>
 
-                    <button
-                      className={`px-2.5 py-1 text-[11px] font-semibold rounded-lg ${
-                        isSelected ? 'bg-brass-500 text-slate-950 font-bold' : 'bg-slate-800 text-slate-300'
-                      }`}
-                    >
-                      {isSelected ? '✓' : 'Select'}
-                    </button>
+                    <div className="flex items-center gap-1.5 shrink-0 ml-2">
+                      {r.vendors[0]?.productUrl && (
+                        <a
+                          href={r.vendors[0].productUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={e => e.stopPropagation()}
+                          className="p-1 rounded text-slate-400 hover:text-slate-200 hover:bg-slate-800 transition"
+                          title={`View on ${r.vendors[0].storeName}`}
+                        >
+                          <ExternalLink className="w-3.5 h-3.5" />
+                        </a>
+                      )}
+                      <button
+                        className={`px-2.5 py-1 text-[11px] font-semibold rounded-lg ${
+                          isSelected ? 'bg-brass-500 text-slate-950 font-bold' : 'bg-slate-800 text-slate-300'
+                        }`}
+                      >
+                        {isSelected ? '✓' : 'Select'}
+                      </button>
+                    </div>
                   </div>
                 );
               })}
@@ -964,20 +1393,41 @@ export const PartPicker: React.FC<PartPickerProps> = ({
                       : 'bg-slate-950/60 border-slate-800 hover:border-slate-700'
                   }`}
                 >
-                  <div>
-                    <div className="font-semibold text-slate-200 text-xs">{st.name}</div>
-                    <div className="text-[10px] text-slate-400 font-mono">
-                      {st.strapType.replace(/-/g, ' ')} • {st.lugWidthMm}mm • from ${st.basePrice}
+                  <div className="flex items-center gap-2.5 min-w-0">
+                    {st.imageUrl ? (
+                      <div className="w-9 h-9 rounded-lg bg-slate-950 border border-slate-800 p-0.5 flex items-center justify-center shrink-0 overflow-hidden">
+                        <img src={st.imageUrl} alt={st.name} className="w-full h-full object-contain" loading="lazy" />
+                      </div>
+                    ) : null}
+                    <div className="min-w-0">
+                      <div className="font-semibold text-slate-200 text-xs truncate">{st.name}</div>
+                      <div className="text-[10px] text-slate-400 font-mono">
+                        {st.strapType.replace(/-/g, ' ')} • {st.lugWidthMm}mm • from ${st.basePrice}
+                      </div>
                     </div>
                   </div>
 
-                  <button
-                    className={`px-2.5 py-1 text-[11px] font-semibold rounded-lg ${
-                      isSelected ? 'bg-brass-500 text-slate-950 font-bold' : 'bg-slate-800 text-slate-300'
-                    }`}
-                  >
-                    {isSelected ? '✓' : 'Select'}
-                  </button>
+                  <div className="flex items-center gap-1.5 shrink-0 ml-2">
+                    {st.vendors[0]?.productUrl && (
+                      <a
+                        href={st.vendors[0].productUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={e => e.stopPropagation()}
+                        className="p-1 rounded text-slate-400 hover:text-slate-200 hover:bg-slate-800 transition"
+                        title={`View on ${st.vendors[0].storeName}`}
+                      >
+                        <ExternalLink className="w-3.5 h-3.5" />
+                      </a>
+                    )}
+                    <button
+                      className={`px-2.5 py-1 text-[11px] font-semibold rounded-lg ${
+                        isSelected ? 'bg-brass-500 text-slate-950 font-bold' : 'bg-slate-800 text-slate-300'
+                      }`}
+                    >
+                      {isSelected ? '✓' : 'Select'}
+                    </button>
+                  </div>
                 </div>
               );
             })}
@@ -1025,13 +1475,27 @@ export const PartPicker: React.FC<PartPickerProps> = ({
                       </div>
                     </div>
 
-                    <button
-                      className={`px-2.5 py-1 text-[11px] font-semibold rounded-lg ${
-                        isSelected ? 'bg-brass-500 text-slate-950 font-bold' : 'bg-slate-800 text-slate-300'
-                      }`}
-                    >
-                      {isSelected ? '✓' : 'Select'}
-                    </button>
+                    <div className="flex items-center gap-1.5 shrink-0 ml-2">
+                      {sec.vendors[0]?.productUrl && (
+                        <a
+                          href={sec.vendors[0].productUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={e => e.stopPropagation()}
+                          className="p-1 rounded text-slate-400 hover:text-slate-200 hover:bg-slate-800 transition"
+                          title={`View on ${sec.vendors[0].storeName}`}
+                        >
+                          <ExternalLink className="w-3.5 h-3.5" />
+                        </a>
+                      )}
+                      <button
+                        className={`px-2.5 py-1 text-[11px] font-semibold rounded-lg ${
+                          isSelected ? 'bg-brass-500 text-slate-950 font-bold' : 'bg-slate-800 text-slate-300'
+                        }`}
+                      >
+                        {isSelected ? '✓' : 'Select'}
+                      </button>
+                    </div>
                   </div>
                 );
               })}
@@ -1063,8 +1527,8 @@ export const PartPicker: React.FC<PartPickerProps> = ({
   return (
     <div className="bg-slate-900 border border-slate-800 rounded-2xl flex flex-col h-[700px] overflow-hidden shadow-2xl">
       {/* Guided Stepper Header */}
-      <div className="p-3 bg-slate-950/90 border-b border-slate-800 shrink-0">
-        <div className="flex items-center justify-between gap-1 overflow-x-auto no-scrollbar">
+      <div className="p-3 bg-slate-950/90 border-b border-slate-800 shrink-0 flex items-center justify-between gap-2">
+        <div className="flex items-center gap-1 overflow-x-auto no-scrollbar flex-1">
           {steps.map((st, idx) => {
             const Icon = st.icon;
             const isCurrent = currentStep === st.id;
@@ -1109,10 +1573,38 @@ export const PartPicker: React.FC<PartPickerProps> = ({
             );
           })}
         </div>
+        <button
+          onClick={() => handleFetchCategory('all')}
+          disabled={isFetching !== null}
+          title="Sync all 800+ parts from live suppliers (Assemble.watch, AliExpress, Namoki, etc.)"
+          className="hidden md:inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium bg-slate-900 border border-slate-700 hover:border-brass-500/50 text-slate-300 hover:text-brass-300 transition shrink-0"
+        >
+          {isFetching === 'all' ? (
+            <Loader2 className="w-3.5 h-3.5 animate-spin text-brass-400" />
+          ) : (
+            <RefreshCw className="w-3.5 h-3.5 text-brass-400" />
+          )}
+          <span>Sync All (800+)</span>
+        </button>
       </div>
 
       {/* Main Step Content Area */}
       <div className="flex-1 overflow-y-auto p-5">
+        {fetchNotification && (
+          <div className="mb-4 p-3 bg-emerald-950/60 border border-emerald-600/40 rounded-xl flex items-center justify-between gap-3 text-xs text-emerald-300 animate-in fade-in duration-200">
+            <div className="flex items-center gap-2">
+              <Check className="w-4 h-4 text-emerald-400 shrink-0" />
+              <span>{fetchNotification}</span>
+            </div>
+            <button
+              onClick={() => setFetchNotification(null)}
+              className="p-1 hover:bg-emerald-900/40 rounded text-emerald-400 hover:text-emerald-200 transition"
+              title="Dismiss notification"
+            >
+              <X className="w-3.5 h-3.5" />
+            </button>
+          </div>
+        )}
         {currentStep === 'movement' && renderMovementStep()}
         {currentStep === 'case' && renderCaseStep()}
         {currentStep === 'dial' && renderDialStep()}

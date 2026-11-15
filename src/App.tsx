@@ -11,13 +11,10 @@ import type {
   BezelInsert,
   Rotor,
   MovementSpacer,
-  Strap,
-  ScanJob
+  Strap
 } from './types/watch';
 import { partsDb } from './db/partsDatabase';
-import { executeStoreScan, VETTED_SCAN_SOURCES } from './services/scannerService';
-import { isFirebaseConfigured, firebaseConfig } from './lib/firebase';
-import { loadBuildFromFirestore, seedCatalogToFirestore } from './services/firestoreService';
+import { loadBuildFromFirestore } from './services/firestoreService';
 import { WatchCanvas } from './components/WatchCanvas';
 import { PartPicker } from './components/PartPicker';
 import { BillOfMaterials } from './components/BillOfMaterials';
@@ -30,12 +27,9 @@ import {
   Sliders,
   ArrowRight,
   Flame,
-  Radio,
   X,
   ExternalLink,
-  Store,
-  Database,
-  CloudUpload
+  Tag
 } from 'lucide-react';
 
 export function App() {
@@ -63,7 +57,15 @@ export function App() {
       // fallback
     }
 
+    // Default initial starter build: Classic Submariner 40mm
     return {
+      movement: partsDb.getMovements()[0],
+      case: partsDb.getCases()[0],
+      dial: partsDb.getDials()[0],
+      hands: partsDb.getHands()[0],
+      bezelInsert: partsDb.getBezelInserts()[0],
+      strap: partsDb.getStraps()[0],
+      rotor: partsDb.getRotors()[0],
       selectedVendors: {}
     };
   });
@@ -71,14 +73,10 @@ export function App() {
   const [currentStep, setCurrentStep] = useState<BuildStep>('movement');
   const [activeTab, setActiveTab] = useState<'configurator' | 'sourcing'>('configurator');
 
-  // Store Scanner & Cloud Firestore Sync State
-  const [isScanning, setIsScanning] = useState(false);
-  const [scanStage, setScanStage] = useState('');
-  const [scanProgress, setScanProgress] = useState(0);
-  const [isScanModalOpen, setIsScanModalOpen] = useState(false);
-  const [latestScanJob, setLatestScanJob] = useState<ScanJob | null>(() => partsDb.getLastScanJob());
-  const [isSeedingFirestore, setIsSeedingFirestore] = useState(false);
-  const [seedingMessage, setSeedingMessage] = useState<string | null>(null);
+  // Market Deals Modal State
+  const [isDealsModalOpen, setIsDealsModalOpen] = useState(false);
+  const latestScanJob = partsDb.getLastScanJob();
+  const deals = latestScanJob?.dealsDiscovered || [];
 
   // Load shared build if ?b=shortId query param is in URL
   useEffect(() => {
@@ -105,41 +103,36 @@ export function App() {
     }
   }, []);
 
-  // Run periodic store scan
-  const handleRunStoreScan = async () => {
-    setIsScanning(true);
-    setScanProgress(5);
-    setScanStage('Initializing connection to suppliers...');
+  // Equip a discovered deal directly into current build
+  const handleEquipDeal = (deal: { componentId: string; storeName: string }) => {
+    const comp = partsDb.getAllComponents().find(c => c.id === deal.componentId);
+    if (!comp) return;
 
-    try {
-      const job = await executeStoreScan((stage, pct) => {
-        setScanStage(stage);
-        setScanProgress(pct);
-      });
-      setLatestScanJob(job);
-    } catch (e) {
-      console.error('Scan error:', e);
-    } finally {
-      setIsScanning(false);
+    handleSelectComponent(comp.category, comp);
+
+    const vendor =
+      comp.vendors.find(v => v.storeName.toLowerCase().includes(deal.storeName.toLowerCase().split(' ')[0])) ||
+      comp.vendors[0];
+    if (vendor) {
+      handleSelectVendor(comp.id, vendor.id);
     }
+
+    setIsDealsModalOpen(false);
   };
 
-  // Seed Catalog to Cloud Firestore
-  const handleSeedFirestore = async () => {
-    setIsSeedingFirestore(true);
-    setSeedingMessage('Connecting to Cloud Firestore...');
-
-    try {
-      const res = await seedCatalogToFirestore((count, total) => {
-        setSeedingMessage(`Uploading component ${count} of ${total} to Firestore...`);
-      });
-      setSeedingMessage(`✅ Successfully seeded ${res.count} components to Cloud Firestore!`);
-    } catch (err: any) {
-      setSeedingMessage(`⚠️ ${err.message || 'Error seeding Firestore'}`);
-    } finally {
-      setIsSeedingFirestore(false);
-      setTimeout(() => setSeedingMessage(null), 5000);
-    }
+  const isDealEquipped = (componentId: string) => {
+    const parts = [
+      build.movement,
+      build.case,
+      build.dial,
+      build.hands,
+      build.secondsAccent,
+      build.bezelInsert,
+      build.rotor,
+      build.spacer,
+      build.strap
+    ];
+    return parts.some(p => p?.id === componentId);
   };
 
   // Handle component selection with cascading incompatibility protection
@@ -367,17 +360,17 @@ export function App() {
 
           {/* Quick Preset Starters & Store Scanner Trigger */}
           <div className="flex items-center gap-2">
-            {/* Store Scanner Button */}
+            {/* Live Market Deals Button */}
             <button
-              onClick={() => setIsScanModalOpen(true)}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-800/90 hover:bg-slate-700/90 border border-slate-700 text-xs font-semibold text-slate-200 transition shadow-sm"
-              title="View Scanned Suppliers & Deals"
+              onClick={() => setIsDealsModalOpen(true)}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-800/90 hover:bg-slate-700/90 border border-slate-700 hover:border-slate-600 text-xs font-semibold text-slate-200 transition shadow-sm"
+              title="View Live Supplier Deals & Discounts"
             >
-              <Radio className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
-              <span className="hidden sm:inline">Scanner Feeds</span>
-              {latestScanJob && latestScanJob.dealsDiscovered.length > 0 && (
-                <span className="px-1.5 py-0.2 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/30 text-[10px] font-bold">
-                  {latestScanJob.dealsDiscovered.length} Deals
+              <Flame className="w-3.5 h-3.5 text-rose-400" />
+              <span>Market Deals</span>
+              {deals.length > 0 && (
+                <span className="px-1.5 py-0.5 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/30 text-[10px] font-bold">
+                  {deals.length} Active
                 </span>
               )}
             </button>
@@ -415,149 +408,116 @@ export function App() {
         </div>
       </header>
 
-      {/* STORE SCANNER MODAL & PROGRESS */}
-      {isScanModalOpen && (
+      {/* LIVE MARKET DEALS MODAL */}
+      {isDealsModalOpen && (
         <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
           <div className="bg-slate-900 border border-slate-800 rounded-2xl max-w-2xl w-full p-6 shadow-2xl space-y-5 animate-in fade-in zoom-in-95 duration-200">
             <div className="flex items-start justify-between">
               <div>
                 <div className="flex items-center gap-2">
-                  <Store className="w-5 h-5 text-brass-400" />
-                  <h3 className="font-bold text-slate-100 text-base">Horological Store Scanner Pipeline</h3>
+                  <div className="p-1.5 rounded-lg bg-rose-500/10 border border-rose-500/20 text-rose-400">
+                    <Flame className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-slate-100 text-base">Live Mod Market Deals</h3>
+                    <p className="text-xs text-slate-400">
+                      Discounts automatically detected across vetted suppliers. Equip deals directly into your build.
+                    </p>
+                  </div>
                 </div>
-                <p className="text-xs text-slate-400 mt-1">
-                  Periodically monitors inventory, mechanical tolerances, and pricing across vetted suppliers.
-                </p>
               </div>
 
               <button
-                onClick={() => setIsScanModalOpen(false)}
+                onClick={() => setIsDealsModalOpen(false)}
                 className="p-1 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800"
               >
                 <X className="w-4 h-4" />
               </button>
             </div>
 
-            {/* Scan Execution & Progress */}
-            {isScanning ? (
-              <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-3">
-                <div className="flex items-center justify-between text-xs font-mono">
-                  <span className="text-brass-400 flex items-center gap-2">
-                    <Radio className="w-3.5 h-3.5 animate-spin" />
-                    {scanStage}
-                  </span>
-                  <span className="font-bold text-slate-300">{scanProgress}%</span>
-                </div>
-                <div className="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
-                  <div
-                    className="bg-gradient-to-r from-brass-500 to-emerald-400 h-2 rounded-full transition-all duration-300"
-                    style={{ width: `${scanProgress}%` }}
-                  />
-                </div>
+            {/* Deals List */}
+            {deals.length > 0 ? (
+              <div className="border border-slate-800 rounded-xl overflow-hidden divide-y divide-slate-800/80 max-h-[420px] overflow-y-auto">
+                {deals.map((deal, idx) => {
+                  const comp = partsDb.getAllComponents().find(c => c.id === deal.componentId);
+                  const equipped = isDealEquipped(deal.componentId);
+                  const vendor =
+                    comp?.vendors.find(v => v.storeName.toLowerCase().includes(deal.storeName.toLowerCase().split(' ')[0])) ||
+                    comp?.vendors[0];
+
+                  return (
+                    <div
+                      key={idx}
+                      className="p-3.5 hover:bg-slate-850/60 transition flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-slate-950/40"
+                    >
+                      <div className="space-y-1">
+                        <div className="flex items-center gap-2">
+                          {comp && (
+                            <span className="px-1.5 py-0.5 rounded text-[10px] font-mono font-bold bg-slate-800 text-slate-300 border border-slate-700 uppercase">
+                              {comp.category}
+                            </span>
+                          )}
+                          <span className="font-semibold text-slate-100 text-sm">{deal.componentName}</span>
+                          <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-rose-500/15 text-rose-300 border border-rose-500/30">
+                            -{deal.discountPercent}% OFF
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-2 text-xs text-slate-400">
+                          <span>
+                            Supplier: <strong className="text-slate-300">{deal.storeName}</strong>
+                          </span>
+                          {vendor?.shippingDaysEstimate && (
+                            <>
+                              <span>•</span>
+                              <span>Est: {vendor.shippingDaysEstimate}</span>
+                            </>
+                          )}
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-3 self-end sm:self-center shrink-0">
+                        <div className="text-right">
+                          <span className="text-slate-500 line-through text-xs font-mono block">
+                            ${deal.oldPrice.toFixed(2)}
+                          </span>
+                          <span className="text-sm font-bold font-mono text-brass-400">
+                            ${deal.newPrice.toFixed(2)}
+                          </span>
+                        </div>
+
+                        {vendor?.productUrl && (
+                          <a
+                            href={vendor.productUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="p-1.5 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800 transition"
+                            title="View on supplier store"
+                          >
+                            <ExternalLink className="w-3.5 h-3.5" />
+                          </a>
+                        )}
+
+                        <button
+                          onClick={() => handleEquipDeal(deal)}
+                          disabled={equipped}
+                          className={`px-3 py-1.5 text-xs font-bold rounded-lg transition ${
+                            equipped
+                              ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 cursor-default'
+                              : 'bg-brass-500 hover:bg-brass-400 text-slate-950 shadow'
+                          }`}
+                        >
+                          {equipped ? '✓ Equipped' : 'Equip in Build'}
+                        </button>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             ) : (
-              <div className="flex items-center justify-between p-3.5 rounded-xl bg-slate-950/70 border border-slate-800 text-xs">
-                <div>
-                  <span className="text-slate-400 block text-[11px]">Last Scan Completed:</span>
-                  <span className="font-mono font-semibold text-slate-200">
-                    {latestScanJob ? new Date(latestScanJob.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }) : 'Never'}
-                  </span>
-                </div>
-
-                <button
-                  onClick={handleRunStoreScan}
-                  className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-brass-500 hover:bg-brass-400 text-slate-950 text-xs font-bold transition shadow"
-                >
-                  <Radio className="w-3.5 h-3.5" />
-                  <span>Run Scan Pipeline Now</span>
-                </button>
-              </div>
-            )}
-
-            {/* Cloud Firestore Storage & Sync Section */}
-            <div className="p-3.5 rounded-xl bg-slate-950/70 border border-slate-800 space-y-2.5">
-              <div className="flex items-center justify-between text-xs">
-                <div className="flex items-center gap-2">
-                  <Database className="w-4 h-4 text-sky-400" />
-                  <span className="font-semibold text-slate-200">Database Backend:</span>
-                  <span className={`px-2 py-0.5 rounded text-[10px] font-mono font-bold ${
-                    isFirebaseConfigured
-                      ? 'bg-sky-500/20 text-sky-300 border border-sky-500/40'
-                      : 'bg-emerald-500/15 text-emerald-300 border border-emerald-500/30'
-                  }`}>
-                    {isFirebaseConfigured ? `Cloud Firestore (${firebaseConfig.projectId})` : 'IndexedDB Local Cache (Free Tier Active)'}
-                  </span>
-                </div>
-
-                <button
-                  disabled={isSeedingFirestore}
-                  onClick={handleSeedFirestore}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium border border-slate-700 transition"
-                  title="Push components from catalog into Cloud Firestore"
-                >
-                  <CloudUpload className="w-3.5 h-3.5 text-brass-400" />
-                  <span>{isSeedingFirestore ? 'Seeding...' : 'Sync Catalog to Firestore'}</span>
-                </button>
-              </div>
-
-              {seedingMessage && (
-                <div className="text-[11px] font-mono p-2 rounded bg-slate-900 border border-slate-800 text-brass-300">
-                  {seedingMessage}
-                </div>
-              )}
-            </div>
-
-            {/* Monitored Supplier Sources */}
-            <div>
-              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">
-                Monitored Supplier Feeds ({VETTED_SCAN_SOURCES.length})
-              </h4>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
-                {VETTED_SCAN_SOURCES.map(src => (
-                  <div key={src.id} className="p-2 rounded-lg bg-slate-950/60 border border-slate-800/80">
-                    <div className="font-semibold text-slate-200 truncate">{src.name}</div>
-                    <div className="text-[10px] text-slate-500 font-mono flex items-center justify-between mt-1">
-                      <span>{src.tier}</span>
-                      <a href={`https://${src.domain}`} target="_blank" rel="noopener noreferrer" className="hover:text-brass-400">
-                        <ExternalLink className="w-3 h-3" />
-                      </a>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Active Price Drops / Deals Table */}
-            {latestScanJob && latestScanJob.dealsDiscovered.length > 0 && (
-              <div>
-                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-300 mb-2 flex items-center gap-1.5">
-                  <Flame className="w-3.5 h-3.5 text-rose-400" />
-                  <span>Discovered Deals & Price Reductions</span>
-                </h4>
-                <div className="border border-slate-800 rounded-xl overflow-hidden text-xs max-h-48 overflow-y-auto">
-                  <table className="w-full text-left">
-                    <thead className="bg-slate-950 text-slate-400 font-mono text-[11px] border-b border-slate-800">
-                      <tr>
-                        <th className="py-2 px-3">Component</th>
-                        <th className="py-2 px-3">Supplier</th>
-                        <th className="py-2 px-3 text-right">Prior</th>
-                        <th className="py-2 px-3 text-right">New Deal</th>
-                        <th className="py-2 px-3 text-right">Savings</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-slate-800/60">
-                      {latestScanJob.dealsDiscovered.map((deal, idx) => (
-                        <tr key={idx} className="hover:bg-slate-850/60">
-                          <td className="py-2 px-3 font-medium text-slate-200">{deal.componentName}</td>
-                          <td className="py-2 px-3 text-slate-400 text-[11px]">{deal.storeName}</td>
-                          <td className="py-2 px-3 text-right text-slate-500 line-through font-mono">${deal.oldPrice.toFixed(2)}</td>
-                          <td className="py-2 px-3 text-right font-bold text-brass-400 font-mono">${deal.newPrice.toFixed(2)}</td>
-                          <td className="py-2 px-3 text-right text-emerald-400 font-bold text-[11px]">-{deal.discountPercent}%</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
+              <div className="p-8 text-center text-slate-400 space-y-2">
+                <Tag className="w-8 h-8 mx-auto text-slate-600" />
+                <p className="text-sm font-medium">No active discounts detected at this moment.</p>
+                <p className="text-xs text-slate-500">All components are at verified supplier baseline pricing.</p>
               </div>
             )}
           </div>

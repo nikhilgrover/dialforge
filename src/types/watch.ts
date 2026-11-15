@@ -65,7 +65,7 @@ export interface Movement extends BaseComponent {
   batteryLifeYears?: number;
 }
 
-export type CaseStyle = 'diver' | 'explorer' | 'field' | 'flieger' | 'dress' | 'datejust' | 'pilot';
+export type CaseStyle = 'diver' | 'explorer' | 'field' | 'flieger' | 'dress' | 'datejust' | 'pilot' | 'gs' | 'bauhaus' | '1908';
 export type CrownPosition = '3.0' | '3.8' | '4.0' | '9.0';
 export type CrystalType = 'flat-sapphire' | 'double-domed-sapphire' | 'top-hat-sapphire' | 'mineral';
 export type CaseFinish = 'brushed-steel' | 'pvd-black' | 'bronze' | 'rose-gold' | 'gold';
@@ -99,7 +99,7 @@ export interface Case extends BaseComponent {
   nativeMovementFamily: 'NH' | 'VH' | 'ETA' | 'Universal';
 }
 
-export type DialStyle = 'diver' | 'field' | 'explorer' | 'flieger' | 'marine' | 'minimalist' | 'dress';
+export type DialStyle = 'diver' | 'field' | 'explorer' | 'flieger' | 'marine' | 'minimalist' | 'dress' | 'art';
 export type LumeType = 'BGW9' | 'C3' | 'Vintage' | 'None';
 export type DialFeetPosition = '3.0' | '3.8' | '4.0' | 'none';
 
@@ -113,18 +113,25 @@ export interface Dial extends BaseComponent {
   lume: LumeType;
   dialFeetPositions: DialFeetPosition[];
   dateWindow: 'none' | '3.0' | '3.8' | '6.0';
-  texture?: 'matte' | 'sunburst' | 'waffle' | 'enamel' | 'sand' | 'linen' | 'meteorite';
+  texture?: 'matte' | 'sunburst' | 'waffle' | 'enamel' | 'sand' | 'linen' | 'meteorite' | 'guilloche' | 'mother-of-pearl';
 }
 
-export type HandsStyle = 'mercedes' | 'snowflake' | 'sword' | 'cathedral' | 'baton' | 'marine' | 'dauphine' | 'flieger';
+export type HandsStyle = 'mercedes' | 'snowflake' | 'sword' | 'cathedral' | 'baton' | 'marine' | 'dauphine' | 'flieger' | 'breguet' | 'alpha';
+
+export interface HandComponents {
+  hour: string;
+  minute: string;
+  second: string;
+}
 
 export interface Hands extends BaseComponent {
   category: 'hands';
   handsStyle: HandsStyle;
   handHoleSizes: HandHoleSizes;
   lume: LumeType;
-  finish: 'silver' | 'gold' | 'black' | 'rose-gold' | 'heat-blued';
+  finish: 'silver' | 'gold' | 'black' | 'rose-gold' | 'heat-blued' | 'blue';
   compatibleMovementFamilies: MovementFamily[];
+  handComponents?: HandComponents;
 }
 
 export interface SecondsHandAccent extends BaseComponent {
@@ -139,7 +146,7 @@ export interface SecondsHandAccent extends BaseComponent {
 export interface BezelInsert extends BaseComponent {
   category: 'bezel-insert';
   style: 'diver-60min' | 'gmt-24hr' | 'dual-time-12hr' | 'yacht' | 'tachymeter';
-  material: 'ceramic' | 'aluminum';
+  material: 'ceramic' | 'aluminum' | 'steel';
   color1: string;
   color1Hex: string;
   color2?: string;
@@ -171,7 +178,7 @@ export interface MovementSpacer extends BaseComponent {
   includesStemShim: boolean;
 }
 
-export type StrapType = 'oyster-steel' | 'jubilee-steel' | 'vintage-leather' | 'nato-nylon' | 'fkm-rubber';
+export type StrapType = 'oyster-steel' | 'jubilee-steel' | 'vintage-leather' | 'nato-nylon' | 'fkm-rubber' | 'president-steel' | 'gs-steel' | 'custom-leather';
 
 export interface Strap extends BaseComponent {
   category: 'strap';

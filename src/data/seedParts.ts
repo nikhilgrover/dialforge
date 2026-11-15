@@ -33,9 +33,9 @@ export const SEED_MOVEMENTS: Movement[] = [
     lastScannedAt: '2026-11-14T18:00:00Z',
     historicalLowestPrice: 28.50,
     vendors: [
-      { id: 'v-miuski-nh35', storeName: 'Miuski Official Store (AliExpress)', tier: 'vetted-direct', price: 31.50, productUrl: 'https://aliexpress.com', inStock: true, isSpecialDeal: true, shippingDaysEstimate: '10-14 days' },
-      { id: 'v-namoki-nh35', storeName: 'NamokiMODS', tier: 'premier', price: 64.99, productUrl: 'https://namokimods.com', inStock: true, shippingDaysEstimate: '3-5 days', notes: 'Pre-regulated to +/- 5 sec/day' },
-      { id: 'v-esslinger-nh35', storeName: 'Esslinger Watch Supplies', tier: 'supply-house', price: 47.95, productUrl: 'https://esslinger.com', inStock: true, shippingDaysEstimate: '2-4 days' }
+      { id: 'v-miuski-nh35', storeName: 'Miuski Official Store (AliExpress)', tier: 'vetted-direct', price: 31.50, productUrl: 'https://www.aliexpress.us/w/wholesale-miuski-nh35-automatic-movement.html', inStock: true, isSpecialDeal: true, shippingDaysEstimate: '10-14 days' },
+      { id: 'v-namoki-nh35', storeName: 'NamokiMODS', tier: 'premier', price: 64.99, productUrl: 'https://www.namokimods.com/products/seiko-sii-nh35a-automatic-movement', inStock: true, shippingDaysEstimate: '3-5 days', notes: 'Pre-regulated to +/- 5 sec/day' },
+      { id: 'v-esslinger-nh35', storeName: 'Esslinger Watch Supplies', tier: 'supply-house', price: 47.95, productUrl: 'https://www.esslinger.com/seiko-watch-movement-nh35-automatic-date-at-3-overall-height-7-6mm/', inStock: true, shippingDaysEstimate: '2-4 days' }
     ]
   },
   {
@@ -59,8 +59,8 @@ export const SEED_MOVEMENTS: Movement[] = [
     lastScannedAt: '2026-11-14T18:00:00Z',
     historicalLowestPrice: 32.00,
     vendors: [
-      { id: 'v-miuski-nh36', storeName: 'Miuski Official Store (AliExpress)', tier: 'vetted-direct', price: 34.00, productUrl: 'https://aliexpress.com', inStock: true, isSpecialDeal: true, shippingDaysEstimate: '10-14 days' },
-      { id: 'v-namoki-nh36', storeName: 'NamokiMODS', tier: 'premier', price: 69.99, productUrl: 'https://namokimods.com', inStock: true, shippingDaysEstimate: '3-5 days' }
+      { id: 'v-miuski-nh36', storeName: 'Miuski Official Store (AliExpress)', tier: 'vetted-direct', price: 34.00, productUrl: 'https://www.aliexpress.us/w/wholesale-miuski-nh36-day-date-movement.html', inStock: true, isSpecialDeal: true, shippingDaysEstimate: '10-14 days' },
+      { id: 'v-namoki-nh36', storeName: 'NamokiMODS', tier: 'premier', price: 69.99, productUrl: 'https://www.namokimods.com/products/seiko-sii-nh36a-automatic-movement', inStock: true, shippingDaysEstimate: '3-5 days' }
     ]
   },
   {
@@ -84,8 +84,8 @@ export const SEED_MOVEMENTS: Movement[] = [
     lastScannedAt: '2026-11-14T18:00:00Z',
     historicalLowestPrice: 33.00,
     vendors: [
-      { id: 'v-tandorio-nh38', storeName: 'Tandorio Official (AliExpress)', tier: 'vetted-direct', price: 34.00, productUrl: 'https://aliexpress.com', inStock: true, isSpecialDeal: true, shippingDaysEstimate: '10-14 days' },
-      { id: 'v-dlw-nh38', storeName: 'DLW Watches', tier: 'premier', price: 58.00, productUrl: 'https://dlwwatches.com', inStock: true, shippingDaysEstimate: '4-7 days' }
+      { id: 'v-tandorio-nh38', storeName: 'Tandorio Official (AliExpress)', tier: 'vetted-direct', price: 34.00, productUrl: 'https://www.aliexpress.us/w/wholesale-tandorio-nh38-automatic-movement.html', inStock: true, isSpecialDeal: true, shippingDaysEstimate: '10-14 days' },
+      { id: 'v-dlw-nh38', storeName: 'DLW Watches', tier: 'premier', price: 58.00, productUrl: 'https://www.dlwwatches.com/products/movement-nh38', inStock: true, shippingDaysEstimate: '4-7 days' }
     ]
   },
   {
@@ -109,15 +109,15 @@ export const SEED_MOVEMENTS: Movement[] = [
     lastScannedAt: '2026-11-14T18:00:00Z',
     historicalLowestPrice: 38.00,
     vendors: [
-      { id: 'v-miuski-nh34', storeName: 'Miuski Official Store (AliExpress)', tier: 'vetted-direct', price: 39.50, productUrl: 'https://aliexpress.com', inStock: true, isSpecialDeal: true, shippingDaysEstimate: '10-14 days' },
-      { id: 'v-lucius-nh34', storeName: 'Lucius Atelier', tier: 'premier', price: 74.90, productUrl: 'https://luciusatelier.com', inStock: true, shippingDaysEstimate: '3-6 days', notes: 'Individually regulated' }
+      { id: 'v-miuski-nh34', storeName: 'Miuski Official Store (AliExpress)', tier: 'vetted-direct', price: 39.50, productUrl: 'https://www.aliexpress.us/w/wholesale-miuski-nh34-gmt-automatic-movement.html', inStock: true, isSpecialDeal: true, shippingDaysEstimate: '10-14 days' },
+      { id: 'v-lucius-nh34', storeName: 'Lucius Atelier', tier: 'premier', price: 74.90, productUrl: 'https://luciusatelier.com/products/seiko-nh34-gmt-automatic-movement', inStock: true, shippingDaysEstimate: '3-6 days', notes: 'Individually regulated' }
     ]
   },
   {
     id: 'mov-vh31',
     name: 'Seiko (TMI) VH31 Sweeping Quartz',
     brand: 'Seiko Instruments / TMI',
-    description: 'The holy grail of grab-and-go watchmaking. A high-torque quartz movement that sweeps smoothly at 4 beats per second (14,400 bph), mimicking a mechanical movement without the daily winding or accuracy drift.',
+    description: 'High-precision hybrid quartz caliber featuring a smooth 4 beats/second mechanical sweep. Ultra-slim 3.45mm profile, 15-second/month accuracy, zero winding needed. Requires NH movement adapter spacer.',
     category: 'movement',
     caliber: 'VH31',
     movementType: 'quartz-sweeping',
@@ -125,52 +125,52 @@ export const SEED_MOVEMENTS: Movement[] = [
     basePrice: 12,
     beatsPerHour: 14400,
     beatsPerSecond: 4,
-    diameterMm: 23.7,
+    diameterMm: 23.3,
     thicknessMm: 3.45,
     hasDate: false,
     hasDay: false,
     hasGmt: false,
-    batteryModel: 'SR920SW / 371',
-    batteryLifeYears: 2,
     handHoleSizes: { hour: 1.20, minute: 0.70, second: 0.17 },
+    batteryLifeYears: 2,
+    batteryModel: 'SR920SW / 371',
     lastScannedAt: '2026-11-14T18:00:00Z',
-    historicalLowestPrice: 8.50,
+    historicalLowestPrice: 7.90,
     vendors: [
-      { id: 'v-tandorio-vh31', storeName: 'Tandorio Official (AliExpress)', tier: 'vetted-direct', price: 8.90, productUrl: 'https://aliexpress.com', inStock: true, isSpecialDeal: true, shippingDaysEstimate: '10-14 days' },
-      { id: 'v-esslinger-vh31', storeName: 'Esslinger Watch Supplies', tier: 'supply-house', price: 14.50, productUrl: 'https://esslinger.com', inStock: true, shippingDaysEstimate: '2-4 days', notes: 'Includes factory warranty' }
+      { id: 'v-tandorio-vh31', storeName: 'Tandorio Official (AliExpress)', tier: 'vetted-direct', price: 8.90, productUrl: 'https://www.aliexpress.us/w/wholesale-tandorio-vh31-quartz-movement.html', inStock: true, isSpecialDeal: true, shippingDaysEstimate: '10-14 days' },
+      { id: 'v-esslinger-vh31', storeName: 'Esslinger Watch Supplies', tier: 'supply-house', price: 14.50, productUrl: 'https://www.esslinger.com/hattoris-epson-japan-quartz-watch-movement-vh31-overall-height-5-0mm/', inStock: true, shippingDaysEstimate: '2-4 days', notes: 'Includes factory warranty' }
     ]
   },
   {
     id: 'mov-ronda515',
-    name: 'Ronda Powertech 515 Quartz',
-    brand: 'Ronda AG (Swiss Parts)',
-    description: 'Workhorse Swiss quartz movement with date window. High-efficiency stepping motor provides traditional 1-tick-per-second action and a remarkable 45-month battery lifespan.',
+    name: 'Ronda 515.24H Swiss Quartz GMT',
+    brand: 'Ronda Swiss',
+    description: 'Swiss-engineered workhorse step-quartz movement with dual-time 24H hand and 3:00 date window. Renowned 45-month power cell life and high shock resistance.',
     category: 'movement',
-    caliber: 'Ronda 515',
+    caliber: '515.24H',
     movementType: 'quartz-standard',
     family: 'Ronda',
-    basePrice: 18,
+    basePrice: 16,
     beatsPerHour: 3600,
     beatsPerSecond: 1,
     diameterMm: 26.0,
     thicknessMm: 3.00,
     hasDate: true,
     hasDay: false,
-    hasGmt: false,
-    batteryModel: 'Renata 371',
+    hasGmt: true,
+    handHoleSizes: { hour: 1.20, minute: 0.70, second: 0.20, gmt: 1.60 },
     batteryLifeYears: 3.75,
-    handHoleSizes: { hour: 1.20, minute: 0.70, second: 0.20 },
+    batteryModel: 'SR920SW / 371',
     lastScannedAt: '2026-11-14T18:00:00Z',
-    historicalLowestPrice: 15.00,
+    historicalLowestPrice: 13.50,
     vendors: [
-      { id: 'v-esslinger-ronda515', storeName: 'Esslinger Watch Supplies', tier: 'supply-house', price: 16.95, productUrl: 'https://esslinger.com', inStock: true, shippingDaysEstimate: '2-4 days' }
+      { id: 'v-esslinger-ronda515', storeName: 'Esslinger Watch Supplies', tier: 'supply-house', price: 16.95, productUrl: 'https://www.esslinger.com/harley-ronda-quartz-watch-movement-515-24h-date-at-3-00-overall-height-4-9mm/', inStock: true, shippingDaysEstimate: '2-4 days' }
     ]
   },
   {
     id: 'mov-pt5000',
-    name: 'HK Precision PT5000 High-Beat Automatic',
+    name: 'HKPT PT5000 High-Beat 28,800 BPH',
     brand: 'HK Precision Technology',
-    description: 'High-grade 28,800 bph (4Hz / 8 beats/s) Swiss ETA 2824-2 clone caliber. Features buttery smooth second hand sweep, Incabloc shock protection, and Chronometer-grade capability.',
+    description: 'Swiss ETA 2824-2 architecture clone boasting a fluid 8 beats/second (28,800 BPH) sweep. Glashütte chronometer certified grade capability. Requires ETA compatible case and hands.',
     category: 'movement',
     caliber: 'PT5000',
     movementType: 'automatic',
@@ -185,10 +185,10 @@ export const SEED_MOVEMENTS: Movement[] = [
     hasGmt: false,
     handHoleSizes: { hour: 1.50, minute: 0.90, second: 0.25 },
     lastScannedAt: '2026-11-14T18:00:00Z',
-    historicalLowestPrice: 52.00,
+    historicalLowestPrice: 48.00,
     vendors: [
-      { id: 'v-miuski-pt5000', storeName: 'Miuski Official Store (AliExpress)', tier: 'vetted-direct', price: 54.00, productUrl: 'https://aliexpress.com', inStock: true, isSpecialDeal: true, shippingDaysEstimate: '10-14 days' },
-      { id: 'v-esslinger-pt5000', storeName: 'Esslinger Watch Supplies', tier: 'supply-house', price: 79.95, productUrl: 'https://esslinger.com', inStock: true, shippingDaysEstimate: '2-4 days' }
+      { id: 'v-miuski-pt5000', storeName: 'Miuski Official Store (AliExpress)', tier: 'vetted-direct', price: 54.00, productUrl: 'https://www.aliexpress.us/w/wholesale-miuski-pt5000-high-beat-movement.html', inStock: true, isSpecialDeal: true, shippingDaysEstimate: '10-14 days' },
+      { id: 'v-esslinger-pt5000', storeName: 'Esslinger Watch Supplies', tier: 'supply-house', price: 79.95, productUrl: 'https://www.esslinger.com/chinese-automatic-movement-pt5000-overall-height-6-5mm/', inStock: true, shippingDaysEstimate: '2-4 days' }
     ]
   }
 ];
@@ -196,6 +196,7 @@ export const SEED_MOVEMENTS: Movement[] = [
 export const SEED_CASES: Case[] = [
   {
     id: 'case-sub-40',
+    imageUrl: 'https://assets.assemble.watch/parts/cases/namoki/namoki_nmk909_sub_skx007_srpd_watch_case_polished_finish.webp',
     name: 'Submariner Style 40mm Diver Case (Stainless)',
     brand: 'Miuski Custom Works',
     description: 'Classic dive watch aesthetic. 316L solid stainless steel with unidirectional 120-click rotating bezel, screw-down crown at 3:00, and flat scratch-resistant sapphire crystal.',
@@ -219,12 +220,13 @@ export const SEED_CASES: Case[] = [
     nativeMovementFamily: 'NH',
     lastScannedAt: '2026-11-14T18:00:00Z',
     vendors: [
-      { id: 'v-miuski-subcase', storeName: 'Miuski Official Store (AliExpress)', tier: 'vetted-direct', price: 34.00, productUrl: 'https://aliexpress.com', inStock: true, isSpecialDeal: true, shippingDaysEstimate: '10-14 days' },
-      { id: 'v-namoki-nmk901', storeName: 'NamokiMODS (NMK901 Sub)', tier: 'premier', price: 89.99, productUrl: 'https://namokimods.com', inStock: true, shippingDaysEstimate: '3-5 days', notes: 'Includes double O-ring Viton gaskets' }
+      { id: 'v-miuski-subcase', storeName: 'Miuski Official Store (AliExpress)', tier: 'vetted-direct', price: 34.00, productUrl: 'https://www.aliexpress.us/w/wholesale-miuski-submariner-watch-case-40mm.html', inStock: true, isSpecialDeal: true, shippingDaysEstimate: '10-14 days' },
+      { id: 'v-namoki-nmk901', storeName: 'NamokiMODS', tier: 'premier', price: 89.99, productUrl: 'https://www.namokimods.com/products/nmk909-sub-skx007-srpd-watch-case-bundle-polished-finish', inStock: true, shippingDaysEstimate: '3-5 days', notes: 'Includes double O-ring Viton gaskets' }
     ]
   },
   {
     id: 'case-sub-black-40',
+    imageUrl: 'https://assets.assemble.watch/parts/cases/namoki/namoki_nmk909_sub_skx007_srpd_watch_case_pvd_matte_black_finish.webp',
     name: 'Submariner Style 40mm PVD Stealth Black Case',
     brand: 'Caroline Mod Store',
     description: 'Tactical blacked-out diver case with satin PVD scratch-resistant ceramic coating. 120-click unidirectional bezel and screw-down triple-seal crown at 3:00.',
@@ -248,12 +250,13 @@ export const SEED_CASES: Case[] = [
     nativeMovementFamily: 'NH',
     lastScannedAt: '2026-11-14T18:00:00Z',
     vendors: [
-      { id: 'v-caroline-pvd-case', storeName: 'Caroline Mod Store (AliExpress)', tier: 'vetted-direct', price: 38.00, productUrl: 'https://aliexpress.com', inStock: true, isSpecialDeal: true, shippingDaysEstimate: '10-14 days' },
-      { id: 'v-dlw-sub-pvd', storeName: 'DLW Watches', tier: 'premier', price: 92.00, productUrl: 'https://dlwwatches.com', inStock: true, shippingDaysEstimate: '3-5 days' }
+      { id: 'v-caroline-pvd-case', storeName: 'Caroline Mod Store (AliExpress)', tier: 'vetted-direct', price: 38.00, productUrl: 'https://www.aliexpress.us/w/wholesale-caroline-submariner-pvd-case.html', inStock: true, isSpecialDeal: true, shippingDaysEstimate: '10-14 days' },
+      { id: 'v-dlw-sub-pvd', storeName: 'DLW Watches', tier: 'premier', price: 92.00, productUrl: 'https://www.dlwwatches.com/products/case-sub-matte-black', inStock: true, shippingDaysEstimate: '3-5 days' }
     ]
   },
   {
     id: 'case-skx-42',
+    imageUrl: 'https://assets.assemble.watch/parts/cases/namoki/namoki_nmk901_skx_watch_case_aged_steel_finish.webp',
     name: 'SKX007 Style 42mm GMT Diver Case',
     brand: 'Namoki Custom Line',
     description: 'Iconic ergonomic 42mm diver case with crown at 3.8:00. Equipped with high-clearance double-domed sapphire crystal engineered specifically to provide clearance for NH34 GMT hand stacks.',
@@ -278,12 +281,13 @@ export const SEED_CASES: Case[] = [
     nativeMovementFamily: 'NH',
     lastScannedAt: '2026-11-14T18:00:00Z',
     vendors: [
-      { id: 'v-namoki-skx007', storeName: 'NamokiMODS', tier: 'premier', price: 79.99, productUrl: 'https://namokimods.com', inStock: true, shippingDaysEstimate: '3-5 days' },
-      { id: 'v-tandorio-skx', storeName: 'Tandorio Official (AliExpress)', tier: 'vetted-direct', price: 38.50, productUrl: 'https://aliexpress.com', inStock: true, isSpecialDeal: true, shippingDaysEstimate: '10-14 days' }
+      { id: 'v-namoki-skx007', storeName: 'NamokiMODS', tier: 'premier', price: 79.99, productUrl: 'https://www.namokimods.com/products/nmk901-skx-watch-case-aged-steel-finish', inStock: true, shippingDaysEstimate: '3-5 days' },
+      { id: 'v-tandorio-skx', storeName: 'Tandorio Official (AliExpress)', tier: 'vetted-direct', price: 38.50, productUrl: 'https://www.aliexpress.us/w/wholesale-tandorio-skx007-watch-case-42mm.html', inStock: true, isSpecialDeal: true, shippingDaysEstimate: '10-14 days' }
     ]
   },
   {
     id: 'case-gmt-39',
+    imageUrl: 'https://assets.assemble.watch/parts/cases/lucius_atelier/lucius_atelier_gs_diver_watch_case_36mm_nh34_ready.webp',
     name: 'Explorer II Style 39mm High-Clearance GMT Case',
     brand: 'Lucius Atelier',
     description: 'Modern 39mm sports GMT case with crown at 3:00. Fitted with premium double-domed anti-reflective sapphire crystal offering 1.95mm clearance for NH34 caller GMT stacks.',
@@ -307,12 +311,13 @@ export const SEED_CASES: Case[] = [
     nativeMovementFamily: 'NH',
     lastScannedAt: '2026-11-14T18:00:00Z',
     vendors: [
-      { id: 'v-lucius-gmt39', storeName: 'Lucius Atelier', tier: 'premier', price: 98.00, productUrl: 'https://luciusatelier.com', inStock: true, shippingDaysEstimate: '3-5 days' },
-      { id: 'v-miuski-gmt39', storeName: 'Miuski Official Store (AliExpress)', tier: 'vetted-direct', price: 42.00, productUrl: 'https://aliexpress.com', inStock: true, isSpecialDeal: true, shippingDaysEstimate: '10-14 days' }
+      { id: 'v-lucius-gmt39', storeName: 'Lucius Atelier', tier: 'premier', price: 98.00, productUrl: 'https://luciusatelier.com/products/gs-diver-watch-case-36mm-nh34-ready', inStock: true, shippingDaysEstimate: '3-5 days' },
+      { id: 'v-miuski-gmt39', storeName: 'Miuski Official Store (AliExpress)', tier: 'vetted-direct', price: 42.00, productUrl: 'https://www.aliexpress.us/w/wholesale-miuski-explorer-gmt-case-39mm.html', inStock: true, isSpecialDeal: true, shippingDaysEstimate: '10-14 days' }
     ]
   },
   {
     id: 'case-exp-36',
+    imageUrl: 'https://assets.assemble.watch/parts/cases/lucius_atelier/lucius_atelier_explorer_watch_case_36mm_v3.webp',
     name: 'Explorer Style 36mm Smooth Bezel Case',
     brand: 'Lucius Atelier',
     description: 'Proportionally perfect everyday sport/dress watch case. Slender 11.5mm profile with fixed mirror-polished bezel, screw-down crown at 3:00, and exhibition sapphire caseback.',
@@ -335,12 +340,13 @@ export const SEED_CASES: Case[] = [
     nativeMovementFamily: 'NH',
     lastScannedAt: '2026-11-14T18:00:00Z',
     vendors: [
-      { id: 'v-lucius-exp36', storeName: 'Lucius Atelier', tier: 'premier', price: 92.00, productUrl: 'https://luciusatelier.com', inStock: true, shippingDaysEstimate: '3-5 days' },
-      { id: 'v-miuski-exp36', storeName: 'Miuski Official Store (AliExpress)', tier: 'vetted-direct', price: 36.00, productUrl: 'https://aliexpress.com', inStock: true, isSpecialDeal: true, shippingDaysEstimate: '10-14 days' }
+      { id: 'v-lucius-exp36', storeName: 'Lucius Atelier', tier: 'premier', price: 92.00, productUrl: 'https://luciusatelier.com/products/explorer-watch-case-36mm-v3', inStock: true, shippingDaysEstimate: '3-5 days' },
+      { id: 'v-miuski-exp36', storeName: 'Miuski Official Store (AliExpress)', tier: 'vetted-direct', price: 36.00, productUrl: 'https://www.aliexpress.us/w/wholesale-miuski-explorer-watch-case-36mm.html', inStock: true, isSpecialDeal: true, shippingDaysEstimate: '10-14 days' }
     ]
   },
   {
     id: 'case-field-38',
+    imageUrl: 'https://assets.assemble.watch/parts/cases/namoki/namoki_nmk912_field_watch_case_bundle_olive_green_finish.webp',
     name: 'Khaki Field Style 38mm Matte Case',
     brand: 'Tandorio Horology',
     description: 'Military field watch case featuring a glare-free bead-blasted satin finish, drilled lug holes for quick strap changes, and a robust screw-down solid engraved caseback.',
@@ -363,11 +369,12 @@ export const SEED_CASES: Case[] = [
     nativeMovementFamily: 'NH',
     lastScannedAt: '2026-11-14T18:00:00Z',
     vendors: [
-      { id: 'v-tandorio-field', storeName: 'Tandorio Official (AliExpress)', tier: 'vetted-direct', price: 29.80, productUrl: 'https://aliexpress.com', inStock: true, isSpecialDeal: true, shippingDaysEstimate: '10-14 days' }
+      { id: 'v-tandorio-field', storeName: 'Tandorio Official (AliExpress)', tier: 'vetted-direct', price: 29.80, productUrl: 'https://www.aliexpress.us/w/wholesale-tandorio-field-watch-case-38mm.html', inStock: true, isSpecialDeal: true, shippingDaysEstimate: '10-14 days' }
     ]
   },
   {
     id: 'case-datejust-36',
+    imageUrl: 'https://assets.assemble.watch/parts/cases/lucius_atelier/lucius_atelier_datejust_watch_case_36mm.webp',
     name: 'Datejust Style 36mm Fluted Bezel Case',
     brand: 'Miuski Custom Works',
     description: 'Refined dress watch case with light-catching fluted stainless steel bezel, screw-down crown at 3:00, and exhibition screw-in caseback.',
@@ -390,11 +397,13 @@ export const SEED_CASES: Case[] = [
     nativeMovementFamily: 'NH',
     lastScannedAt: '2026-11-14T18:00:00Z',
     vendors: [
-      { id: 'v-miuski-dj36', storeName: 'Miuski Official Store (AliExpress)', tier: 'vetted-direct', price: 37.50, productUrl: 'https://aliexpress.com', inStock: true, isSpecialDeal: true, shippingDaysEstimate: '10-14 days' }
+      { id: 'v-miuski-dj36', storeName: 'Miuski Official Store (AliExpress)', tier: 'vetted-direct', price: 37.50, productUrl: 'https://www.aliexpress.us/w/wholesale-miuski-datejust-watch-case-36mm.html', inStock: true, isSpecialDeal: true, shippingDaysEstimate: '10-14 days' },
+      { id: 'v-lucius-dj36', storeName: 'Lucius Atelier', tier: 'premier', price: 95.00, productUrl: 'https://luciusatelier.com/products/datejust-watch-case-36mm', inStock: true, shippingDaysEstimate: '3-5 days' }
     ]
   },
   {
     id: 'case-flieger-40',
+    imageUrl: 'https://assets.assemble.watch/parts/cases/lucius_atelier/lucius_atelier_pilot_watch_case_34mm_ultra_thin_edition.webp',
     name: 'Type-A Pilot Flieger 40mm Satin Case',
     brand: 'Tandorio Horology',
     description: 'Aviation heritage pilot case featuring a fine satin finish, distinctive diamond onion crown for easy winding, and anti-reflective flat sapphire.',
@@ -417,44 +426,229 @@ export const SEED_CASES: Case[] = [
     nativeMovementFamily: 'NH',
     lastScannedAt: '2026-11-14T18:00:00Z',
     vendors: [
-      { id: 'v-tandorio-flieger', storeName: 'Tandorio Official (AliExpress)', tier: 'vetted-direct', price: 32.00, productUrl: 'https://aliexpress.com', inStock: true, isSpecialDeal: true, shippingDaysEstimate: '10-14 days' }
+      { id: 'v-tandorio-flieger', storeName: 'Tandorio Official (AliExpress)', tier: 'vetted-direct', price: 32.00, productUrl: 'https://www.aliexpress.us/w/wholesale-tandorio-flieger-watch-case-40mm.html', inStock: true, isSpecialDeal: true, shippingDaysEstimate: '10-14 days' }
     ]
   }
 ];
 
 export const SEED_DIALS: Dial[] = [
+  // --- 1. Iconic Art & Museum Dials ---
   {
-    id: 'dial-marine-master',
-    name: 'Marine Master Diver Dial - Matte Black',
-    brand: 'NamokiMODS',
-    description: 'Classic professional dive dial. High-contrast white geometric indices filled with ultra-bright Swiss Super-LumiNova BGW9 (ice blue night glow). Crisp date window at 3:00.',
+    id: 'dial-great-wave',
+    imageUrl: 'https://assets.assemble.watch/parts/dials/lucius_atelier/lucius_atelier_luminous_bgw9_the_great_wave_off_kanagawa_dial_no_date.webp',
+    name: 'The Great Wave off Kanagawa (Luminous BGW9)',
+    brand: 'Lucius Atelier',
+    description: 'Masterpiece horology dial featuring Hokusai\'s iconic woodblock print. Multi-layered luminous ink emits a brilliant ice-blue BGW9 glow in the dark.',
     category: 'dial',
-    basePrice: 38,
+    basePrice: 62,
     diameterMm: 28.5,
-    dialStyle: 'diver',
-    colorName: 'Matte Black',
-    colorHex: '#18181b',
+    dialStyle: 'art',
+    colorName: 'Sea Wave Blue',
+    colorHex: '#1e3a8a',
+    indicesStyle: 'minimal-markers',
+    lume: 'BGW9',
+    dialFeetPositions: ['3.0', '3.8'],
+    dateWindow: 'none',
+    texture: 'enamel',
+    lastScannedAt: '2026-11-14T18:00:00Z',
+    vendors: [
+      { id: 'v-lucius-great-wave', storeName: 'Lucius Atelier', tier: 'premier', price: 62.00, productUrl: 'https://luciusatelier.com/products/luminous-bgw9-the-great-wave-off-kanagawa-dial-no-date', inStock: true }
+    ]
+  },
+  {
+    id: 'dial-starry-night',
+    imageUrl: 'https://assets.assemble.watch/parts/dials/lucius_atelier/lucius_atelier_luminous_the_starry_night_dial_day_date.webp',
+    name: 'The Starry Night Luminous Dial',
+    brand: 'Lucius Atelier',
+    description: 'Vincent van Gogh inspired fine-art watch dial with celestial swirling brushstrokes and day/date apertures at 3:00. Fully luminescent starry sky.',
+    category: 'dial',
+    basePrice: 82,
+    diameterMm: 28.5,
+    dialStyle: 'art',
+    colorName: 'Cobalt Night Blue',
+    colorHex: '#172554',
     indicesStyle: 'dots-and-batons',
     lume: 'BGW9',
     dialFeetPositions: ['3.0', '3.8'],
     dateWindow: '3.0',
-    texture: 'matte',
+    texture: 'enamel',
     lastScannedAt: '2026-11-14T18:00:00Z',
     vendors: [
-      { id: 'v-namoki-mm-dial', storeName: 'NamokiMODS', tier: 'premier', price: 42.00, productUrl: 'https://namokimods.com', inStock: true },
-      { id: 'v-ds-dial-mm', storeName: 'DS-Watch Mod Store (AliExpress)', tier: 'vetted-direct', price: 18.50, productUrl: 'https://aliexpress.com', inStock: true, isSpecialDeal: true }
+      { id: 'v-lucius-starry-night', storeName: 'Lucius Atelier', tier: 'premier', price: 82.00, productUrl: 'https://luciusatelier.com/products/luminous-the-starry-night-dial-day-date', inStock: true }
     ]
   },
   {
-    id: 'dial-diver-blue',
-    name: 'Ocean Master Diver Dial - Sunburst Royal Blue',
-    brand: 'DLW Watches',
-    description: 'Captivating deep sunburst cobalt blue dial. Applied chrome index borders with brilliant BGW9 blue night illumination and date aperture at 3:00.',
+    id: 'dial-fine-wind-nodate',
+    imageUrl: 'https://assets.assemble.watch/parts/dials/lucius_atelier/lucius_atelier_fine_wind_clear_morning_dial_no_date.webp',
+    name: 'Fine Wind, Clear Morning (Red Fuji)',
+    brand: 'Lucius Atelier',
+    description: 'Hokusai\'s Red Fuji woodblock depiction in kiln-fired enamel with geometric clouds and towering crimson peak.',
     category: 'dial',
     basePrice: 39,
     diameterMm: 28.5,
+    dialStyle: 'art',
+    colorName: 'Crimson Fuji Red',
+    colorHex: '#991b1b',
+    indicesStyle: 'minimal-markers',
+    lume: 'None',
+    dialFeetPositions: ['3.0', '3.8'],
+    dateWindow: 'none',
+    texture: 'enamel',
+    lastScannedAt: '2026-11-14T18:00:00Z',
+    vendors: [
+      { id: 'v-lucius-fine-wind', storeName: 'Lucius Atelier', tier: 'premier', price: 39.00, productUrl: 'https://luciusatelier.com/products/fine-wind-clear-morning-dial-no-date', inStock: true }
+    ]
+  },
+  {
+    id: 'dial-fine-wind-date',
+    imageUrl: 'https://assets.assemble.watch/parts/dials/lucius_atelier/lucius_atelier_fine_wind_clear_morning_dial_date.webp',
+    name: 'Fine Wind, Clear Morning (Red Fuji - Date)',
+    brand: 'Lucius Atelier',
+    description: 'Enamel Red Fuji dial with bevel-framed date window at 3:00 matching Seiko NH35 datewheels.',
+    category: 'dial',
+    basePrice: 43,
+    diameterMm: 28.5,
+    dialStyle: 'art',
+    colorName: 'Crimson Fuji Red',
+    colorHex: '#991b1b',
+    indicesStyle: 'minimal-markers',
+    lume: 'None',
+    dialFeetPositions: ['3.0', '3.8'],
+    dateWindow: '3.0',
+    texture: 'enamel',
+    lastScannedAt: '2026-11-14T18:00:00Z',
+    vendors: [
+      { id: 'v-lucius-fine-wind-date', storeName: 'Lucius Atelier', tier: 'premier', price: 43.00, productUrl: 'https://luciusatelier.com/products/fine-wind-clear-morning-dial-date', inStock: true }
+    ]
+  },
+
+  // --- 2. Mother of Pearl & Luxury Gemstone Dials ---
+  {
+    id: 'dial-mop-natural-date',
+    imageUrl: 'https://assets.assemble.watch/parts/dials/lucius_atelier/lucius_atelier_mother_of_pearl_dial_natural_swarovski_edition_date.webp',
+    name: 'Mother of Pearl / Swarovski Edition (Date)',
+    brand: 'Lucius Atelier',
+    description: 'Natural iridescent oceanic mother of pearl wafer adorned with hand-set Swarovski crystal hour indices and beveled date frame.',
+    category: 'dial',
+    basePrice: 64,
+    diameterMm: 28.5,
+    dialStyle: 'dress',
+    colorName: 'Iridescent Pearl',
+    colorHex: '#f8fafc',
+    indicesStyle: 'dots-and-batons',
+    lume: 'BGW9',
+    dialFeetPositions: ['3.0', '3.8'],
+    dateWindow: '3.0',
+    texture: 'mother-of-pearl',
+    lastScannedAt: '2026-11-14T18:00:00Z',
+    vendors: [
+      { id: 'v-lucius-mop-date', storeName: 'Lucius Atelier', tier: 'premier', price: 64.00, productUrl: 'https://luciusatelier.com/products/mother-of-pearl-dial-natural-swarovski-edition-date', inStock: true }
+    ]
+  },
+  {
+    id: 'dial-mop-pink-nodate',
+    imageUrl: 'https://assets.assemble.watch/parts/dials/lucius_atelier/lucius_atelier_mother_of_pearl_dial_pink_swarovski_edition_no_date.webp',
+    name: 'Mother of Pearl Pink / Swarovski (No Date)',
+    brand: 'Lucius Atelier',
+    description: 'Natural rose-pink shimmering nacre dial with handset crystal hour markers and sterile clean layout.',
+    category: 'dial',
+    basePrice: 64,
+    diameterMm: 28.5,
+    dialStyle: 'dress',
+    colorName: 'Rose Pearl Pink',
+    colorHex: '#fbcfe8',
+    indicesStyle: 'dots-and-batons',
+    lume: 'BGW9',
+    dialFeetPositions: ['3.0', '3.8'],
+    dateWindow: 'none',
+    texture: 'mother-of-pearl',
+    lastScannedAt: '2026-11-14T18:00:00Z',
+    vendors: [
+      { id: 'v-lucius-mop-pink', storeName: 'Lucius Atelier', tier: 'premier', price: 64.00, productUrl: 'https://luciusatelier.com/products/mother-of-pearl-dial-pink-swarovski-edition-no-date', inStock: true }
+    ]
+  },
+  {
+    id: 'dial-bitcoin-24k',
+    imageUrl: 'https://assets.assemble.watch/parts/dials/lucius_atelier/lucius_atelier_bitcoin_dial_24k_gold.webp',
+    name: 'Bitcoin Dial - 24K Gold Plated',
+    brand: 'Lucius Atelier',
+    description: 'Deep-engraved proof-coin Bitcoin emblem plated in authentic 24-karat yellow gold with circuit board micro-traces.',
+    category: 'dial',
+    basePrice: 58,
+    diameterMm: 28.5,
+    dialStyle: 'dress',
+    colorName: '24K Yellow Gold',
+    colorHex: '#eab308',
+    indicesStyle: 'minimal-markers',
+    lume: 'None',
+    dialFeetPositions: ['3.0', '3.8'],
+    dateWindow: 'none',
+    texture: 'sunburst',
+    lastScannedAt: '2026-11-14T18:00:00Z',
+    vendors: [
+      { id: 'v-lucius-bitcoin-gold', storeName: 'Lucius Atelier', tier: 'premier', price: 58.00, productUrl: 'https://luciusatelier.com/products/bitcoin-dial-24k-gold', inStock: true }
+    ]
+  },
+  {
+    id: 'dial-bitcoin-black',
+    imageUrl: 'https://assets.assemble.watch/parts/dials/lucius_atelier/lucius_atelier_bitcoin_dial_vintage_black.webp',
+    name: 'Bitcoin Dial - Vintage Matte Black',
+    brand: 'Lucius Atelier',
+    description: 'Stealth black commemorative crypto dial with matte PVD backdrop and raised gold relief insignia.',
+    category: 'dial',
+    basePrice: 58,
+    diameterMm: 28.5,
+    dialStyle: 'dress',
+    colorName: 'Matte Obsidian Black',
+    colorHex: '#18181b',
+    indicesStyle: 'minimal-markers',
+    lume: 'None',
+    dialFeetPositions: ['3.0', '3.8'],
+    dateWindow: 'none',
+    texture: 'matte',
+    lastScannedAt: '2026-11-14T18:00:00Z',
+    vendors: [
+      { id: 'v-lucius-bitcoin-black', storeName: 'Lucius Atelier', tier: 'premier', price: 58.00, productUrl: 'https://luciusatelier.com/products/bitcoin-dial-vintage-black', inStock: true }
+    ]
+  },
+
+  // --- 3. Deep Enamel & Pitch Black Dials ---
+  {
+    id: 'dial-marine-master',
+    imageUrl: 'https://assets.assemble.watch/parts/dials/lucius_atelier/lucius_atelier_pitch_black_enamel_dial_date.webp',
+    name: 'Pitch Black Kiln Enamel Dial (Date)',
+    brand: 'Lucius Atelier',
+    description: 'Flawless glossy piano-black enamel dial with mirror finish. Applied chrome indices filled with ultra-bright Swiss Super-LumiNova BGW9 and framed date window @ 3:00.',
+    category: 'dial',
+    basePrice: 54,
+    diameterMm: 28.5,
     dialStyle: 'diver',
-    colorName: 'Sunburst Royal Blue',
+    colorName: 'Enamel Gloss Black',
+    colorHex: '#09090b',
+    indicesStyle: 'dots-and-batons',
+    lume: 'BGW9',
+    dialFeetPositions: ['3.0', '3.8'],
+    dateWindow: '3.0',
+    texture: 'enamel',
+    lastScannedAt: '2026-11-14T18:00:00Z',
+    vendors: [
+      { id: 'v-lucius-pitch-black', storeName: 'Lucius Atelier', tier: 'premier', price: 54.00, productUrl: 'https://luciusatelier.com/products/pitch-black-enamel-dial-date', inStock: true },
+      { id: 'v-ds-dial-mm', storeName: 'DS-Watch Mod Store (AliExpress)', tier: 'vetted-direct', price: 18.50, productUrl: 'https://www.aliexpress.us/w/wholesale-ds-watch-enamel-dial-28.5mm.html', inStock: true, isSpecialDeal: true }
+    ]
+  },
+
+  // --- 4. Luxury Sport Sunburst & Textured Dials ---
+  {
+    id: 'dial-sunburst-blue',
+    imageUrl: 'https://assets.assemble.watch/parts/dials/lucius_atelier/lucius_atelier_nautilus_deep_blue_sunburst_dial_date.webp',
+    name: 'Nautilus Deep Blue Sunburst Dial (Date)',
+    brand: 'Lucius Atelier',
+    description: 'Horizontal embossed grooved dial with deep navy sunburst radial brushing that shifts between midnight black and electric ocean blue in sunlight.',
+    category: 'dial',
+    basePrice: 68,
+    diameterMm: 28.5,
+    dialStyle: 'dress',
+    colorName: 'Deep Sunburst Blue',
     colorHex: '#1e3a8a',
     indicesStyle: 'dots-and-batons',
     lume: 'BGW9',
@@ -463,147 +657,21 @@ export const SEED_DIALS: Dial[] = [
     texture: 'sunburst',
     lastScannedAt: '2026-11-14T18:00:00Z',
     vendors: [
-      { id: 'v-dlw-blue-dial', storeName: 'DLW Watches', tier: 'premier', price: 44.00, productUrl: 'https://dlwwatches.com', inStock: true },
-      { id: 'v-miuski-blue-dial', storeName: 'Miuski Official Store (AliExpress)', tier: 'vetted-direct', price: 19.00, productUrl: 'https://aliexpress.com', inStock: true, isSpecialDeal: true }
+      { id: 'v-lucius-nautilus-blue', storeName: 'Lucius Atelier', tier: 'premier', price: 68.00, productUrl: 'https://luciusatelier.com/products/nautilus-deep-blue-sunburst-dial-date', inStock: true },
+      { id: 'v-miuski-blue-dial', storeName: 'Miuski Official Store (AliExpress)', tier: 'vetted-direct', price: 19.00, productUrl: 'https://www.aliexpress.us/w/wholesale-miuski-nautilus-blue-dial.html', inStock: true, isSpecialDeal: true }
     ]
   },
   {
-    id: 'dial-diver-green',
-    name: 'Emerald Diver Dial - Sunburst Malachite Green',
-    brand: 'Caroline Mod Store',
-    description: 'Rich emerald green sunburst finish inspired by legendary luxury dive watches. Crisp 3:00 date window and applied polished indices.',
-    category: 'dial',
-    basePrice: 32,
-    diameterMm: 28.5,
-    dialStyle: 'diver',
-    colorName: 'Emerald Green',
-    colorHex: '#064e3b',
-    indicesStyle: 'dots-and-batons',
-    lume: 'BGW9',
-    dialFeetPositions: ['3.0', '3.8'],
-    dateWindow: '3.0',
-    texture: 'sunburst',
-    lastScannedAt: '2026-11-14T18:00:00Z',
-    vendors: [
-      { id: 'v-caroline-green-dial', storeName: 'Caroline Mod Store (AliExpress)', tier: 'vetted-direct', price: 21.50, productUrl: 'https://aliexpress.com', inStock: true, isSpecialDeal: true }
-    ]
-  },
-  {
-    id: 'dial-explorer-navy',
-    name: 'Explorer 3-6-9 Dial - Sunburst Navy',
+    id: 'dial-arctic-white',
+    imageUrl: 'https://assets.assemble.watch/parts/dials/lucius_atelier/lucius_atelier_nautilus_arctic_white_dial_date.webp',
+    name: 'Nautilus Arctic White Textured Dial (Date)',
     brand: 'Lucius Atelier',
-    description: 'Iconic mountaineering aesthetic. Deep navy blue sunburst surface with applied mirror-polished 3-6-9 numerals and baton indices. Pure sterile time-only design with no date cut-out.',
+    description: 'Crisp glacial-white horizontal bar relief dial with blackened indices and date frame offering maximum contrast.',
     category: 'dial',
-    basePrice: 48,
-    diameterMm: 28.5,
-    dialStyle: 'explorer',
-    colorName: 'Sunburst Navy',
-    colorHex: '#0c2238',
-    indicesStyle: 'explorer-369',
-    lume: 'BGW9',
-    dialFeetPositions: ['3.0', '3.8'],
-    dateWindow: 'none',
-    texture: 'sunburst',
-    lastScannedAt: '2026-11-14T18:00:00Z',
-    vendors: [
-      { id: 'v-lucius-exp-dial', storeName: 'Lucius Atelier', tier: 'premier', price: 54.00, productUrl: 'https://luciusatelier.com', inStock: true },
-      { id: 'v-miuski-exp-dial', storeName: 'Miuski Official Store (AliExpress)', tier: 'vetted-direct', price: 21.00, productUrl: 'https://aliexpress.com', inStock: true, isSpecialDeal: true }
-    ]
-  },
-  {
-    id: 'dial-explorer-black',
-    name: 'Explorer 3-6-9 Dial - Matte Tactical Black',
-    brand: 'Tandorio Horology',
-    description: 'Understated matte black tool watch dial with crisp applied Arabic 3-6-9 numerals and lumed indices. Clean sterile no-date dial.',
-    category: 'dial',
-    basePrice: 28,
-    diameterMm: 28.5,
-    dialStyle: 'explorer',
-    colorName: 'Matte Black',
-    colorHex: '#171717',
-    indicesStyle: 'explorer-369',
-    lume: 'BGW9',
-    dialFeetPositions: ['3.0', '3.8'],
-    dateWindow: 'none',
-    texture: 'matte',
-    lastScannedAt: '2026-11-14T18:00:00Z',
-    vendors: [
-      { id: 'v-tandorio-exp-black', storeName: 'Tandorio Official (AliExpress)', tier: 'vetted-direct', price: 17.50, productUrl: 'https://aliexpress.com', inStock: true, isSpecialDeal: true }
-    ]
-  },
-  {
-    id: 'dial-field-military',
-    name: 'Khaki Military Field Dial - Matte Black 24H',
-    brand: 'Tandorio Horology',
-    description: 'Functional 12-hour and inner 24-hour military scale. Printed in authentic vintage cream patina with matching C3 glow. Fitted with date window at 3:00.',
-    category: 'dial',
-    basePrice: 28,
-    diameterMm: 28.5,
-    dialStyle: 'field',
-    colorName: 'Tactical Black',
-    colorHex: '#121316',
-    indicesStyle: 'field-arabic',
-    lume: 'Vintage',
-    dialFeetPositions: ['3.0'],
-    dateWindow: '3.0',
-    texture: 'matte',
-    lastScannedAt: '2026-11-14T18:00:00Z',
-    vendors: [
-      { id: 'v-tandorio-field-dial', storeName: 'Tandorio Official (AliExpress)', tier: 'vetted-direct', price: 16.90, productUrl: 'https://aliexpress.com', inStock: true, isSpecialDeal: true }
-    ]
-  },
-  {
-    id: 'dial-field-olive',
-    name: 'Tactical Field Dial - Matte Olive Drab',
-    brand: 'Tokeilab',
-    description: 'Military spec olive drab dial with crisp stencil numerals. Sterile no-date configuration specifically engineered for time-only field builds like the NH38 or VH31.',
-    category: 'dial',
-    basePrice: 34,
-    diameterMm: 28.5,
-    dialStyle: 'field',
-    colorName: 'Olive Drab',
-    colorHex: '#283618',
-    indicesStyle: 'field-arabic',
-    lume: 'C3',
-    dialFeetPositions: ['3.0', '3.8'],
-    dateWindow: 'none',
-    texture: 'matte',
-    lastScannedAt: '2026-11-14T18:00:00Z',
-    vendors: [
-      { id: 'v-tokeilab-field-olive', storeName: 'Tokeilab', tier: 'premier', price: 36.00, productUrl: 'https://tokeilab.com', inStock: true }
-    ]
-  },
-  {
-    id: 'dial-tiffany-sunburst',
-    name: 'Artisan Turquoise "Tiffany" Dial',
-    brand: 'Caroline Mod Store',
-    description: 'Striking pastel turquoise sunburst dial that catches the light brilliantly. Time-only design with polished applied indices and BGW9 lume.',
-    category: 'dial',
-    basePrice: 32,
-    diameterMm: 28.5,
-    dialStyle: 'minimalist',
-    colorName: 'Tiffany Turquoise',
-    colorHex: '#0abab5',
-    indicesStyle: 'minimal-markers',
-    lume: 'BGW9',
-    dialFeetPositions: ['3.0', '3.8'],
-    dateWindow: 'none',
-    texture: 'sunburst',
-    lastScannedAt: '2026-11-14T18:00:00Z',
-    vendors: [
-      { id: 'v-caroline-tiffany', storeName: 'Caroline Mod Store (AliExpress)', tier: 'vetted-direct', price: 22.50, productUrl: 'https://aliexpress.com', inStock: true, isSpecialDeal: true }
-    ]
-  },
-  {
-    id: 'dial-birch-white',
-    name: 'Grand Snowflake Textured Dial - Arctic White',
-    brand: 'Lucius Atelier',
-    description: 'Exquisite 3D vertical bark texture reminiscent of snow-covered birch trees. Mirror-finished beveled indices and crisp 3:00 date aperture.',
-    category: 'dial',
-    basePrice: 52,
+    basePrice: 71,
     diameterMm: 28.5,
     dialStyle: 'dress',
-    colorName: 'Arctic White',
+    colorName: 'Arctic Polar White',
     colorHex: '#f8fafc',
     indicesStyle: 'dots-and-batons',
     lume: 'BGW9',
@@ -612,20 +680,403 @@ export const SEED_DIALS: Dial[] = [
     texture: 'waffle',
     lastScannedAt: '2026-11-14T18:00:00Z',
     vendors: [
-      { id: 'v-lucius-birch', storeName: 'Lucius Atelier', tier: 'premier', price: 62.00, productUrl: 'https://luciusatelier.com', inStock: true }
+      { id: 'v-lucius-nautilus-white', storeName: 'Lucius Atelier', tier: 'premier', price: 71.00, productUrl: 'https://luciusatelier.com/products/nautilus-arctic-white-dial-date', inStock: true }
     ]
   },
   {
-    id: 'dial-meteorite-raw',
-    name: 'Muonionalusta Real Meteorite Slice Dial',
+    id: 'dial-turquoise-tiffany',
+    imageUrl: 'https://assets.assemble.watch/parts/dials/lucius_atelier/lucius_atelier_nautilus_turquoise_dial_no_date.webp',
+    name: 'Nautilus Tiffany Turquoise Dial (No Date)',
     brand: 'Lucius Atelier',
-    description: 'Genuine Swedish meteorite slice exhibiting distinctive natural Widmanstätten crystalline cross-hatch structures. Sterile time-only aesthetic with polished indices.',
+    description: 'Hypnotic robins-egg turquoise blue dial with horizontal texture ribs and pure sterile layout.',
     category: 'dial',
-    basePrice: 85,
+    basePrice: 68,
     diameterMm: 28.5,
     dialStyle: 'dress',
-    colorName: 'Natural Metallic Silver',
-    colorHex: '#94a3b8',
+    colorName: 'Tiffany Turquoise',
+    colorHex: '#2dd4bf',
+    indicesStyle: 'dots-and-batons',
+    lume: 'BGW9',
+    dialFeetPositions: ['3.0', '3.8'],
+    dateWindow: 'none',
+    texture: 'waffle',
+    lastScannedAt: '2026-11-14T18:00:00Z',
+    vendors: [
+      { id: 'v-lucius-tiffany', storeName: 'Lucius Atelier', tier: 'premier', price: 68.00, productUrl: 'https://luciusatelier.com/products/nautilus-turquoise-dial-no-date', inStock: true },
+      { id: 'v-caroline-tiffany', storeName: 'Caroline Mod Store (AliExpress)', tier: 'vetted-direct', price: 22.50, productUrl: 'https://www.aliexpress.us/w/wholesale-caroline-tiffany-blue-dial.html', inStock: true, isSpecialDeal: true }
+    ]
+  },
+  {
+    id: 'dial-hemicube-guilloche',
+    imageUrl: 'https://assets.assemble.watch/parts/dials/lucius_atelier/lucius_atelier_hemicube_dial_no_date.webp',
+    name: 'Hemicube 3D Isometric Guilloché Dial',
+    brand: 'Lucius Atelier',
+    description: 'High-complication CNC isometric cubic guilloché pattern that bends light in three dimensions across alternating satin facets.',
+    category: 'dial',
+    basePrice: 61,
+    diameterMm: 28.5,
+    dialStyle: 'dress',
+    colorName: 'Charcoal Guilloché',
+    colorHex: '#27272a',
+    indicesStyle: 'minimal-markers',
+    lume: 'BGW9',
+    dialFeetPositions: ['3.0', '3.8'],
+    dateWindow: 'none',
+    texture: 'guilloche',
+    lastScannedAt: '2026-11-14T18:00:00Z',
+    vendors: [
+      { id: 'v-lucius-hemicube', storeName: 'Lucius Atelier', tier: 'premier', price: 61.00, productUrl: 'https://luciusatelier.com/products/hemicube-dial-no-date', inStock: true }
+    ]
+  },
+  {
+    id: 'dial-blank-brass',
+    imageUrl: 'https://assets.assemble.watch/parts/dials/lucius_atelier/lucius_atelier_blank_brass_dial.webp',
+    name: 'Blank Raw Brass Sunburst Dial',
+    brand: 'Lucius Atelier',
+    description: 'Solid natural raw brass dial blank featuring heavy circular sunburst brushing. Ideal for custom patination or minimalist builds.',
+    category: 'dial',
+    basePrice: 20,
+    diameterMm: 28.5,
+    dialStyle: 'minimalist',
+    colorName: 'Warm Raw Brass',
+    colorHex: '#ca8a04',
+    indicesStyle: 'minimal-markers',
+    lume: 'None',
+    dialFeetPositions: ['3.0', '3.8'],
+    dateWindow: 'none',
+    texture: 'sunburst',
+    lastScannedAt: '2026-11-14T18:00:00Z',
+    vendors: [
+      { id: 'v-lucius-brass', storeName: 'Lucius Atelier', tier: 'premier', price: 20.00, productUrl: 'https://luciusatelier.com/products/blank-brass-dial', inStock: true }
+    ]
+  },
+
+  // --- 5. Explorer & Heritage Dials ---
+  {
+    id: 'dial-explorer-1016-nodate',
+    imageUrl: 'https://assets.assemble.watch/parts/dials/lucius_atelier/lucius_atelier_explorer_1016_dial_no_date.webp',
+    name: 'Explorer 1016 Vintage Dial (No Date)',
+    brand: 'Lucius Atelier',
+    description: 'The golden age horology benchmark. Distinctive 3-6-9 Arabic font typography, printed gilt minute track, and vintage patinated lume markers.',
+    category: 'dial',
+    basePrice: 52,
+    diameterMm: 28.5,
+    dialStyle: 'explorer',
+    colorName: 'Satin Black',
+    colorHex: '#18181b',
+    indicesStyle: 'explorer-369',
+    lume: 'Vintage',
+    dialFeetPositions: ['3.0', '3.8'],
+    dateWindow: 'none',
+    texture: 'matte',
+    lastScannedAt: '2026-11-14T18:00:00Z',
+    vendors: [
+      { id: 'v-lucius-exp1016', storeName: 'Lucius Atelier', tier: 'premier', price: 52.00, productUrl: 'https://luciusatelier.com/products/explorer-1016-dial-no-date', inStock: true },
+      { id: 'v-tandorio-exp-black', storeName: 'Tandorio Official (AliExpress)', tier: 'vetted-direct', price: 17.50, productUrl: 'https://www.aliexpress.us/w/wholesale-tandorio-1016-dial-28.5mm.html', inStock: true, isSpecialDeal: true }
+    ]
+  },
+  {
+    id: 'dial-explorer-1016-date',
+    imageUrl: 'https://assets.assemble.watch/parts/dials/lucius_atelier/lucius_atelier_explorer_1016_dial_date.webp',
+    name: 'Explorer 1016 Gilt Dial (Date Window)',
+    brand: 'Lucius Atelier',
+    description: 'Vintage 3-6-9 dial with aperture for standard NH35 date calendar wheel at 3:00.',
+    category: 'dial',
+    basePrice: 52,
+    diameterMm: 28.5,
+    dialStyle: 'explorer',
+    colorName: 'Vintage Gilt Black',
+    colorHex: '#18181b',
+    indicesStyle: 'explorer-369',
+    lume: 'Vintage',
+    dialFeetPositions: ['3.0', '3.8'],
+    dateWindow: '3.0',
+    texture: 'matte',
+    lastScannedAt: '2026-11-14T18:00:00Z',
+    vendors: [
+      { id: 'v-lucius-exp-date', storeName: 'Lucius Atelier', tier: 'premier', price: 52.00, productUrl: 'https://luciusatelier.com/products/explorer-1016-dial-date', inStock: true }
+    ]
+  },
+  {
+    id: 'dial-nautical-exp-v2',
+    imageUrl: 'https://assets.assemble.watch/parts/dials/lucius_atelier/lucius_atelier_nautical_explorer_dial_v2_no_date.webp',
+    name: 'Nautical Explorer Dial v2 (No Date)',
+    brand: 'Lucius Atelier',
+    description: 'A blend of nautical diver markers and iconic 3-6-9 Explorer geometry with Swiss BGW9 lume.',
+    category: 'dial',
+    basePrice: 52,
+    diameterMm: 28.5,
+    dialStyle: 'explorer',
+    colorName: 'Matte Jet Black',
+    colorHex: '#18181b',
+    indicesStyle: 'explorer-369',
+    lume: 'BGW9',
+    dialFeetPositions: ['3.0', '3.8'],
+    dateWindow: 'none',
+    texture: 'matte',
+    lastScannedAt: '2026-11-14T18:00:00Z',
+    vendors: [
+      { id: 'v-lucius-nautical-exp', storeName: 'Lucius Atelier', tier: 'premier', price: 52.00, productUrl: 'https://luciusatelier.com/products/nautical-explorer-dial-v2-no-date', inStock: true }
+    ]
+  },
+  {
+    id: 'dial-1908-silver',
+    imageUrl: 'https://assets.assemble.watch/parts/dials/lucius_atelier/lucius_atelier_1908_dial_silver_indices_no_date.webp',
+    name: '1908 Dress Dial - Silver Faceted Indices',
+    brand: 'Lucius Atelier',
+    description: 'Haute horlogerie dress watch dial with rhodium-plated faceted arrow markers and printed minute rail track.',
+    category: 'dial',
+    basePrice: 55,
+    diameterMm: 28.5,
+    dialStyle: 'dress',
+    colorName: 'Opaline Silver',
+    colorHex: '#f1f5f9',
+    indicesStyle: 'minimal-markers',
+    lume: 'None',
+    dialFeetPositions: ['3.0', '3.8'],
+    dateWindow: 'none',
+    texture: 'enamel',
+    lastScannedAt: '2026-11-14T18:00:00Z',
+    vendors: [
+      { id: 'v-lucius-1908-silver', storeName: 'Lucius Atelier', tier: 'premier', price: 55.00, productUrl: 'https://luciusatelier.com/products/1908-dial-silver-indices-no-date', inStock: true }
+    ]
+  },
+  {
+    id: 'dial-1908-gold',
+    imageUrl: 'https://assets.assemble.watch/parts/dials/lucius_atelier/lucius_atelier_1908_dial_yellow_gold_indices_no_date.webp',
+    name: '1908 Dress Dial - Yellow Gold Indices',
+    brand: 'Lucius Atelier',
+    description: 'Dress watch dial with 18k yellow gold-plated faceted arrow indices and crisp railroad outer track.',
+    category: 'dial',
+    basePrice: 55,
+    diameterMm: 28.5,
+    dialStyle: 'dress',
+    colorName: 'Champagne Ivory',
+    colorHex: '#fef3c7',
+    indicesStyle: 'minimal-markers',
+    lume: 'None',
+    dialFeetPositions: ['3.0', '3.8'],
+    dateWindow: 'none',
+    texture: 'enamel',
+    lastScannedAt: '2026-11-14T18:00:00Z',
+    vendors: [
+      { id: 'v-lucius-1908-gold', storeName: 'Lucius Atelier', tier: 'premier', price: 55.00, productUrl: 'https://luciusatelier.com/products/1908-dial-yellow-gold-indices-no-date', inStock: true }
+    ]
+  },
+
+  // --- 6. Namoki Vintage & Tool Dials ---
+  {
+    id: 'dial-namoki-62mas-grey',
+    imageUrl: 'https://assets.assemble.watch/parts/dials/namoki/namoki_watch_dial_62mas_grey.webp',
+    name: '62MAS Sunburst Charcoal Grey Dial',
+    brand: 'NamokiMODS',
+    description: 'Tribute to Seiko\'s original 1965 diver (6217-8001). Radiant charcoal sunburst finish with raised polished rectangle indices and date at 3:00.',
+    category: 'dial',
+    basePrice: 42,
+    diameterMm: 28.5,
+    dialStyle: 'diver',
+    colorName: 'Sunburst Charcoal',
+    colorHex: '#475569',
+    indicesStyle: 'dots-and-batons',
+    lume: 'BGW9',
+    dialFeetPositions: ['3.0', '3.8'],
+    dateWindow: '3.0',
+    texture: 'sunburst',
+    lastScannedAt: '2026-11-14T18:00:00Z',
+    vendors: [
+      { id: 'v-namoki-62mas-grey', storeName: 'NamokiMODS', tier: 'premier', price: 42.00, productUrl: 'https://www.namokimods.com/products/watch-dial-62mas-grey', inStock: true }
+    ]
+  },
+  {
+    id: 'dial-namoki-62mas-blue',
+    imageUrl: 'https://assets.assemble.watch/parts/dials/namoki/namoki_watch_dial_62mas_sunburst_blue.webp',
+    name: '62MAS Sunburst Pacific Blue Dial',
+    brand: 'NamokiMODS',
+    description: 'Rich maritime sunburst blue diver dial with rectangular applied lume markers and polished chamfers.',
+    category: 'dial',
+    basePrice: 42,
+    diameterMm: 28.5,
+    dialStyle: 'diver',
+    colorName: 'Sunburst Pacific Blue',
+    colorHex: '#1d4ed8',
+    indicesStyle: 'dots-and-batons',
+    lume: 'BGW9',
+    dialFeetPositions: ['3.0', '3.8'],
+    dateWindow: '3.0',
+    texture: 'sunburst',
+    lastScannedAt: '2026-11-14T18:00:00Z',
+    vendors: [
+      { id: 'v-namoki-62mas-blue', storeName: 'NamokiMODS', tier: 'premier', price: 42.00, productUrl: 'https://www.namokimods.com/products/watch-dial-62mas-sunburst-blue', inStock: true }
+    ]
+  },
+  {
+    id: 'dial-namoki-alpine-black',
+    imageUrl: 'https://assets.assemble.watch/parts/dials/namoki/namoki_watch_dial_alpine_black.webp',
+    name: 'Alpine Sunburst Onyx Black Dial',
+    brand: 'NamokiMODS',
+    description: 'Adventure sports dial with deep circular sunburst texture and triangular indices.',
+    category: 'dial',
+    basePrice: 40,
+    diameterMm: 28.5,
+    dialStyle: 'explorer',
+    colorName: 'Onyx Black',
+    colorHex: '#18181b',
+    indicesStyle: 'dots-and-batons',
+    lume: 'BGW9',
+    dialFeetPositions: ['3.0', '3.8'],
+    dateWindow: '3.0',
+    texture: 'sunburst',
+    lastScannedAt: '2026-11-14T18:00:00Z',
+    vendors: [
+      { id: 'v-namoki-alpine-black', storeName: 'NamokiMODS', tier: 'premier', price: 40.00, productUrl: 'https://www.namokimods.com/products/watch-dial-alpine-black', inStock: true }
+    ]
+  },
+  {
+    id: 'dial-namoki-alpine-blue',
+    imageUrl: 'https://assets.assemble.watch/parts/dials/namoki/namoki_watch_dial_alpine_blue.webp',
+    name: 'Alpine Sunburst Glacier Blue Dial',
+    brand: 'NamokiMODS',
+    description: 'Glacial blue sunburst adventure dial with crisp Swiss lume.',
+    category: 'dial',
+    basePrice: 40,
+    diameterMm: 28.5,
+    dialStyle: 'explorer',
+    colorName: 'Glacier Blue',
+    colorHex: '#38bdf8',
+    indicesStyle: 'dots-and-batons',
+    lume: 'BGW9',
+    dialFeetPositions: ['3.0', '3.8'],
+    dateWindow: '3.0',
+    texture: 'sunburst',
+    lastScannedAt: '2026-11-14T18:00:00Z',
+    vendors: [
+      { id: 'v-namoki-alpine-blue', storeName: 'NamokiMODS', tier: 'premier', price: 40.00, productUrl: 'https://www.namokimods.com/products/watch-dial-alpine-blue', inStock: true }
+    ]
+  },
+  {
+    id: 'dial-namoki-106-black',
+    imageUrl: 'https://assets.assemble.watch/parts/dials/namoki/namoki_watch_dial_106_minimal_tool_dial_black.webp',
+    name: '106 Minimal Tool Dial (Matte Black)',
+    brand: 'NamokiMODS',
+    description: 'Clean utilitarian tool watch dial with baton indices, high-legibility crosshair layout, and date window.',
+    category: 'dial',
+    basePrice: 38,
+    diameterMm: 28.5,
+    dialStyle: 'minimalist',
+    colorName: 'Matte Black',
+    colorHex: '#18181b',
+    indicesStyle: 'minimal-markers',
+    lume: 'BGW9',
+    dialFeetPositions: ['3.0', '3.8'],
+    dateWindow: '3.0',
+    texture: 'matte',
+    lastScannedAt: '2026-11-14T18:00:00Z',
+    vendors: [
+      { id: 'v-namoki-106-black', storeName: 'NamokiMODS', tier: 'premier', price: 38.00, productUrl: 'https://www.namokimods.com/products/watch-dial-106-minimal-tool-dial-black', inStock: true }
+    ]
+  },
+  {
+    id: 'dial-namoki-107-white',
+    imageUrl: 'https://assets.assemble.watch/parts/dials/namoki/namoki_watch_dial_107_minimal_tool_dial_white.webp',
+    name: '107 Minimal Tool Dial (Stark White)',
+    brand: 'NamokiMODS',
+    description: 'Ultra-clean stark white dial with jet-black printed indices and date window.',
+    category: 'dial',
+    basePrice: 38,
+    diameterMm: 28.5,
+    dialStyle: 'minimalist',
+    colorName: 'Stark White',
+    colorHex: '#f8fafc',
+    indicesStyle: 'minimal-markers',
+    lume: 'BGW9',
+    dialFeetPositions: ['3.0', '3.8'],
+    dateWindow: '3.0',
+    texture: 'matte',
+    lastScannedAt: '2026-11-14T18:00:00Z',
+    vendors: [
+      { id: 'v-namoki-107-white', storeName: 'NamokiMODS', tier: 'premier', price: 38.00, productUrl: 'https://www.namokimods.com/products/watch-dial-107-minimal-tool-dial-white', inStock: true }
+    ]
+  },
+  {
+    id: 'dial-namoki-108-silver',
+    imageUrl: 'https://assets.assemble.watch/parts/dials/namoki/namoki_watch_dial_108_minimal_tool_dial_sunburst_silver.webp',
+    name: '108 Sector Sunburst Silver Dial',
+    brand: 'NamokiMODS',
+    description: 'Vintage 1940s scientific sector dial with two-tone concentric rings and radial sunburst finish.',
+    category: 'dial',
+    basePrice: 42,
+    diameterMm: 28.5,
+    dialStyle: 'dress',
+    colorName: 'Sunburst Silver',
+    colorHex: '#e2e8f0',
+    indicesStyle: 'minimal-markers',
+    lume: 'None',
+    dialFeetPositions: ['3.0', '3.8'],
+    dateWindow: 'none',
+    texture: 'sunburst',
+    lastScannedAt: '2026-11-14T18:00:00Z',
+    vendors: [
+      { id: 'v-namoki-108-silver', storeName: 'NamokiMODS', tier: 'premier', price: 42.00, productUrl: 'https://www.namokimods.com/products/watch-dial-108-minimal-tool-dial-sunburst-silver', inStock: true }
+    ]
+  },
+  {
+    id: 'dial-namoki-af001-light',
+    imageUrl: 'https://assets.assemble.watch/parts/dials/namoki/namoki_namoki_x_watch_dial_af_001_light.webp',
+    name: 'Namoki x AF-001 Aviator Light Dial',
+    brand: 'NamokiMODS',
+    description: 'Limited collaborative aviation instrument dial with cockpit altimeter typography.',
+    category: 'dial',
+    basePrice: 45,
+    diameterMm: 28.5,
+    dialStyle: 'flieger',
+    colorName: 'Sand Beige',
+    colorHex: '#fef08a',
+    indicesStyle: 'flieger-a',
+    lume: 'Vintage',
+    dialFeetPositions: ['3.0', '3.8'],
+    dateWindow: 'none',
+    texture: 'matte',
+    lastScannedAt: '2026-11-14T18:00:00Z',
+    vendors: [
+      { id: 'v-namoki-af001-light', storeName: 'NamokiMODS', tier: 'premier', price: 45.00, productUrl: 'https://www.namokimods.com/products/namoki-x-watch-dial-af-001-light', inStock: true }
+    ]
+  },
+  {
+    id: 'dial-namoki-af001-stealth',
+    imageUrl: 'https://assets.assemble.watch/parts/dials/namoki/namoki_namoki_x_watch_dial_af_001_stealth.webp',
+    name: 'Namoki x AF-001 Aviator Stealth Dial',
+    brand: 'NamokiMODS',
+    description: 'Tactical blacked-out aviator instrument dial with stealth grey indices.',
+    category: 'dial',
+    basePrice: 45,
+    diameterMm: 28.5,
+    dialStyle: 'flieger',
+    colorName: 'Stealth Black',
+    colorHex: '#18181b',
+    indicesStyle: 'flieger-a',
+    lume: 'BGW9',
+    dialFeetPositions: ['3.0', '3.8'],
+    dateWindow: 'none',
+    texture: 'matte',
+    lastScannedAt: '2026-11-14T18:00:00Z',
+    vendors: [
+      { id: 'v-namoki-af001-stealth', storeName: 'NamokiMODS', tier: 'premier', price: 45.00, productUrl: 'https://www.namokimods.com/products/namoki-x-watch-dial-af-001-stealth', inStock: true }
+    ]
+  },
+
+  // --- 7. Exotic Custom Artist Dials ---
+  {
+    id: 'dial-mission-mars',
+    imageUrl: 'https://assets.assemble.watch/parts/dials/custom/custom_daneceo_mission_on_mars_dark.webp',
+    name: 'Mission to Mars - Dark Meteorite Dial',
+    brand: 'daneCEO Horology',
+    description: 'Custom astronomical space mod dial with lunar crater topographic texture and Mars exploration motif.',
+    category: 'dial',
+    basePrice: 75,
+    diameterMm: 28.5,
+    dialStyle: 'art',
+    colorName: 'Space Dark Charcoal',
+    colorHex: '#27272a',
     indicesStyle: 'minimal-markers',
     lume: 'BGW9',
     dialFeetPositions: ['3.0', '3.8'],
@@ -633,49 +1084,29 @@ export const SEED_DIALS: Dial[] = [
     texture: 'meteorite',
     lastScannedAt: '2026-11-14T18:00:00Z',
     vendors: [
-      { id: 'v-lucius-meteorite', storeName: 'Lucius Atelier', tier: 'premier', price: 95.00, productUrl: 'https://luciusatelier.com', inStock: true }
+      { id: 'v-daneceo-mars', storeName: 'daneCEO Studio', tier: 'premier', price: 75.00, productUrl: 'https://www.instagram.com/the_watch_virtuoso/', inStock: true }
     ]
   },
   {
-    id: 'dial-linen-silver',
-    name: 'Vintage Linen Textured Dial - Champagne Silver',
-    brand: 'NamokiMODS',
-    description: 'Delicate criss-cross woven fabric linen pattern inspired by mid-century luxury dress watches. Polished faceted indices and framed 3:00 date aperture.',
+    id: 'dial-up-custom',
+    imageUrl: 'https://assets.assemble.watch/parts/dials/custom/custom_daneceo_up.webp',
+    name: 'Up! Multi-Color Balloon Artist Dial',
+    brand: 'daneCEO Horology',
+    description: 'Playful haute horlogerie custom artisan dial featuring vibrant micro-painted polychromatic balloons against a cloud-white sky.',
     category: 'dial',
-    basePrice: 44,
+    basePrice: 75,
     diameterMm: 28.5,
-    dialStyle: 'dress',
-    colorName: 'Champagne Silver',
-    colorHex: '#e2e8f0',
+    dialStyle: 'art',
+    colorName: 'Sky White / Multi',
+    colorHex: '#f8fafc',
     indicesStyle: 'minimal-markers',
-    lume: 'BGW9',
+    lume: 'None',
     dialFeetPositions: ['3.0', '3.8'],
-    dateWindow: '3.0',
-    texture: 'linen',
-    lastScannedAt: '2026-11-14T18:00:00Z',
-    vendors: [
-      { id: 'v-namoki-linen', storeName: 'NamokiMODS', tier: 'premier', price: 48.00, productUrl: 'https://namokimods.com', inStock: true }
-    ]
-  },
-  {
-    id: 'dial-flieger-a',
-    name: 'Luftwaffe Baumuster Type-A Pilot Dial',
-    brand: 'Tandorio Horology',
-    description: 'Authentic 1940s aviator observation dial with prominent 12:00 triangle and dots marker. Highly legible sterile layout.',
-    category: 'dial',
-    basePrice: 29,
-    diameterMm: 28.5,
-    dialStyle: 'flieger',
-    colorName: 'Matte Pilot Black',
-    colorHex: '#0f172a',
-    indicesStyle: 'field-arabic',
-    lume: 'C3',
-    dialFeetPositions: ['3.0'],
     dateWindow: 'none',
-    texture: 'matte',
+    texture: 'enamel',
     lastScannedAt: '2026-11-14T18:00:00Z',
     vendors: [
-      { id: 'v-tandorio-flieger-dial', storeName: 'Tandorio Official (AliExpress)', tier: 'vetted-direct', price: 18.00, productUrl: 'https://aliexpress.com', inStock: true, isSpecialDeal: true }
+      { id: 'v-daneceo-up', storeName: 'daneCEO Studio', tier: 'premier', price: 75.00, productUrl: 'https://www.instagram.com/the_watch_virtuoso/', inStock: true }
     ]
   }
 ];
@@ -683,178 +1114,335 @@ export const SEED_DIALS: Dial[] = [
 export const SEED_HANDS: Hands[] = [
   {
     id: 'hands-mercedes-nh',
-    name: 'Classic Mercedes Hand Set - Polished Silver (NH Automatic)',
-    brand: 'NamokiMODS',
-    description: 'Iconic Submariner style hands with circular hour hand tri-spoke. Manufactured to exact Seiko NH tolerances (1.50/0.89/0.21mm). Swiss BGW9 lume.',
+    handComponents: {
+      hour: 'https://assets.assemble.watch/parts/hands/lucius_atelier/lucius_atelier_grand_seiko_dauphine_hands_brushed_top_silver_hour.webp',
+      minute: 'https://assets.assemble.watch/parts/hands/lucius_atelier/lucius_atelier_grand_seiko_dauphine_hands_brushed_top_silver_minute.webp',
+      second: 'https://assets.assemble.watch/parts/hands/lucius_atelier/lucius_atelier_grand_seiko_dauphine_hands_brushed_top_silver_second.webp'
+    },
+    name: 'Grand Seiko Dauphine Hands - Brushed Top Silver',
+    brand: 'Lucius Atelier',
+    description: 'Razor-sharp diamond cut dauphine hands with mirror-polished beveled edges and satin brushed top ridge. Fits NH35/NH36/NH34.',
     category: 'hands',
-    basePrice: 24,
-    handsStyle: 'mercedes',
+    basePrice: 28,
+    handsStyle: 'dauphine',
     handHoleSizes: { hour: 1.50, minute: 0.89, second: 0.21 },
     lume: 'BGW9',
     finish: 'silver',
     compatibleMovementFamilies: ['NH'],
     lastScannedAt: '2026-11-14T18:00:00Z',
     vendors: [
-      { id: 'v-namoki-mercedes', storeName: 'NamokiMODS', tier: 'premier', price: 28.00, productUrl: 'https://namokimods.com', inStock: true },
-      { id: 'v-miuski-mercedes', storeName: 'Miuski Official Store (AliExpress)', tier: 'vetted-direct', price: 11.50, productUrl: 'https://aliexpress.com', inStock: true, isSpecialDeal: true }
+      { id: 'v-lucius-gs-hands', storeName: 'Lucius Atelier', tier: 'premier', price: 28.00, productUrl: 'https://luciusatelier.com/products/grand-seiko-dauphine-hands-brushed-top-silver', inStock: true },
+      { id: 'v-miuski-mercedes', storeName: 'Miuski Official Store (AliExpress)', tier: 'vetted-direct', price: 11.50, productUrl: 'https://www.aliexpress.us/w/wholesale-miuski-dauphine-hands-nh35.html', inStock: true, isSpecialDeal: true }
     ]
   },
   {
     id: 'hands-mercedes-gold',
-    name: 'Vintage Gilt Mercedes Hand Set - Yellow Gold (NH Automatic)',
-    brand: 'DLW Watches',
-    description: 'Polished yellow gold plated Mercedes hands filled with vintage cream patina lume. Adds warmth to vintage two-tone or gilt builds.',
+    handComponents: {
+      hour: 'https://assets.assemble.watch/parts/hands/lucius_atelier/lucius_atelier_dauphine_hands_polished_yellow_gold_hour.webp',
+      minute: 'https://assets.assemble.watch/parts/hands/lucius_atelier/lucius_atelier_dauphine_hands_polished_yellow_gold_minute.webp',
+      second: 'https://assets.assemble.watch/parts/hands/lucius_atelier/lucius_atelier_dauphine_hands_polished_yellow_gold_second.webp'
+    },
+    name: 'Dauphine Hands - Polished Yellow Gold',
+    brand: 'Lucius Atelier',
+    description: 'Polished 18k yellow gold-plated faceted hands. Adds vintage warmth to dress or two-tone builds.',
     category: 'hands',
-    basePrice: 26,
-    handsStyle: 'mercedes',
+    basePrice: 28,
+    handsStyle: 'dauphine',
     handHoleSizes: { hour: 1.50, minute: 0.89, second: 0.21 },
-    lume: 'Vintage',
+    lume: 'None',
     finish: 'gold',
     compatibleMovementFamilies: ['NH'],
     lastScannedAt: '2026-11-14T18:00:00Z',
     vendors: [
-      { id: 'v-dlw-gilt-mercedes', storeName: 'DLW Watches', tier: 'premier', price: 29.00, productUrl: 'https://dlwwatches.com', inStock: true },
-      { id: 'v-miuski-gilt-mercedes', storeName: 'Miuski Official Store (AliExpress)', tier: 'vetted-direct', price: 12.00, productUrl: 'https://aliexpress.com', inStock: true, isSpecialDeal: true }
+      { id: 'v-lucius-gold-dauphine', storeName: 'Lucius Atelier', tier: 'premier', price: 28.00, productUrl: 'https://luciusatelier.com/products/dauphine-hands-polished-yellow-gold', inStock: true },
+      { id: 'v-miuski-gold-mercedes', storeName: 'Miuski Official Store (AliExpress)', tier: 'vetted-direct', price: 12.00, productUrl: 'https://www.aliexpress.us/w/wholesale-miuski-gold-dauphine-hands.html', inStock: true, isSpecialDeal: true }
     ]
   },
   {
     id: 'hands-snowflake-nh',
-    name: 'Snowflake Hand Set - Polished Silver (NH Automatic)',
-    brand: 'DLW Watches',
-    description: 'Legendary angular block hands inspired by vintage Tudor dive watches. Diamond-faceted polished edges with thick BGW9 luminescence.',
+    handComponents: {
+      hour: 'https://assets.assemble.watch/parts/hands/lucius_atelier/lucius_atelier_baton_hands_bgw9_polished_silver_hour.webp',
+      minute: 'https://assets.assemble.watch/parts/hands/lucius_atelier/lucius_atelier_baton_hands_bgw9_polished_silver_minute.webp',
+      second: 'https://assets.assemble.watch/parts/hands/lucius_atelier/lucius_atelier_baton_hands_bgw9_polished_silver_second.webp'
+    },
+    name: 'Baton Hands - BGW9 Polished Silver',
+    brand: 'Lucius Atelier',
+    description: 'Linear architectural baton hands with mirror-polished flanks and filled with bright Swiss BGW9 lume.',
     category: 'hands',
-    basePrice: 26,
-    handsStyle: 'snowflake',
+    basePrice: 28,
+    handsStyle: 'baton',
     handHoleSizes: { hour: 1.50, minute: 0.89, second: 0.21 },
     lume: 'BGW9',
     finish: 'silver',
     compatibleMovementFamilies: ['NH'],
     lastScannedAt: '2026-11-14T18:00:00Z',
     vendors: [
-      { id: 'v-dlw-snowflake', storeName: 'DLW Watches', tier: 'premier', price: 29.50, productUrl: 'https://dlwwatches.com', inStock: true },
-      { id: 'v-tandorio-snowflake', storeName: 'Tandorio Official (AliExpress)', tier: 'vetted-direct', price: 12.00, productUrl: 'https://aliexpress.com', inStock: true, isSpecialDeal: true }
+      { id: 'v-lucius-baton', storeName: 'Lucius Atelier', tier: 'premier', price: 28.00, productUrl: 'https://luciusatelier.com/products/baton-hands-bgw9-polished-silver', inStock: true },
+      { id: 'v-caroline-snowflake', storeName: 'Caroline Mod Store (AliExpress)', tier: 'vetted-direct', price: 12.50, productUrl: 'https://www.aliexpress.us/w/wholesale-caroline-baton-hands-nh35.html', inStock: true, isSpecialDeal: true }
     ]
   },
   {
-    id: 'hands-milsub-sword-nh',
-    name: 'MilSub Sword Hands - British Navy Spec (NH Automatic)',
-    brand: 'Tokeilab',
-    description: 'Wide sword-blade hands modeled after British Royal Navy issue dive watches. Maximizes luminous surface area with vibrant C3 green glow.',
+    id: 'hands-gmt-nh34',
+    handComponents: {
+      hour: 'https://assets.assemble.watch/parts/hands/lucius_atelier/lucius_atelier_broad_arrow_hands_bgw9_polished_silver_hour.webp',
+      minute: 'https://assets.assemble.watch/parts/hands/lucius_atelier/lucius_atelier_broad_arrow_hands_bgw9_polished_silver_minute.webp',
+      second: 'https://assets.assemble.watch/parts/hands/lucius_atelier/lucius_atelier_broad_arrow_hands_bgw9_polished_silver_second.webp'
+    },
+    name: 'Broad Arrow 4-Hand Set (NH34 Caller GMT)',
+    brand: 'Lucius Atelier',
+    description: 'Heritage military broad arrow hand set engineered specifically with 2.20mm GMT arbor hole for Seiko NH34 calibers.',
     category: 'hands',
-    basePrice: 25,
+    basePrice: 28,
     handsStyle: 'sword',
-    handHoleSizes: { hour: 1.50, minute: 0.89, second: 0.21 },
-    lume: 'C3',
+    handHoleSizes: { hour: 1.50, minute: 0.89, second: 0.21, gmt: 2.20 },
+    lume: 'BGW9',
     finish: 'silver',
     compatibleMovementFamilies: ['NH'],
     lastScannedAt: '2026-11-14T18:00:00Z',
     vendors: [
-      { id: 'v-tokeilab-sword', storeName: 'Tokeilab', tier: 'premier', price: 26.00, productUrl: 'https://tokeilab.com', inStock: true }
+      { id: 'v-lucius-broad-arrow', storeName: 'Lucius Atelier', tier: 'premier', price: 28.00, productUrl: 'https://luciusatelier.com/products/broad-arrow-hands-bgw9-polished-silver', inStock: true },
+      { id: 'v-miuski-nh34hands', storeName: 'Miuski Official Store (AliExpress)', tier: 'vetted-direct', price: 13.50, productUrl: 'https://www.aliexpress.us/w/wholesale-miuski-nh34-gmt-hands.html', inStock: true, isSpecialDeal: true }
     ]
   },
   {
-    id: 'hands-dauphine-nh',
-    name: 'Grand Dauphine Dress Hands - Faceted Silver (NH Automatic)',
+    id: 'hands-milgauss-orange',
+    handComponents: {
+      hour: 'https://assets.assemble.watch/parts/hands/lucius_atelier/lucius_atelier_grand_seiko_dauphine_hands_brushed_top_silver_red_hour.webp',
+      minute: 'https://assets.assemble.watch/parts/hands/lucius_atelier/lucius_atelier_grand_seiko_dauphine_hands_brushed_top_silver_red_minute.webp',
+      second: 'https://assets.assemble.watch/parts/hands/lucius_atelier/lucius_atelier_grand_seiko_dauphine_hands_brushed_top_silver_red_second.webp'
+    },
+    name: 'Dauphine Hands - Brushed Top Silver & Red Accent',
     brand: 'Lucius Atelier',
-    description: 'Razor-sharp beveled dauphine hands that catch reflections from any angle. Perfect for Grand Seiko or Datejust style dress builds.',
+    description: 'Faceted silver hands with crimson needle tip seconds hand.',
     category: 'hands',
     basePrice: 28,
     handsStyle: 'dauphine',
+    handHoleSizes: { hour: 1.50, minute: 0.89, second: 0.21 },
+    lume: 'BGW9',
+    finish: 'silver',
+    compatibleMovementFamilies: ['NH'],
+    lastScannedAt: '2026-11-14T18:00:00Z',
+    vendors: [
+      { id: 'v-lucius-gs-red', storeName: 'Lucius Atelier', tier: 'premier', price: 28.00, productUrl: 'https://luciusatelier.com/products/grand-seiko-dauphine-hands-brushed-top-silver-red', inStock: true },
+      { id: 'v-miuski-lightning', storeName: 'Miuski Official Store (AliExpress)', tier: 'vetted-direct', price: 11.50, productUrl: 'https://www.aliexpress.us/w/wholesale-miuski-lightning-bolt-hands-nh35.html', inStock: true, isSpecialDeal: true }
+    ]
+  },
+  {
+    id: 'hands-sword-nh',
+    handComponents: {
+      hour: 'https://assets.assemble.watch/parts/hands/lucius_atelier/lucius_atelier_1908_sword_breguet_hands_polished_silver_hour.webp',
+      minute: 'https://assets.assemble.watch/parts/hands/lucius_atelier/lucius_atelier_1908_sword_breguet_hands_polished_silver_minute.webp',
+      second: 'https://assets.assemble.watch/parts/hands/lucius_atelier/lucius_atelier_1908_sword_breguet_hands_polished_silver_second.webp'
+    },
+    name: '1908 Sword Breguet Hands - Polished Silver',
+    brand: 'Lucius Atelier',
+    description: 'Classic high-horology sword hands featuring open circular Breguet eyelet on the hour hand.',
+    category: 'hands',
+    basePrice: 28,
+    handsStyle: 'sword',
     handHoleSizes: { hour: 1.50, minute: 0.89, second: 0.21 },
     lume: 'None',
     finish: 'silver',
     compatibleMovementFamilies: ['NH'],
     lastScannedAt: '2026-11-14T18:00:00Z',
     vendors: [
-      { id: 'v-lucius-dauphine', storeName: 'Lucius Atelier', tier: 'premier', price: 32.00, productUrl: 'https://luciusatelier.com', inStock: true }
+      { id: 'v-lucius-1908-hands', storeName: 'Lucius Atelier', tier: 'premier', price: 28.00, productUrl: 'https://luciusatelier.com/products/1908-sword-breguet-hands-polished-silver', inStock: true },
+      { id: 'v-tandorio-sword', storeName: 'Tandorio Official (AliExpress)', tier: 'vetted-direct', price: 11.80, productUrl: 'https://www.aliexpress.us/w/wholesale-tandorio-sword-hands-nh35.html', inStock: true, isSpecialDeal: true }
     ]
   },
   {
-    id: 'hands-gmt-nh34',
-    name: '4-Piece GMT Hand Set with Red 24H Arrow (NH34)',
-    brand: 'NamokiMODS',
-    description: 'Complete 4-piece set including a bright red 24-hour GMT arrow hand (2.20mm hole) engineered specifically for the Seiko NH34 movement.',
+    id: 'hands-breguet-blue',
+    handComponents: {
+      hour: 'https://assets.assemble.watch/parts/hands/lucius_atelier/lucius_atelier_breguet_hands_polished_blue_hour.webp',
+      minute: 'https://assets.assemble.watch/parts/hands/lucius_atelier/lucius_atelier_breguet_hands_polished_blue_minute.webp',
+      second: 'https://assets.assemble.watch/parts/hands/lucius_atelier/lucius_atelier_breguet_hands_polished_blue_second.webp'
+    },
+    name: 'Breguet Hands - Thermal Blued Steel Finish',
+    brand: 'Lucius Atelier',
+    description: 'Iconic hollow-moon Breguet hands with deep iridescent cobalt blue temper finish.',
     category: 'hands',
-    basePrice: 32,
-    handsStyle: 'mercedes',
-    handHoleSizes: { hour: 1.50, minute: 0.89, second: 0.21, gmt: 2.20 },
-    lume: 'BGW9',
-    finish: 'silver',
+    basePrice: 28,
+    handsStyle: 'marine',
+    handHoleSizes: { hour: 1.50, minute: 0.89, second: 0.21 },
+    lume: 'None',
+    finish: 'heat-blued',
     compatibleMovementFamilies: ['NH'],
     lastScannedAt: '2026-11-14T18:00:00Z',
     vendors: [
-      { id: 'v-namoki-gmt-hands', storeName: 'NamokiMODS', tier: 'premier', price: 34.00, productUrl: 'https://namokimods.com', inStock: true },
-      { id: 'v-miuski-gmt-hands', storeName: 'Miuski Official Store (AliExpress)', tier: 'vetted-direct', price: 14.50, productUrl: 'https://aliexpress.com', inStock: true, isSpecialDeal: true }
+      { id: 'v-lucius-breguet-blue', storeName: 'Lucius Atelier', tier: 'premier', price: 28.00, productUrl: 'https://luciusatelier.com/products/breguet-hands-polished-blue', inStock: true }
     ]
   },
   {
-    id: 'hands-gmt-snowflake',
-    name: '4-Piece Snowflake GMT Set with Orange 24H Arrow (NH34)',
-    brand: 'DLW Watches',
-    description: 'Snowflake hour & minute hands paired with a vibrant signal orange GMT pointer hand for high-legibility dual-time zone travel builds.',
+    id: 'hands-dauphine-black',
+    handComponents: {
+      hour: 'https://assets.assemble.watch/parts/hands/lucius_atelier/lucius_atelier_dauphine_hands_polished_black_hour.webp',
+      minute: 'https://assets.assemble.watch/parts/hands/lucius_atelier/lucius_atelier_dauphine_hands_polished_black_minute.webp',
+      second: 'https://assets.assemble.watch/parts/hands/lucius_atelier/lucius_atelier_dauphine_hands_polished_black_second.webp'
+    },
+    name: 'Dauphine Hands - Polished PVD Black',
+    brand: 'Lucius Atelier',
+    description: 'Gloss black DLC/PVD coated faceted dauphine hands for stealth or high-contrast monochromatic builds.',
     category: 'hands',
-    basePrice: 34,
-    handsStyle: 'snowflake',
-    handHoleSizes: { hour: 1.50, minute: 0.89, second: 0.21, gmt: 2.20 },
-    lume: 'BGW9',
-    finish: 'silver',
+    basePrice: 28,
+    handsStyle: 'dauphine',
+    handHoleSizes: { hour: 1.50, minute: 0.89, second: 0.21 },
+    lume: 'None',
+    finish: 'black',
     compatibleMovementFamilies: ['NH'],
     lastScannedAt: '2026-11-14T18:00:00Z',
     vendors: [
-      { id: 'v-dlw-snowflake-gmt', storeName: 'DLW Watches', tier: 'premier', price: 36.50, productUrl: 'https://dlwwatches.com', inStock: true },
-      { id: 'v-caroline-snowflake-gmt', storeName: 'Caroline Mod Store (AliExpress)', tier: 'vetted-direct', price: 15.00, productUrl: 'https://aliexpress.com', inStock: true, isSpecialDeal: true }
+      { id: 'v-lucius-dauphine-black', storeName: 'Lucius Atelier', tier: 'premier', price: 28.00, productUrl: 'https://luciusatelier.com/products/dauphine-hands-polished-black', inStock: true }
     ]
   },
   {
     id: 'hands-baton-vh31',
-    name: 'Slim Baton Hand Set (VH31 Sweeping Quartz / Ronda)',
+    handComponents: {
+      hour: 'https://assets.assemble.watch/parts/hands/lucius_atelier/lucius_atelier_baton_hands_bgw9_polished_silver_hour.webp',
+      minute: 'https://assets.assemble.watch/parts/hands/lucius_atelier/lucius_atelier_baton_hands_bgw9_polished_silver_minute.webp',
+      second: 'https://assets.assemble.watch/parts/hands/lucius_atelier/lucius_atelier_baton_hands_bgw9_polished_silver_second.webp'
+    },
+    name: 'Slim Baton Hand Set - Polished Silver (VH31 Quartz Hole Sizes)',
     brand: 'Tandorio Horology',
-    description: 'Precision-broached hand set sized exclusively for quartz calibers (1.20mm hour, 0.70mm minute, 0.17mm second pinion). Balanced counterweights prevent quartz gear train drag.',
+    description: 'Precision-broached hand set manufactured specifically to fit Seiko VH31 quartz arbors (1.20mm hour, 0.70mm minute, 0.17mm second).',
     category: 'hands',
-    basePrice: 16,
+    basePrice: 18,
     handsStyle: 'baton',
     handHoleSizes: { hour: 1.20, minute: 0.70, second: 0.17 },
     lume: 'BGW9',
     finish: 'silver',
-    compatibleMovementFamilies: ['VH', 'Ronda'],
+    compatibleMovementFamilies: ['VH'],
     lastScannedAt: '2026-11-14T18:00:00Z',
     vendors: [
-      { id: 'v-tandorio-vh31-hands', storeName: 'Tandorio Official (AliExpress)', tier: 'vetted-direct', price: 11.00, productUrl: 'https://aliexpress.com', inStock: true, isSpecialDeal: true },
-      { id: 'v-esslinger-quartz-hands', storeName: 'Esslinger Watch Supplies', tier: 'supply-house', price: 18.50, productUrl: 'https://esslinger.com', inStock: true }
+      { id: 'v-tandorio-vh31-hands', storeName: 'Tandorio Official (AliExpress)', tier: 'vetted-direct', price: 11.20, productUrl: 'https://www.aliexpress.us/w/wholesale-tandorio-vh31-hands.html', inStock: true, isSpecialDeal: true }
     ]
   },
   {
-    id: 'hands-sword-vh31',
-    name: 'MilSub Sword Hand Set (VH31 Sweeping Quartz / Ronda)',
-    brand: 'Caroline Mod Store',
-    description: 'Military sword design engineered with 1.20/0.70/0.17mm quartz arbors. Allows building a lightweight, zero-maintenance quartz field or dive watch.',
+    id: 'hands-eta-dauphine',
+    handComponents: {
+      hour: 'https://assets.assemble.watch/parts/hands/lucius_atelier/lucius_atelier_grand_seiko_dauphine_hands_brushed_top_silver_hour.webp',
+      minute: 'https://assets.assemble.watch/parts/hands/lucius_atelier/lucius_atelier_grand_seiko_dauphine_hands_brushed_top_silver_minute.webp',
+      second: 'https://assets.assemble.watch/parts/hands/lucius_atelier/lucius_atelier_grand_seiko_dauphine_hands_brushed_top_silver_second.webp'
+    },
+    name: 'Dauphine Hand Set - Rhodium (PT5000 / ETA 2824 Sizing)',
+    brand: 'Esslinger Supplies',
+    description: 'Precision Swiss-pattern dauphine hands sized with ETA 2824 / PT5000 collet specifications (1.50mm / 0.90mm / 0.25mm).',
     category: 'hands',
-    basePrice: 17,
-    handsStyle: 'sword',
-    handHoleSizes: { hour: 1.20, minute: 0.70, second: 0.17 },
-    lume: 'C3',
+    basePrice: 22,
+    handsStyle: 'dauphine',
+    handHoleSizes: { hour: 1.50, minute: 0.90, second: 0.25 },
+    lume: 'BGW9',
     finish: 'silver',
-    compatibleMovementFamilies: ['VH', 'Ronda'],
+    compatibleMovementFamilies: ['ETA'],
     lastScannedAt: '2026-11-14T18:00:00Z',
     vendors: [
-      { id: 'v-caroline-vh31-sword', storeName: 'Caroline Mod Store (AliExpress)', tier: 'vetted-direct', price: 12.80, productUrl: 'https://aliexpress.com', inStock: true, isSpecialDeal: true }
+      { id: 'v-esslinger-eta-hands', storeName: 'Esslinger Watch Supplies', tier: 'supply-house', price: 21.95, productUrl: 'https://www.esslinger.com/watch-hands-to-fit-eta-2824-2-hole-sizes-90-150-25mm/', inStock: true }
+    ]
+  }
+];
+
+export const SEED_SECONDS_ACCENTS: SecondsHandAccent[] = [
+  {
+    id: 'sec-nh-orange-lightning',
+    name: 'Milgauss Orange Lightning Bolt Seconds Hand',
+    brand: 'DLW Watches',
+    description: 'Signature zigzag lightning bolt needle coated in vibrant safety orange lacquer. Directly replaces standard NH second hand.',
+    category: 'seconds-accent',
+    basePrice: 12,
+    accentStyle: 'lightning',
+    colorName: 'Safety Orange',
+    colorHex: '#ea580c',
+    holeSize: 0.21,
+    compatibleMovementFamilies: ['NH'],
+    lastScannedAt: '2026-11-14T18:00:00Z',
+    vendors: [
+      { id: 'v-dlw-lightning', storeName: 'DLW Watches', tier: 'premier', price: 14.00, productUrl: 'https://www.dlwwatches.com/products/hands-lightning-seconds', inStock: true },
+      { id: 'v-miuski-orange-lightning', storeName: 'Miuski Official Store (AliExpress)', tier: 'vetted-direct', price: 4.50, productUrl: 'https://www.aliexpress.us/w/wholesale-miuski-lightning-seconds-hand.html', inStock: true, isSpecialDeal: true }
     ]
   },
   {
-    id: 'hands-flieger-vh31',
-    name: 'Heat-Blued Aviator Pilot Hands (VH31 / Ronda Quartz)',
-    brand: 'Tandorio Horology',
-    description: 'Classic diamond pilot hands with traditional thermal heat-blued steel finish and vintage cream lume. Precision 1.20/0.70/0.17mm quartz arbors.',
-    category: 'hands',
-    basePrice: 19,
-    handsStyle: 'flieger',
-    handHoleSizes: { hour: 1.20, minute: 0.70, second: 0.17 },
-    lume: 'Vintage',
-    finish: 'heat-blued',
-    compatibleMovementFamilies: ['VH', 'Ronda'],
+    id: 'sec-nh-red-arrow',
+    name: 'Red Arrow Needle Seconds Hand',
+    brand: 'NamokiMODS',
+    description: 'Gloss black counterbalance stem tapering to an eye-catching vivid red arrow point with lumed circle.',
+    category: 'seconds-accent',
+    basePrice: 10,
+    accentStyle: 'red-arrow',
+    colorName: 'Cherry Red',
+    colorHex: '#dc2626',
+    holeSize: 0.21,
+    compatibleMovementFamilies: ['NH'],
     lastScannedAt: '2026-11-14T18:00:00Z',
     vendors: [
-      { id: 'v-tandorio-flieger-quartz', storeName: 'Tandorio Official (AliExpress)', tier: 'vetted-direct', price: 13.50, productUrl: 'https://aliexpress.com', inStock: true, isSpecialDeal: true }
+      { id: 'v-namoki-red-arrow', storeName: 'NamokiMODS', tier: 'premier', price: 12.00, productUrl: 'https://www.namokimods.com/products/arrow-second-hand-red-finish', inStock: true },
+      { id: 'v-miuski-red-arrow', storeName: 'Miuski Official Store (AliExpress)', tier: 'vetted-direct', price: 3.80, productUrl: 'https://www.aliexpress.us/w/wholesale-miuski-red-seconds-hand-nh35.html', inStock: true, isSpecialDeal: true }
+    ]
+  },
+  {
+    id: 'sec-nh-blue-lollipop',
+    name: 'Ocean Blue Lollipop Seconds Hand',
+    brand: 'Lucius Atelier',
+    description: 'Polished rhodium needle featuring a luminous circular lollipop disc filled with Swiss BGW9 lume.',
+    category: 'seconds-accent',
+    basePrice: 12,
+    accentStyle: 'blue-lollipop',
+    colorName: 'Cyan Blue',
+    colorHex: '#0284c7',
+    holeSize: 0.21,
+    compatibleMovementFamilies: ['NH'],
+    lastScannedAt: '2026-11-14T18:00:00Z',
+    vendors: [
+      { id: 'v-lucius-blue-lollipop', storeName: 'Lucius Atelier', tier: 'premier', price: 14.00, productUrl: 'https://luciusatelier.com/products/grand-seiko-dauphine-hands-brushed-top-silver-blue', inStock: true }
+    ]
+  },
+  {
+    id: 'sec-vh31-red-arrow',
+    name: 'Red Needle Seconds Hand (VH31 0.17mm Hole)',
+    brand: 'Tandorio Horology',
+    description: 'Engineered specifically for the smaller 0.17mm pinion arbor on Seiko VH31 quartz calibers.',
+    category: 'seconds-accent',
+    basePrice: 8,
+    accentStyle: 'red-arrow',
+    colorName: 'Rally Red',
+    colorHex: '#ef4444',
+    holeSize: 0.17,
+    compatibleMovementFamilies: ['VH'],
+    lastScannedAt: '2026-11-14T18:00:00Z',
+    vendors: [
+      { id: 'v-tandorio-vh31-sec', storeName: 'Tandorio Official (AliExpress)', tier: 'vetted-direct', price: 4.20, productUrl: 'https://www.aliexpress.us/w/wholesale-tandorio-vh31-seconds-hand.html', inStock: true, isSpecialDeal: true }
+    ]
+  },
+  {
+    id: 'sec-nh-yellow-bolt',
+    name: 'Acid Yellow Flash Seconds Hand',
+    brand: 'Caroline Mod Store',
+    description: 'High-visibility neon yellow second hand for racing, dive timing, or sport chronograph vibes.',
+    category: 'seconds-accent',
+    basePrice: 9,
+    accentStyle: 'lightning',
+    colorName: 'Racing Yellow',
+    colorHex: '#eab308',
+    holeSize: 0.21,
+    compatibleMovementFamilies: ['NH'],
+    lastScannedAt: '2026-11-14T18:00:00Z',
+    vendors: [
+      { id: 'v-caroline-yellow-sec', storeName: 'Caroline Mod Store (AliExpress)', tier: 'vetted-direct', price: 4.00, productUrl: 'https://www.aliexpress.us/w/wholesale-caroline-yellow-seconds-hand.html', inStock: true, isSpecialDeal: true }
+    ]
+  },
+  {
+    id: 'sec-nh-trident',
+    name: 'Trident Counterweight Seconds Hand',
+    brand: 'DLW Watches',
+    description: 'Poseidon trident silhouette counterweight with polished silver stem and crimson arrow pointer.',
+    category: 'seconds-accent',
+    basePrice: 13,
+    accentStyle: 'trident',
+    colorName: 'Silver & Crimson',
+    colorHex: '#b91c1c',
+    holeSize: 0.21,
+    compatibleMovementFamilies: ['NH'],
+    lastScannedAt: '2026-11-14T18:00:00Z',
+    vendors: [
+      { id: 'v-dlw-trident', storeName: 'DLW Watches', tier: 'premier', price: 15.00, productUrl: 'https://www.dlwwatches.com/products/hands-trident', inStock: true }
     ]
   }
 ];
@@ -862,6 +1450,7 @@ export const SEED_HANDS: Hands[] = [
 export const SEED_BEZEL_INSERTS: BezelInsert[] = [
   {
     id: 'insert-sub-black',
+    imageUrl: 'https://assets.assemble.watch/parts/bezels/lucius_atelier/lucius_atelier_skx007_ceramic_bezel_insert_slope_yacht_master_black.webp',
     name: 'Ceramic Submariner 60-Minute Insert - Gloss Black',
     brand: 'NamokiMODS',
     description: 'Polished scratch-resistant ceramic with engraved and platinum-filled numerals. Lumed pip at 12:00.',
@@ -876,137 +1465,157 @@ export const SEED_BEZEL_INSERTS: BezelInsert[] = [
     isSloping: true,
     lastScannedAt: '2026-11-14T18:00:00Z',
     vendors: [
-      { id: 'v-namoki-ins-blk', storeName: 'NamokiMODS', tier: 'premier', price: 34.00, productUrl: 'https://namokimods.com', inStock: true },
-      { id: 'v-miuski-ins-blk', storeName: 'Miuski Official Store (AliExpress)', tier: 'vetted-direct', price: 14.00, productUrl: 'https://aliexpress.com', inStock: true, isSpecialDeal: true }
+      { id: 'v-namoki-sub-insert', storeName: 'NamokiMODS', tier: 'premier', price: 34.99, productUrl: 'https://www.namokimods.com/products/ceramic-bezel-insert-sub-style-black', inStock: true },
+      { id: 'v-miuski-insert-black', storeName: 'Miuski Official Store (AliExpress)', tier: 'vetted-direct', price: 11.50, productUrl: 'https://www.aliexpress.us/w/wholesale-miuski-ceramic-bezel-insert-38mm.html', inStock: true, isSpecialDeal: true }
     ]
   },
   {
-    id: 'insert-sub-green',
-    name: 'Ceramic "Kermit" 60-Minute Insert - Forest Green',
-    brand: 'DLW Watches',
-    description: 'Vibrant emerald forest green ceramic dive insert. Deep engraved numbers with white fill.',
-    category: 'bezel-insert',
-    basePrice: 30,
-    style: 'diver-60min',
-    material: 'ceramic',
-    color1: 'Forest Green',
-    color1Hex: '#065f46',
-    outerMm: 38.0,
-    innerMm: 30.6,
-    isSloping: true,
-    lastScannedAt: '2026-11-14T18:00:00Z',
-    vendors: [
-      { id: 'v-dlw-kermit', storeName: 'DLW Watches', tier: 'premier', price: 36.00, productUrl: 'https://dlwwatches.com', inStock: true },
-      { id: 'v-caroline-kermit', storeName: 'Caroline Mod Store (AliExpress)', tier: 'vetted-direct', price: 15.50, productUrl: 'https://aliexpress.com', inStock: true, isSpecialDeal: true }
-    ]
-  },
-  {
-    id: 'insert-gmt-batman',
-    name: 'Ceramic Dual-Color "Batman" 24-Hour GMT Insert',
-    brand: 'NamokiMODS',
-    description: 'Seamless two-tone blue (day) and black (night) high-tech ceramic bezel insert engineered for NH34 24H traveler builds.',
-    category: 'bezel-insert',
-    basePrice: 38,
-    style: 'gmt-24hr',
-    material: 'ceramic',
-    color1: 'Night Black',
-    color1Hex: '#09090b',
-    color2: 'Ocean Blue',
-    color2Hex: '#1d4ed8',
-    outerMm: 38.0,
-    innerMm: 30.6,
-    isSloping: true,
-    lastScannedAt: '2026-11-14T18:00:00Z',
-    vendors: [
-      { id: 'v-namoki-batman', storeName: 'NamokiMODS', tier: 'premier', price: 42.00, productUrl: 'https://namokimods.com', inStock: true },
-      { id: 'v-miuski-batman', storeName: 'Miuski Official Store (AliExpress)', tier: 'vetted-direct', price: 16.50, productUrl: 'https://aliexpress.com', inStock: true, isSpecialDeal: true }
-    ]
-  },
-  {
-    id: 'insert-gmt-pepsi',
-    name: 'Ceramic Dual-Color "Pepsi" 24-Hour GMT Insert',
-    brand: 'DLW Watches',
-    description: 'Legendary red and blue ceramic 24H GMT insert. Laser-engraved and silver-powdered markers.',
-    category: 'bezel-insert',
-    basePrice: 38,
-    style: 'gmt-24hr',
-    material: 'ceramic',
-    color1: 'Crimson Red',
-    color1Hex: '#991b1b',
-    color2: 'Navy Blue',
-    color2Hex: '#1e3a8a',
-    outerMm: 38.0,
-    innerMm: 30.6,
-    isSloping: true,
-    lastScannedAt: '2026-11-14T18:00:00Z',
-    vendors: [
-      { id: 'v-dlw-pepsi', storeName: 'DLW Watches', tier: 'premier', price: 42.00, productUrl: 'https://dlwwatches.com', inStock: true },
-      { id: 'v-tandorio-pepsi', storeName: 'Tandorio Official (AliExpress)', tier: 'vetted-direct', price: 16.00, productUrl: 'https://aliexpress.com', inStock: true, isSpecialDeal: true }
-    ]
-  },
-  {
-    id: 'insert-dual-12h',
-    name: 'Stealth Ceramic 12-Hour Dual Time Zone Insert',
+    id: 'insert-yacht-matte',
+    imageUrl: 'https://assets.assemble.watch/parts/bezels/lucius_atelier/lucius_atelier_skx007_ceramic_bezel_insert_slope_yacht_master_black.webp',
+    name: 'Yacht-Master Matte Black Ceramic Insert (Raised Numerals)',
     brand: 'Lucius Atelier',
-    description: 'Discreet 12-hour numeral markings allowing second time zone tracking without needing a GMT movement. Matte black ceramic.',
+    description: 'Matte blasted ceramic backdrop with mirror-polished three-dimensional raised relief numerals.',
     category: 'bezel-insert',
-    basePrice: 34,
-    style: 'dual-time-12hr',
+    basePrice: 38,
+    style: 'yacht',
     material: 'ceramic',
-    color1: 'Stealth Black',
+    color1: 'Matte Black',
     color1Hex: '#18181b',
     outerMm: 38.0,
     innerMm: 30.6,
     isSloping: true,
     lastScannedAt: '2026-11-14T18:00:00Z',
     vendors: [
-      { id: 'v-lucius-12h', storeName: 'Lucius Atelier', tier: 'premier', price: 38.00, productUrl: 'https://luciusatelier.com', inStock: true }
+      { id: 'v-lucius-yacht-insert', storeName: 'Lucius Atelier', tier: 'premier', price: 42.00, productUrl: 'https://luciusatelier.com/products/skx007-ceramic-bezel-insert-slope-yacht-master-black', inStock: true },
+      { id: 'v-caroline-yacht-insert', storeName: 'Caroline Mod Store (AliExpress)', tier: 'vetted-direct', price: 14.50, productUrl: 'https://www.aliexpress.us/w/wholesale-caroline-yacht-master-bezel-insert.html', inStock: true, isSpecialDeal: true }
+    ]
+  },
+  {
+    id: 'insert-gmt-batman',
+    imageUrl: 'https://assets.assemble.watch/parts/bezels/lucius_atelier/lucius_atelier_skx013_aluminium_bezel_insert_slope_gmt_24h_batman_black_blue.webp',
+    name: 'Batman GMT 24-Hour Insert (Black & Royal Blue)',
+    brand: 'Lucius Atelier',
+    description: 'Dual-color 24-hour day/night split insert designed specifically for caller GMT movements like NH34A.',
+    category: 'bezel-insert',
+    basePrice: 32,
+    style: 'gmt-24hr',
+    material: 'ceramic',
+    color1: 'Pitch Black',
+    color1Hex: '#09090b',
+    color2: 'Royal Blue',
+    color2Hex: '#1d4ed8',
+    outerMm: 38.0,
+    innerMm: 30.6,
+    isSloping: true,
+    lastScannedAt: '2026-11-14T18:00:00Z',
+    vendors: [
+      { id: 'v-lucius-batman-insert', storeName: 'Lucius Atelier', tier: 'premier', price: 38.00, productUrl: 'https://luciusatelier.com/products/skx013-aluminium-bezel-insert-slope-gmt-24h-batman-black-blue', inStock: true },
+      { id: 'v-dlw-batman', storeName: 'DLW Watches', tier: 'premier', price: 36.00, productUrl: 'https://www.dlwwatches.com/products/ceramic-insert-007-gmt-batman', inStock: true },
+      { id: 'v-tandorio-batman', storeName: 'Tandorio Official (AliExpress)', tier: 'vetted-direct', price: 12.00, productUrl: 'https://www.aliexpress.us/w/wholesale-tandorio-batman-gmt-insert.html', inStock: true, isSpecialDeal: true }
+    ]
+  },
+  {
+    id: 'insert-pepsi-dual',
+    imageUrl: 'https://assets.assemble.watch/parts/bezels/lucius_atelier/lucius_atelier_skx007_ceramic_bezel_insert_slope_pepsi_dual_time_swiss_made.webp',
+    name: 'Pepsi Dual-Time 12-Hour Insert (Navy Blue & Ruby Red)',
+    brand: 'Lucius Atelier',
+    description: 'Swiss-made dual-time ceramic insert with 12-hour indices allowing dual time tracking with any standard 3-hand movement.',
+    category: 'bezel-insert',
+    basePrice: 34,
+    style: 'dual-time-12hr',
+    material: 'ceramic',
+    color1: 'Navy Blue',
+    color1Hex: '#1e3a8a',
+    color2: 'Ruby Red',
+    color2Hex: '#b91c1c',
+    outerMm: 38.0,
+    innerMm: 30.6,
+    isSloping: true,
+    lastScannedAt: '2026-11-14T18:00:00Z',
+    vendors: [
+      { id: 'v-lucius-pepsi', storeName: 'Lucius Atelier', tier: 'premier', price: 38.00, productUrl: 'https://luciusatelier.com/products/skx007-ceramic-bezel-insert-slope-pepsi-dual-time-swiss-made', inStock: true },
+      { id: 'v-namoki-pepsi', storeName: 'NamokiMODS', tier: 'premier', price: 39.99, productUrl: 'https://www.namokimods.com/products/ceramic-bezel-insert-dual-time-pepsi', inStock: true },
+      { id: 'v-miuski-pepsi', storeName: 'Miuski Official Store (AliExpress)', tier: 'vetted-direct', price: 13.00, productUrl: 'https://www.aliexpress.us/w/wholesale-miuski-pepsi-bezel-insert.html', inStock: true, isSpecialDeal: true }
+    ]
+  },
+  {
+    id: 'insert-skx-flat-black',
+    imageUrl: 'https://assets.assemble.watch/parts/bezels/lucius_atelier/lucius_atelier_skx013_aluminium_bezel_insert_slope_gmt_24h_batman_black_blue.webp',
+    name: 'SKX007 Factory Flat Diver Bezel Insert',
+    brand: 'Caroline Mod Store',
+    description: 'Flat profile aluminum bezel insert dimensioned to fit OEM Seiko SKX007 (38.0mm outer / 31.5mm inner).',
+    category: 'bezel-insert',
+    basePrice: 18,
+    style: 'diver-60min',
+    material: 'aluminum',
+    color1: 'Satin Black',
+    color1Hex: '#18181b',
+    outerMm: 38.0,
+    innerMm: 31.5,
+    isSloping: false,
+    lastScannedAt: '2026-11-14T18:00:00Z',
+    vendors: [
+      { id: 'v-caroline-skx-flat', storeName: 'Caroline Mod Store (AliExpress)', tier: 'vetted-direct', price: 9.50, productUrl: 'https://www.aliexpress.us/w/wholesale-caroline-skx007-bezel-insert.html', inStock: true, isSpecialDeal: true }
     ]
   }
 ];
 
 export const SEED_ROTORS: Rotor[] = [
   {
-    id: 'rotor-tokyo-waves',
-    name: 'Kanagawa Great Wave Laser-Engraved Rotor',
-    brand: 'Lucius Atelier',
-    description: 'Intricately etched Hokusai Great Wave motif in solid brass with heavy rhodium plating. Mesmerizing motion through an exhibition caseback.',
+    id: 'rotor-skeleton-rose',
+    name: 'Skeletonized Wave Rotor - Rose Gold Plated (NH)',
+    brand: 'DLW Watches',
+    description: 'Precision laser-cut winding rotor with Geneva wave skeleton bridges, high-density tungsten rim weight, and lustrous 18k rose gold electroplating.',
     category: 'rotor',
-    basePrice: 38,
-    finish: 'tokyo-wave',
-    compatibleMovements: ['NH35', 'NH36', 'NH34', 'NH38'],
-    lastScannedAt: '2026-11-14T18:00:00Z',
-    vendors: [
-      { id: 'v-lucius-wave-rotor', storeName: 'Lucius Atelier', tier: 'premier', price: 44.00, productUrl: 'https://luciusatelier.com', inStock: true },
-      { id: 'v-ds-wave-rotor', storeName: 'DS-Watch Mod Store (AliExpress)', tier: 'vetted-direct', price: 18.00, productUrl: 'https://aliexpress.com', inStock: true, isSpecialDeal: true }
-    ]
-  },
-  {
-    id: 'rotor-gold-skeleton',
-    name: '24K Yellow Gold Plated Skeletonized Rotor',
-    brand: 'NamokiMODS',
-    description: 'Lightweight geometric cutouts with mirror-beveled edges and gleaming 24K gold electroplating. Increases winding responsiveness.',
-    category: 'rotor',
-    basePrice: 36,
+    basePrice: 28,
     finish: 'rose-gold-skeleton',
-    compatibleMovements: ['NH35', 'NH36', 'NH34', 'NH38'],
+    compatibleMovements: ['NH35', 'NH36', 'NH38', 'NH34'],
     lastScannedAt: '2026-11-14T18:00:00Z',
     vendors: [
-      { id: 'v-namoki-gold-rotor', storeName: 'NamokiMODS', tier: 'premier', price: 39.99, productUrl: 'https://namokimods.com', inStock: true }
+      { id: 'v-dlw-rose-rotor', storeName: 'DLW Watches', tier: 'premier', price: 32.00, productUrl: 'https://www.dlwwatches.com/products/rotor-skeleton-rose-gold', inStock: true },
+      { id: 'v-miuski-rose-rotor', storeName: 'Miuski Official Store (AliExpress)', tier: 'vetted-direct', price: 14.50, productUrl: 'https://www.aliexpress.us/w/wholesale-miuski-rose-gold-rotor-nh35.html', inStock: true, isSpecialDeal: true }
     ]
   },
   {
-    id: 'rotor-geneva-rhodium',
-    name: 'Côtes de Genève Rhodium Striped Rotor',
-    brand: 'Tokeilab',
-    description: 'Swiss horology inspired circular Geneva waves across a rhodium finished oscillating weight with engraved caliber markings.',
+    id: 'rotor-bronze-crest',
+    name: 'Antique Bronze Heritage Crest Rotor (NH)',
+    brand: 'NamokiMODS',
+    description: 'Heavy architectural bronze rotor adorned with engraved Japanese Kanagawa waves. Optimized winding efficiency for automatic mainsprings.',
     category: 'rotor',
     basePrice: 32,
-    finish: 'cotes-de-geneve',
-    compatibleMovements: ['NH35', 'NH36', 'NH34', 'NH38'],
+    finish: 'bronze-crest',
+    compatibleMovements: ['NH35', 'NH36', 'NH38', 'NH34'],
     lastScannedAt: '2026-11-14T18:00:00Z',
     vendors: [
-      { id: 'v-tokeilab-geneva', storeName: 'Tokeilab', tier: 'premier', price: 34.00, productUrl: 'https://tokeilab.com', inStock: true }
+      { id: 'v-namoki-bronze-rotor', storeName: 'NamokiMODS', tier: 'premier', price: 34.99, productUrl: 'https://www.namokimods.com/products/custom-rotor-great-wave-finish', inStock: true }
+    ]
+  },
+  {
+    id: 'rotor-black-tactical',
+    name: 'Stealth Tactical Black PVD Rotor (NH)',
+    brand: 'Caroline Mod Store',
+    description: 'Matte black DLC coated rotor with open skeleton windows. Pairs seamlessly with exhibition caseback diver builds.',
+    category: 'rotor',
+    basePrice: 22,
+    finish: 'black-tactical',
+    compatibleMovements: ['NH35', 'NH36', 'NH38', 'NH34'],
+    lastScannedAt: '2026-11-14T18:00:00Z',
+    vendors: [
+      { id: 'v-caroline-black-rotor', storeName: 'Caroline Mod Store (AliExpress)', tier: 'vetted-direct', price: 12.00, productUrl: 'https://www.aliexpress.us/w/wholesale-caroline-black-rotor-nh35.html', inStock: true, isSpecialDeal: true }
+    ]
+  },
+  {
+    id: 'rotor-cotes-de-geneve',
+    name: 'Traditional Côtes de Genève Rhodium Rotor (NH)',
+    brand: 'Lucius Atelier',
+    description: 'Classic high-horology circular Geneva striped rotor plated in bright rhodium with polished chamfers.',
+    category: 'rotor',
+    basePrice: 30,
+    finish: 'cotes-de-geneve',
+    compatibleMovements: ['NH35', 'NH36', 'NH38', 'NH34'],
+    lastScannedAt: '2026-11-14T18:00:00Z',
+    vendors: [
+      { id: 'v-lucius-rhodium-rotor', storeName: 'Lucius Atelier', tier: 'premier', price: 36.00, productUrl: 'https://luciusatelier.com/products/custom-rotor-nh35-rhodium-finish', inStock: true }
     ]
   }
 ];
@@ -1014,19 +1623,35 @@ export const SEED_ROTORS: Rotor[] = [
 export const SEED_SPACERS: MovementSpacer[] = [
   {
     id: 'spacer-vh31-to-nh',
-    name: 'VH31 to NH Casing Adapter Ring (3D Delrin)',
-    brand: 'DialForge Engineering',
-    description: 'Custom CNC-machined Delrin / PETG adapter ring that precisely seats the 23.7mm Seiko VH31 quartz movement into standard 28.5mm NH case cavities. Includes dial dot recesses.',
+    name: 'Precision Delrin Spacer: VH31 Quartz to NH Case',
+    brand: 'Custom Horology Lab',
+    description: 'CNC-machined engineering Delrin adapter ring. Positions the 23.3mm VH31 quartz caliber securely into standard 28.5mm Seiko NH case cavities while matching stem height precisely.',
     category: 'spacer',
-    basePrice: 9.50,
+    basePrice: 12,
     fromMovementFamily: 'VH',
     toCaseFamily: 'NH',
     material: 'delrin',
     includesStemShim: true,
     lastScannedAt: '2026-11-14T18:00:00Z',
     vendors: [
-      { id: 'v-dialforge-spacer', storeName: 'Tandorio Official (AliExpress)', tier: 'vetted-direct', price: 6.80, productUrl: 'https://aliexpress.com', inStock: true, isSpecialDeal: true },
-      { id: 'v-namoki-vh31-ring', storeName: 'NamokiMODS Custom Labs', tier: 'premier', price: 14.00, productUrl: 'https://namokimods.com', inStock: true }
+      { id: 'v-modlab-spacer', storeName: 'Custom Horology Lab (Etsy)', tier: 'premier', price: 14.50, productUrl: 'https://www.etsy.com/search?q=seiko+vh31+to+nh35+movement+spacer+adapter', inStock: true },
+      { id: 'v-tandorio-spacer', storeName: 'Tandorio Official (AliExpress)', tier: 'vetted-direct', price: 5.50, productUrl: 'https://www.aliexpress.us/w/wholesale-tandorio-vh31-movement-spacer.html', inStock: true, isSpecialDeal: true }
+    ]
+  },
+  {
+    id: 'spacer-eta-to-nh',
+    name: 'Brass Movement Adapter Ring: ETA 2824 / PT5000 to NH Case',
+    brand: 'Esslinger Supplies',
+    description: 'Turned solid brass spacer with securing movement clamps to house ETA 2824-2 and PT5000 movements in custom NH-compatible watch cases.',
+    category: 'spacer',
+    basePrice: 16,
+    fromMovementFamily: 'Ronda',
+    toCaseFamily: 'NH',
+    material: 'machined-brass',
+    includesStemShim: true,
+    lastScannedAt: '2026-11-14T18:00:00Z',
+    vendors: [
+      { id: 'v-esslinger-spacer', storeName: 'Esslinger Watch Supplies', tier: 'supply-house', price: 16.95, productUrl: 'https://www.esslinger.com/movement-casing-cushion-and-spacer-rings-for-eta-2824/', inStock: true }
     ]
   }
 ];
@@ -1034,6 +1659,7 @@ export const SEED_SPACERS: MovementSpacer[] = [
 export const SEED_STRAPS: Strap[] = [
   {
     id: 'strap-oyster-20',
+    imageUrl: 'https://assets.assemble.watch/parts/bracelets/lucius_atelier/lucius_atelier_oyster_bracelet_20_18mm_mid_polished.webp',
     name: 'Solid 316L Stainless Steel Oyster Bracelet (20mm)',
     brand: 'Miuski Custom Works',
     description: 'Solid milled links with brushed outer flanks, polished sides, solid end-links, and double-lock micro-adjusting dive extension clasp.',
@@ -1042,207 +1668,177 @@ export const SEED_STRAPS: Strap[] = [
     strapType: 'oyster-steel',
     lugWidthMm: 20,
     colorName: 'Brushed Steel',
-    colorHex: '#94a3b8',
-    hardwareFinish: 'brushed-steel',
-    lastScannedAt: '2026-11-14T18:00:00Z',
-    vendors: [
-      { id: 'v-miuski-oyster-20', storeName: 'Miuski Official Store (AliExpress)', tier: 'vetted-direct', price: 24.50, productUrl: 'https://aliexpress.com', inStock: true, isSpecialDeal: true, shippingDaysEstimate: '10-14 days' },
-      { id: 'v-namoki-oyster-20', storeName: 'NamokiMODS', tier: 'premier', price: 62.00, productUrl: 'https://namokimods.com', inStock: true, shippingDaysEstimate: '3-5 days' }
-    ]
-  },
-  {
-    id: 'strap-jubilee-22',
-    name: 'Five-Link Jubilee Solid Bracelet (22mm for SKX)',
-    brand: 'NamokiMODS',
-    description: 'Iconic five-link construction with high-polish center links and brushed outer links. Conforms comfortably to the wrist with solid curved end links.',
-    category: 'strap',
-    basePrice: 48,
-    strapType: 'jubilee-steel',
-    lugWidthMm: 22,
-    colorName: 'Brushed & Polished Steel',
     colorHex: '#cbd5e1',
     hardwareFinish: 'brushed-steel',
     lastScannedAt: '2026-11-14T18:00:00Z',
     vendors: [
-      { id: 'v-namoki-jubilee-22', storeName: 'NamokiMODS', tier: 'premier', price: 68.00, productUrl: 'https://namokimods.com', inStock: true, shippingDaysEstimate: '3-5 days' },
-      { id: 'v-tandorio-jubilee-22', storeName: 'Tandorio Official (AliExpress)', tier: 'vetted-direct', price: 26.00, productUrl: 'https://aliexpress.com', inStock: true, isSpecialDeal: true }
+      { id: 'v-lucius-oyster', storeName: 'Lucius Atelier', tier: 'premier', price: 65.00, productUrl: 'https://luciusatelier.com/products/oyster-bracelet-20-18mm-mid-polished', inStock: true },
+      { id: 'v-miuski-oyster', storeName: 'Miuski Official Store (AliExpress)', tier: 'vetted-direct', price: 21.00, productUrl: 'https://www.aliexpress.us/w/wholesale-miuski-oyster-bracelet-20mm.html', inStock: true, isSpecialDeal: true }
     ]
   },
   {
-    id: 'strap-fkm-black-20',
-    name: 'FKM High-Grade Fluorine Rubber Waffle Strap (20mm)',
-    brand: 'Tokeilab',
-    description: 'Ultra-durable, lint-resistant FKM rubber with vintage Japanese waffle grid texture. Highly supple, waterproof, and heat resistant.',
+    id: 'strap-jubilee-20',
+    imageUrl: 'https://assets.assemble.watch/parts/bracelets/lucius_atelier/lucius_atelier_jubilee_bracelet_20_16mm.webp',
+    name: 'Solid 5-Link Jubilee Steel Bracelet (20mm)',
+    brand: 'Caroline Mod Store',
+    description: 'Fluid five-piece link architecture with high-polish center links and brushed outer flanks. Concealed milled crown clasp.',
     category: 'strap',
-    basePrice: 24,
-    strapType: 'fkm-rubber',
+    basePrice: 38,
+    strapType: 'jubilee-steel',
     lugWidthMm: 20,
-    colorName: 'Obsidian Black',
-    colorHex: '#09090b',
+    colorName: 'Brushed & Mirror Polished',
+    colorHex: '#e2e8f0',
     hardwareFinish: 'brushed-steel',
     lastScannedAt: '2026-11-14T18:00:00Z',
     vendors: [
-      { id: 'v-tokeilab-fkm', storeName: 'Tokeilab', tier: 'premier', price: 28.00, productUrl: 'https://tokeilab.com', inStock: true },
-      { id: 'v-caroline-fkm', storeName: 'Caroline Mod Store (AliExpress)', tier: 'vetted-direct', price: 14.50, productUrl: 'https://aliexpress.com', inStock: true, isSpecialDeal: true }
+      { id: 'v-lucius-jubilee', storeName: 'Lucius Atelier', tier: 'premier', price: 68.00, productUrl: 'https://luciusatelier.com/products/jubilee-bracelet-20-16mm', inStock: true },
+      { id: 'v-caroline-jubilee', storeName: 'Caroline Mod Store (AliExpress)', tier: 'vetted-direct', price: 22.50, productUrl: 'https://www.aliexpress.us/w/wholesale-caroline-jubilee-bracelet-20mm.html', inStock: true, isSpecialDeal: true }
+    ]
+  },
+  {
+    id: 'strap-leather-black-20',
+    imageUrl: 'https://assets.assemble.watch/parts/straps/lucius_atelier/lucius_atelier_full_grain_cowhide_leather_strap_20_16mm_black_side_stitch.webp',
+    name: 'Full Grain Cowhide Leather Strap - Black Side Stitch (20mm)',
+    brand: 'Lucius Atelier',
+    description: 'Handcrafted supple full-grain Italian cowhide leather strap with minimal cream side stitching and brushed 316L buckle.',
+    category: 'strap',
+    basePrice: 28,
+    strapType: 'vintage-leather',
+    lugWidthMm: 20,
+    colorName: 'Black Leather',
+    colorHex: '#18181b',
+    hardwareFinish: 'brushed-steel',
+    lastScannedAt: '2026-11-14T18:00:00Z',
+    vendors: [
+      { id: 'v-lucius-black-leather', storeName: 'Lucius Atelier', tier: 'premier', price: 32.00, productUrl: 'https://luciusatelier.com/products/full-grain-cowhide-leather-strap-20-16mm-black-side-stitch', inStock: true },
+      { id: 'v-tandorio-black-leather', storeName: 'Tandorio Official (AliExpress)', tier: 'vetted-direct', price: 12.00, productUrl: 'https://www.aliexpress.us/w/wholesale-tandorio-leather-watch-strap-20mm.html', inStock: true, isSpecialDeal: true }
     ]
   },
   {
     id: 'strap-leather-brown-20',
-    name: 'Horween Chromexcel Vintage Leather Strap (20mm)',
+    imageUrl: 'https://assets.assemble.watch/parts/straps/lucius_atelier/lucius_atelier_full_grain_cowhide_leather_strap_20_16mm_brown_side_stitch.webp',
+    name: 'Full Grain Cowhide Leather Strap - Tobacco Brown (20mm)',
     brand: 'Lucius Atelier',
-    description: 'Hand-stitched full-grain pull-up leather that develops rich vintage character with wear. Tapered 20mm to 18mm with polished 316L buckle.',
+    description: 'Rich cognac/tobacco brown oiled pull-up leather that develops a distinctive patina with wear.',
     category: 'strap',
-    basePrice: 38,
+    basePrice: 28,
     strapType: 'vintage-leather',
     lugWidthMm: 20,
-    colorName: 'Cognac Saddle Brown',
+    colorName: 'Tobacco Brown',
     colorHex: '#78350f',
     hardwareFinish: 'brushed-steel',
     lastScannedAt: '2026-11-14T18:00:00Z',
     vendors: [
-      { id: 'v-lucius-leather', storeName: 'Lucius Atelier', tier: 'premier', price: 46.00, productUrl: 'https://luciusatelier.com', inStock: true }
+      { id: 'v-lucius-brown-leather', storeName: 'Lucius Atelier', tier: 'premier', price: 32.00, productUrl: 'https://luciusatelier.com/products/full-grain-cowhide-leather-strap-20-16mm-brown-side-stitch', inStock: true },
+      { id: 'v-tandorio-brown-leather', storeName: 'Tandorio Official (AliExpress)', tier: 'vetted-direct', price: 12.00, productUrl: 'https://www.aliexpress.us/w/wholesale-tandorio-brown-leather-strap-20mm.html', inStock: true, isSpecialDeal: true }
     ]
   },
   {
-    id: 'strap-nato-bond-20',
-    name: 'Heavy-Duty Seatbelt Nylon NATO Strap - Bond 007 (20mm)',
-    brand: 'DLW Watches',
-    description: 'Silky smooth high-density seatbelt nylon in classic black and slate gray stripes. Heat-sealed holes with heavy-duty brushed steel hardware.',
+    id: 'strap-jubilee-22',
+    imageUrl: 'https://assets.assemble.watch/parts/bracelets/lucius_atelier/lucius_atelier_jubilee_bracelet_20_16mm.webp',
+    name: 'Solid 316L Jubilee Bracelet for SKX007 (22mm Lug)',
+    brand: 'Caroline Mod Store',
+    description: 'Custom curved solid end-links engineered specifically for SKX007 cases with 22mm lug width.',
     category: 'strap',
-    basePrice: 18,
-    strapType: 'nato-nylon',
-    lugWidthMm: 20,
-    colorName: 'Bond 007 Black/Grey',
-    colorHex: '#334155',
+    basePrice: 38,
+    strapType: 'jubilee-steel',
+    lugWidthMm: 22,
+    colorName: 'Brushed & Polished Steel',
+    colorHex: '#e2e8f0',
     hardwareFinish: 'brushed-steel',
     lastScannedAt: '2026-11-14T18:00:00Z',
     vendors: [
-      { id: 'v-dlw-bond-nato', storeName: 'DLW Watches', tier: 'premier', price: 22.00, productUrl: 'https://dlwwatches.com', inStock: true },
-      { id: 'v-tandorio-nato', storeName: 'Tandorio Official (AliExpress)', tier: 'vetted-direct', price: 8.50, productUrl: 'https://aliexpress.com', inStock: true, isSpecialDeal: true }
-    ]
-  }
-];
-
-export const SEED_SECONDS_ACCENTS: SecondsHandAccent[] = [
-  {
-    id: 'sec-milgauss-orange',
-    name: 'Milgauss Style Orange Lightning Bolt Second (0.21mm)',
-    brand: 'DLW Watches',
-    description: 'Vibrant high-visibility orange lightning bolt design. Replaces standard seconds hand for a pop of personality.',
-    category: 'seconds-accent',
-    basePrice: 14,
-    accentStyle: 'lightning',
-    colorName: 'Signal Orange',
-    colorHex: '#ea580c',
-    holeSize: 0.21,
-    compatibleMovementFamilies: ['NH'],
-    lastScannedAt: '2026-11-14T18:00:00Z',
-    vendors: [
-      { id: 'v-dlw-orange-sec', storeName: 'DLW Watches', tier: 'premier', price: 16.00, productUrl: 'https://dlwwatches.com', inStock: true },
-      { id: 'v-miuski-orange-sec', storeName: 'Miuski Official Store (AliExpress)', tier: 'vetted-direct', price: 6.50, productUrl: 'https://aliexpress.com', inStock: true, isSpecialDeal: true }
-    ]
-  },
-  {
-    id: 'sec-nh-red-arrow',
-    name: 'Submariner Style Cherry Red Arrow Second (0.21mm)',
-    brand: 'NamokiMODS',
-    description: 'Gloss cherry red second hand with luminous lollipop round pip near tip.',
-    category: 'seconds-accent',
-    basePrice: 13,
-    accentStyle: 'red-arrow',
-    colorName: 'Cherry Red',
-    colorHex: '#dc2626',
-    holeSize: 0.21,
-    compatibleMovementFamilies: ['NH'],
-    lastScannedAt: '2026-11-14T18:00:00Z',
-    vendors: [
-      { id: 'v-namoki-red-sec', storeName: 'NamokiMODS', tier: 'premier', price: 15.00, productUrl: 'https://namokimods.com', inStock: true }
-    ]
-  },
-  {
-    id: 'sec-vh31-red-arrow',
-    name: 'Quartz Red Tip Sweeping Second (0.17mm for VH31)',
-    brand: 'Tandorio Horology',
-    description: 'Featherweight 0.17mm second pinion hand with counterbalanced tail, specially designed not to tax quartz stepper gear trains.',
-    category: 'seconds-accent',
-    basePrice: 10,
-    accentStyle: 'red-arrow',
-    colorName: 'Speed Red',
-    colorHex: '#ef4444',
-    holeSize: 0.17,
-    compatibleMovementFamilies: ['VH', 'Ronda'],
-    lastScannedAt: '2026-11-14T18:00:00Z',
-    vendors: [
-      { id: 'v-tandorio-sec-vh31', storeName: 'Tandorio Official (AliExpress)', tier: 'vetted-direct', price: 6.90, productUrl: 'https://aliexpress.com', inStock: true, isSpecialDeal: true }
+      { id: 'v-caroline-jubilee-22', storeName: 'Caroline Mod Store (AliExpress)', tier: 'vetted-direct', price: 24.00, productUrl: 'https://www.aliexpress.us/w/wholesale-caroline-skx007-jubilee-bracelet-22mm.html', inStock: true, isSpecialDeal: true }
     ]
   }
 ];
 
 export const SEED_TOOLS: WatchTool[] = [
   {
-    id: 'tool-hand-press',
-    name: 'Precision Hand Setting Tool with 3 Nylon Tips',
-    brand: 'Bergeon Style Horology',
-    description: 'Essential vertical plunger tool to press hour, minute, and second hands flat without scratching dial or damaging movement pinions.',
-    category: 'tools',
-    toolType: 'hand-press',
-    basePrice: 22,
-    isConsumable: false,
-    vendors: [
-      { id: 'v-esslinger-press', storeName: 'Esslinger Watch Supplies', tier: 'supply-house', price: 24.50, productUrl: 'https://esslinger.com', inStock: true },
-      { id: 'v-miuski-press', storeName: 'Miuski Official Store (AliExpress)', tier: 'vetted-direct', price: 12.00, productUrl: 'https://aliexpress.com', inStock: true, isSpecialDeal: true }
-    ]
-  },
-  {
-    id: 'tool-dial-dots',
-    name: 'Bergeon 6938 Adhesive Dial Dots (Sheet of 100)',
+    id: 'tool-springbar',
+    name: 'Bergeon 6767-F Swiss Spring Bar Tool',
     brand: 'Bergeon Swiss',
-    description: 'Ultra-thin, residue-free adhesive dots used to firmly mount dials to movement spacers when dial feet have been clipped (essential for VH31 quartz conversions).',
+    description: 'The global standard watchmakers tool with fine pointed tip (0.8mm) and narrow fork (1.2mm) for damage-free strap and bracelet changes.',
     category: 'tools',
-    toolType: 'dial-dots',
-    basePrice: 9.95,
-    isConsumable: true,
+    basePrice: 24,
+    toolType: 'caseback-wrench',
+    isConsumable: false,
+    lastScannedAt: '2026-11-14T18:00:00Z',
     vendors: [
-      { id: 'v-esslinger-dial-dots', storeName: 'Esslinger Watch Supplies', tier: 'supply-house', price: 9.95, productUrl: 'https://esslinger.com', inStock: true }
+      { id: 'v-esslinger-6767', storeName: 'Esslinger Watch Supplies', tier: 'supply-house', price: 24.50, productUrl: 'https://www.esslinger.com/bergeon-6767-f-swiss-watchmakers-spring-bar-tool/', inStock: true },
+      { id: 'v-miuski-springbar', storeName: 'Miuski Official Store (AliExpress)', tier: 'vetted-direct', price: 6.00, productUrl: 'https://www.aliexpress.us/w/wholesale-watchmaker-spring-bar-tool.html', inStock: true, isSpecialDeal: true }
     ]
   },
   {
-    id: 'tool-caseback-wrench',
-    name: 'Adjustable Two-Prong Caseback Opening Wrench',
-    brand: 'Horotec Style',
-    description: 'Hardened steel wrench for opening and securely torque-tightening notched screw-down diver casebacks.',
+    id: 'tool-hand-press',
+    name: 'Watch Hand Setting Press Tool (3-Piece Nylon Tipped)',
+    brand: 'Horotec / Generic Pro',
+    description: 'Precision set of three color-coded hand plungers with soft non-marring Delrin tips (sizes: 0.8mm, 1.0mm, 1.5mm) ensuring flat, parallel hand installation without scratching dial or hands.',
     category: 'tools',
-    toolType: 'caseback-wrench',
-    basePrice: 12,
+    basePrice: 18,
+    toolType: 'hand-press',
     isConsumable: false,
+    lastScannedAt: '2026-11-14T18:00:00Z',
     vendors: [
-      { id: 'v-miuski-wrench', storeName: 'Miuski Official Store (AliExpress)', tier: 'vetted-direct', price: 8.50, productUrl: 'https://aliexpress.com', inStock: true, isSpecialDeal: true }
+      { id: 'v-esslinger-handpress', storeName: 'Esslinger Watch Supplies', tier: 'supply-house', price: 18.95, productUrl: 'https://www.esslinger.com/watch-hand-setting-tool-set-of-3/', inStock: true },
+      { id: 'v-miuski-handpress', storeName: 'Miuski Official Store (AliExpress)', tier: 'vetted-direct', price: 7.20, productUrl: 'https://www.aliexpress.us/w/wholesale-watch-hand-press-tool.html', inStock: true, isSpecialDeal: true }
     ]
   },
   {
     id: 'tool-rodico',
-    name: 'Bergeon 6033 Rodico Cleaning Putty',
+    name: 'Bergeon 7010 Premium Rodico Cleaning Putty',
     brand: 'Bergeon Swiss',
-    description: 'The watchmaker\'s magic putty. Safely lifts dust, lint, and excess oil from dials, hand stems, and inside sapphire crystals without leaving smudges.',
+    description: 'Indispensable horological cleaning compound. Lifts dust particles, excess lubrication, fingerprints, and holds small hands without leaving residue.',
     category: 'tools',
+    basePrice: 8,
     toolType: 'rodico',
-    basePrice: 7.50,
     isConsumable: true,
+    lastScannedAt: '2026-11-14T18:00:00Z',
     vendors: [
-      { id: 'v-esslinger-rodico', storeName: 'Esslinger Watch Supplies', tier: 'supply-house', price: 7.50, productUrl: 'https://esslinger.com', inStock: true }
+      { id: 'v-esslinger-rodico', storeName: 'Esslinger Watch Supplies', tier: 'supply-house', price: 8.50, productUrl: 'https://www.esslinger.com/bergeon-7010-premium-rodico-cleaning-compound/', inStock: true }
     ]
   },
   {
-    id: 'tool-silicone-grease',
-    name: 'Seiko S-916 High-Viscosity Silicone Gasket Grease',
-    brand: 'Seiko Instruments',
-    description: 'Lubricates and revitalizes rubber O-rings on the caseback and crown tube to ensure full 100M/200M water resistance seals.',
+    id: 'tool-movement-holder',
+    name: 'Bergeon 4040 Reversible Movement Holder',
+    brand: 'Bergeon Swiss',
+    description: 'Hardened synthetic jaws with smooth screw adjustment clamp caliber securely while setting dials, pressing hands, and installing stems.',
     category: 'tools',
-    toolType: 'silicone-grease',
-    basePrice: 11,
-    isConsumable: true,
+    basePrice: 22,
+    toolType: 'movement-holder',
+    isConsumable: false,
+    lastScannedAt: '2026-11-14T18:00:00Z',
     vendors: [
-      { id: 'v-esslinger-grease', storeName: 'Esslinger Watch Supplies', tier: 'supply-house', price: 11.00, productUrl: 'https://esslinger.com', inStock: true }
+      { id: 'v-esslinger-holder', storeName: 'Esslinger Watch Supplies', tier: 'supply-house', price: 23.95, productUrl: 'https://www.esslinger.com/bergeon-reversible-movement-holder-nh35/', inStock: true }
+    ]
+  },
+  {
+    id: 'tool-dial-protector',
+    name: 'Dial Protector Film Sheets (10-Pack)',
+    brand: 'NamokiMODS',
+    description: 'Thin transparent plastic film with center notch slipped under watch hands to protect the dial finish from metal levers during hand removal.',
+    category: 'tools',
+    basePrice: 5,
+    toolType: 'dial-dots',
+    isConsumable: true,
+    lastScannedAt: '2026-11-14T18:00:00Z',
+    vendors: [
+      { id: 'v-namoki-dialguard', storeName: 'NamokiMODS', tier: 'premier', price: 5.99, productUrl: 'https://www.namokimods.com/products/dial-protector-sheets-pack-of-10', inStock: true },
+      { id: 'v-esslinger-dialguard', storeName: 'Esslinger Watch Supplies', tier: 'supply-house', price: 4.95, productUrl: 'https://www.esslinger.com/watch-dial-protector-sheets-pack-of-10/', inStock: true }
+    ]
+  },
+  {
+    id: 'tool-tweezers',
+    name: 'Bergeon #3 Non-Magnetic Precision Tweezers',
+    brand: 'Bergeon Swiss',
+    description: 'Swiss stainless steel antimagnetic tweezers with micro-fine tips for delicate second hands, screws, and dial feet.',
+    category: 'tools',
+    basePrice: 19,
+    toolType: 'tweezers',
+    isConsumable: false,
+    lastScannedAt: '2026-11-14T18:00:00Z',
+    vendors: [
+      { id: 'v-esslinger-tweezers', storeName: 'Esslinger Watch Supplies', tier: 'supply-house', price: 19.95, productUrl: 'https://www.esslinger.com/anti-magnetic-stainless-steel-precision-tweezers-3c/', inStock: true }
     ]
   }
 ];
